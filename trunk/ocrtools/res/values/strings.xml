@@ -1,8 +1,14 @@
 <resources>
 
-    <string name="app_name">ocrtools</string>
+    <string name="app_name">OCRTools</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="btn_main_1">DemoOCR</string>
+    <string name="btn_main_2">InputImage</string>
+    <string name="btn_main_3">Nothing</string>
+    <string name="String_error_dir">Error: Creation of Directory on sdcard failed at</string>
+    <string name="String_success">The process is completed</string>
+    <string name="String_fail">The process is failed</string>
 
 </resources>
