@@ -6,9 +6,20 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="btn_main_1">DemoOCR</string>
     <string name="btn_main_2">InputImage</string>
-    <string name="btn_main_3">Nothing</string>
+    <string name="btn_main_3">MyCamera</string>
     <string name="String_error_dir">Error: Creation of Directory on sdcard failed at</string>
     <string name="String_success">The process is completed</string>
     <string name="String_fail">The process is failed</string>
+    <string name="picturehandler_checksdcard">Error creating media file, check SDcard</string>
+    <string name="picturehandler_checkfile">File not found: </string>
+    <string name="picturehandler_accessfile">Error accessing file: </string>
+    <string name="picturehandler_nosdcard">SDCard is not ready</string>
+    <string name="camerapreview_checksurfaceview">surfaceview is not ready</string>
+    <string name="camerapreview_checkstopsurfaceview">Error to stop camera preview: </string>
+    <string name="camerapreview_checkstartsurfaceview">Error to start camera preview: </string>
+    <string name="camerapreview_checkstartpreview">Error preview is not started: </string>
+    <string name="camerapreview_checkcreatesurfaceview">Error setting camera preview: </string>
+    <string name="mycamera_checkcamera">Error Camera is not found </string>
+    <string name="mycamera_checkcameraforusing">Error Camera is not available (in use or does not exist)</string>
 
 </resources>
