@@ -3,11 +3,12 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+
     <ImageView
         android:id="@+id/iv_imagecrop_main"
         android:layout_width="match_parent"
         android:layout_height="380dp"
+        android:layout_above="@+id/iv_imagecrop_btnProcess"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_x="0dp"
@@ -18,17 +19,16 @@
         android:id="@+id/iv_imagecrop_btnProcess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_imagecrop_main"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:src="@drawable/misc_downloads_icon" />
 
     <ImageView
         android:id="@+id/iv_imagecrop_btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/iv_imagecrop_btnProcess"
         android:layout_marginRight="40dp"
         android:src="@drawable/actions_blue_arrow_redo_icon" />
 
@@ -36,8 +36,8 @@
         android:id="@+id/iv_imagecrop_btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/iv_imagecrop_btnProcess"
         android:layout_marginLeft="40dp"
         android:src="@drawable/actions_blue_arrow_undo_icon" />
 

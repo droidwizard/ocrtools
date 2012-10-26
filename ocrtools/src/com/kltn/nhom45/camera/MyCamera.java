@@ -9,13 +9,21 @@ import android.content.res.Resources;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.Surface;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.FrameLayout.LayoutParams;
 
 public class MyCamera extends Activity implements OnClickListener {
 	private static final String TAG = "MyCamera.java";
@@ -25,13 +33,16 @@ public class MyCamera extends Activity implements OnClickListener {
 	private CameraPreview mPreview;
 	private PictureHandler mPicturehandler;
 	private Button btn_MyCamera_TakePhoto;
+	private Display sizeWindows;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mycamera);
-		
-		res=mContext.getResources();
+
+		sizeWindows = getSize();
+
+		res = mContext.getResources();
 
 		// khởi tạo myPicturehandler dùng để xử lý hình ảnh đã chụp ( ghi hình
 		// ra sdcard, thêm thông tin...)
@@ -47,10 +58,59 @@ public class MyCamera extends Activity implements OnClickListener {
 		mPreview = new CameraPreview(mContext, mCamera);
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.cameraPreview);
 		frameLayout.addView(mPreview);
-		
-		btn_MyCamera_TakePhoto=(Button) findViewById(R.id.btn_mycamera_takephoto);
-		btn_MyCamera_TakePhoto.setOnClickListener(MyCamera.this);
 
+		// khởi tạo 1 button chụp trên framelayout
+		btn_MyCamera_TakePhoto = new Button(mContext);
+		btn_MyCamera_TakePhoto.setBackgroundResource(R.drawable.camera_icon);
+		FrameLayout.LayoutParams param = new LayoutParams(100, 100);
+		param.setMargins(sizeWindows.getWidth() / 2 - 50,
+				sizeWindows.getHeight() - 120, sizeWindows.getWidth() / 2 - 50,
+				30);
+		frameLayout.addView(btn_MyCamera_TakePhoto, param);
+		btn_MyCamera_TakePhoto.setOnClickListener(MyCamera.this);
+		
+		//list resolution camera hỗ trợ
+		Parameters p=mCamera.getParameters();
+		List<Size> s=p.getSupportedPreviewSizes();
+		List<Size> ss=p.getSupportedPictureSizes();
+		
+		TextView tv=new TextView(mContext);
+		for (int i=0;i<s.size();i++){
+			tv.append(s.size()+s.get(i).toString());
+		}
+		//frameLayout.addView(tv);
+		
+		TextView tv2=new TextView(mContext);
+		int a=getSmallestPhoto(p).height;
+		int b=getSmallestPhoto(p).width;
+		tv.append(a+" "+b+" "+a*b+" "+ss.get(0).toString());
+		
+		frameLayout.addView(tv2);
+		
+
+	}
+	
+	public Size getSmallestPhoto(Parameters param){
+		Size now = null;
+		for (Camera.Size s:param.getSupportedPictureSizes()){
+			if (now==null){
+				now=s;
+			}else{
+				int nowS=now.height*now.width;
+				int nextS=s.height*s.width;
+				if (nowS>nextS)
+					nowS=nextS;
+			}
+		}
+		return now;
+	}
+
+	public Display getSize() {
+		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay();
+		display.getWidth();
+		display.getHeight();
+		return display;
 	}
 
 	@Override
@@ -66,16 +126,16 @@ public class MyCamera extends Activity implements OnClickListener {
 			mCamera = null;
 		}
 	}
-	
+
 	public void onClick(View v) {
-		if (v==btn_MyCamera_TakePhoto){
+		if (v == btn_MyCamera_TakePhoto) {
 			// chụp 1 bức hình nào
-			// myCamera.setParameters(getFlash());
-			// myCamera.setParameters(getdddd());
-			// myCamera.setParameters(getForcus());
+			//mCamera.setParameters(getFlash());
+			// mCamera.setParameters(getdddd());
+			//mCamera.setParameters(getFocus());
 			mCamera.takePicture(null, null, mPicturehandler);
 		}
-		
+
 	}
 
 	// ktra xem device có camera hay ko
@@ -111,7 +171,7 @@ public class MyCamera extends Activity implements OnClickListener {
 		return param;
 	}
 
-	public Parameters getForcus() {
+	public Parameters getFocus() {
 		// get Camera parameters
 		Parameters params = mCamera.getParameters();
 		// set the focus mode
@@ -126,10 +186,10 @@ public class MyCamera extends Activity implements OnClickListener {
 		int degrees = 0;
 		switch (rotation) {
 		case Surface.ROTATION_0:
-			degrees = 0;
+			degrees = 90;
 			break;
 		case Surface.ROTATION_90:
-			degrees = 90;
+			degrees = 0;
 			break;
 		case Surface.ROTATION_180:
 			degrees = 180;
@@ -144,6 +204,5 @@ public class MyCamera extends Activity implements OnClickListener {
 		// camera.setParameters(params);
 		// camera.setDisplayOrientation(result);
 	}
-
 
 }
