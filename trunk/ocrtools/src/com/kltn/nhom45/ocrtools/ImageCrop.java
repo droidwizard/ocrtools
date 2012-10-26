@@ -46,6 +46,7 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
 
 		imageForResult = onReceiveImage();
+		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
 		ivImageCropProcess.setOnTouchListener(this);
 

@@ -1,12 +1,14 @@
 package com.kltn.nhom45.camera;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.kltn.nhom45.ocrtools.R;
 
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 
 import android.util.Log;
 
@@ -73,7 +75,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			degrees = 270;
 			break;
 		}
-		//mCamera.setDisplayOrientation(degrees);
+		mCamera.setDisplayOrientation(degrees);
 		//Camera.Parameters parameters = mCamera.getParameters();
 		//parameters.setPreviewSize(width, height);
 		//mCamera.setParameters(parameters);
@@ -113,5 +115,4 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 		// chịu trách nhiệm giải phóng camera preview trong activity
 
 	}
-
 }
