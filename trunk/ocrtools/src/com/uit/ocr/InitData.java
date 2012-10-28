@@ -1,11 +1,11 @@
-package com.kltn.nhom45.ocrtools;
+package com.uit.ocr;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import com.kltn.nhom45.ocrtools.R;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -38,7 +38,7 @@ public class InitData extends Thread {
 
 	@Override
 	public void run() {
-		Log.i(TAG, "gọi hàm initOctTools");
+		Log.i(TAG, "g�?i hàm initOctTools");
 		initOcrTools();
 		while (!isComplete) {
 			try {

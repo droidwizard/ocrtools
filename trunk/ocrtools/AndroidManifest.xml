@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kltn.nhom45.ocrtools"
+    package="com.uit.ocr"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -30,11 +30,11 @@
         </activity>
         <activity android:name="DemoOCR" >
         </activity>
-        <activity android:name="com.kltn.nhom45.camera.MyCamera"
+        <activity android:name="com.uit.ocr.camera.MyCamera"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             ></activity>
         <activity android:name="ImageCrop"></activity>
-        <activity android:name="InputImageResult"></activity>
+        <activity android:name=".InputImageResult"></activity>
     </application>
 
 </manifest>
