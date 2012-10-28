@@ -1,6 +1,4 @@
-package com.kltn.nhom45.ocrtools;
-
-import com.kltn.nhom45.camera.MyCamera;
+package com.uit.ocr;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,6 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.uit.ocr.camera.MyCamera;
 
 public class MainActivity extends Activity implements OnClickListener {
 	// private static final String TAG = "MainActivity.java";

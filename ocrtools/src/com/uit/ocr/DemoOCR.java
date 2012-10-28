@@ -1,6 +1,7 @@
-package com.kltn.nhom45.ocrtools;
+package com.uit.ocr;
 
 import java.io.File;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

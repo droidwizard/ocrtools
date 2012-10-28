@@ -1,4 +1,4 @@
-package com.kltn.nhom45.ocrtools;
+package com.uit.ocr;
 
 import java.io.IOException;
 import android.app.Activity;

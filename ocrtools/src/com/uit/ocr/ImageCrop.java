@@ -1,10 +1,10 @@
-package com.kltn.nhom45.ocrtools;
+package com.uit.ocr;
 
 import java.io.FileNotFoundException;
 
-import javax.crypto.spec.IvParameterSpec;
+import com.uit.ocr.utils.CustomImageView;
 
-import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,18 +14,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class ImageCrop extends BaseOCR implements OnTouchListener {
-	private ImageView ivImageCropMain, ivImageCropProcess, ivImageCropNext,
+	private ImageView ivImageCropProcess, ivImageCropNext,
 			ivImageCropBack;
+	private CustomImageView ivImageCropMain;
 
 	private Uri uriData;
 	private String textResult;
@@ -40,12 +37,15 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imagecrop);
-		ivImageCropMain = (ImageView) findViewById(R.id.iv_imagecrop_main);
+		ivImageCropMain = (CustomImageView) findViewById(R.id.custom_image);
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
 
 		imageForResult = onReceiveImage();
+		
+		ivImageCropMain.setBitmap(imageForResult);
+		
 		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
 		ivImageCropProcess.setOnTouchListener(this);
@@ -68,7 +68,7 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 	}
 
 	public void onPhotoChosen() {
-		textResult = onHanldeOCR(imageForResult);
+		textResult = onHanldeOCR(ivImageCropMain.cropBitmap());
 		isComplete = true;
 	}
 

@@ -1,21 +1,17 @@
-package com.kltn.nhom45.camera;
+package com.uit.ocr.camera;
 
 import java.io.IOException;
-import java.util.List;
-
-import com.kltn.nhom45.ocrtools.R;
 
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
-import android.hardware.Camera.Parameters;
-
 import android.util.Log;
-
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+
+import com.uit.ocr.R;
 
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback{
@@ -101,7 +97,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
-		// Surface được tạo, và hiện giờ nói cho camera biết chổ để vẽ preview.
+		// Surface được tạo, và hiện gi�? nói cho camera biết chổ để vẽ preview.
 		try {
 			mCamera.setPreviewDisplay(mHolder);
 			mCamera.setDisplayOrientation(0);

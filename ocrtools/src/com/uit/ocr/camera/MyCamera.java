@@ -1,7 +1,7 @@
-package com.kltn.nhom45.camera;
+package com.uit.ocr.camera;
 
 import java.util.List;
-import com.kltn.nhom45.ocrtools.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -11,19 +11,18 @@ import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.Surface;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.TextView;
+
+import com.uit.ocr.R;
 
 public class MyCamera extends Activity implements OnClickListener {
 	private static final String TAG = "MyCamera.java";
@@ -48,7 +47,7 @@ public class MyCamera extends Activity implements OnClickListener {
 		// ra sdcard, thêm thông tin...)
 		mPicturehandler = new PictureHandler(mContext);
 
-		// gọi hàm ktra coi có camera ko? nếu có thì lấy sử dụng
+		// g�?i hàm ktra coi có camera ko? nếu có thì lấy sử dụng
 		if (checkCameraHardware(mContext)) {
 			mCamera = getCameraInstance();
 		} else {
@@ -159,7 +158,7 @@ public class MyCamera extends Activity implements OnClickListener {
 			// camera ko có giá trị or đang sử dụng or ko tồn tại
 			Log.e(TAG, res.getString(R.string.mycamera_checkcameraforusing));
 		}
-		// trả về null nếu camera ko có
+		// trả v�? null nếu camera ko có
 		return c;
 	}
 
