@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/com/uit/ocr/BaseOCR.java=UTF-8
 encoding//src/com/uit/ocr/ImageCrop.java=UTF-8
 encoding//src/com/uit/ocr/InitData.java=UTF-8
+encoding//src/com/uit/ocr/InputImageResult.java=UTF-8
 encoding//src/com/uit/ocr/camera/CameraPreview.java=UTF-8
 encoding//src/com/uit/ocr/camera/MyCamera.java=UTF-8
 encoding//src/com/uit/ocr/camera/PictureHandler.java=UTF-8

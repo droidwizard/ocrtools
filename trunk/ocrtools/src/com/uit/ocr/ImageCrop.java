@@ -14,15 +14,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
 public class ImageCrop extends BaseOCR implements OnTouchListener {
+	private static final String TAG = "ImageCrop.java";
 	private ImageView ivImageCropProcess, ivImageCropNext,
 			ivImageCropBack;
-	private CustomImageView ivImageCropMain;
+	private ImageView ivImageCropMain;
 
 	private Uri uriData;
 	private String textResult;
@@ -31,20 +33,21 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 	RecognizeThread thread;
 	ProgressDialog progressDialog;
 	private boolean isComplete = false;
+	private String[] textAnalisys;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imagecrop);
-		ivImageCropMain = (CustomImageView) findViewById(R.id.custom_image);
+		ivImageCropMain = (ImageView) findViewById(R.id.custom_image);
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
 
 		imageForResult = onReceiveImage();
 		
-		ivImageCropMain.setBitmap(imageForResult);
+		//ivImageCropMain.setBitmap(imageForResult);
 		
 		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
@@ -68,8 +71,12 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 	}
 
 	public void onPhotoChosen() {
-		textResult = onHanldeOCR(ivImageCropMain.cropBitmap());
+		textResult = onHanldeOCR(imageForResult);
+		Log.i(TAG, "phan tich hinh anh xong");
+		textAnalisys=onTextAnalisys(textResult);
+		Log.i(TAG, "phan tich text xong");
 		isComplete = true;
+		Log.i(TAG, "gan true");
 	}
 
 	class RecognizeThread extends Thread {
@@ -97,6 +104,7 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 				progressDialog.dismiss();
 				Intent i = new Intent(mContext, InputImageResult.class);
 				i.putExtra("textResult", textResult);
+				i.putExtra("textAnalisys", textAnalisys);
 				startActivity(i);
 				isComplete=false;
 			}
@@ -115,5 +123,12 @@ public class ImageCrop extends BaseOCR implements OnTouchListener {
 			}
 		}
 		return true;
+	}
+	@Override
+	protected void onPause() {
+		if ( progressDialog!=null && progressDialog.isShowing() ){
+	        progressDialog.cancel();
+	    }
+		super.onPause();
 	}
 }

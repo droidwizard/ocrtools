@@ -9,7 +9,7 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
+
         <RelativeLayout
             android:id="@+id/RelativeLayout1"
             android:layout_width="match_parent"
@@ -27,43 +27,62 @@
                 <requestFocus />
             </EditText>
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/edt_inputimageresult_result"
-                android:layout_marginLeft="57dp"
-                android:layout_marginTop="59dp"
-                android:text="Back" />
-
-            <Button
-                android:id="@+id/button2"
+            <EditText
+                android:id="@+id/edt_inputimageresult_mobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/button1"
-                android:layout_marginRight="64dp"
-                android:text="Card" />
+                android:layout_below="@+id/edt_inputimageresult_result"
+                android:layout_marginTop="35dp"
+                android:ems="10" />
 
-            <Button
-                android:id="@+id/button3"
+            <TextView
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/button1"
-                android:layout_below="@+id/button1"
-                android:layout_marginTop="74dp"
-                android:text="TTS" />
+                android:layout_alignBaseline="@+id/edt_inputimageresult_mobile"
+                android:layout_alignBottom="@+id/edt_inputimageresult_mobile"
+                android:layout_alignParentLeft="true"
+                android:text="ĐTDĐ" />
 
-            <Button
-                android:id="@+id/button4"
+            <EditText
+                android:id="@+id/edt_inputimageresult_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/button2"
-                android:layout_alignTop="@+id/button3"
-                android:text="Map" />
+                android:layout_alignLeft="@+id/edt_inputimageresult_mobile"
+                android:layout_below="@+id/edt_inputimageresult_mobile"
+                android:layout_marginTop="23dp"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/edt_inputimageresult_email"
+                android:layout_alignBottom="@+id/edt_inputimageresult_email"
+                android:layout_alignParentLeft="true"
+                android:text="Email" />
+
+            <EditText
+                android:id="@+id/edt_inputimageresult_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/edt_inputimageresult_email"
+                android:layout_below="@+id/edt_inputimageresult_email"
+                android:layout_marginTop="23dp"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/edt_inputimageresult_name"
+                android:layout_alignBottom="@+id/edt_inputimageresult_name"
+                android:layout_alignParentLeft="true"
+                android:text="Tên" />
 
         </RelativeLayout>
+
     </ScrollView>
 
 </LinearLayout>
