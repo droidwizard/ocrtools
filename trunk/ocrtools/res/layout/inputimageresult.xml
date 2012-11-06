@@ -3,6 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <ScrollView
@@ -34,6 +35,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/edt_inputimageresult_result"
                 android:layout_marginTop="35dp"
+                
                 android:ems="10" />
 
             <TextView
@@ -43,6 +45,7 @@
                 android:layout_alignBaseline="@+id/edt_inputimageresult_mobile"
                 android:layout_alignBottom="@+id/edt_inputimageresult_mobile"
                 android:layout_alignParentLeft="true"
+                android:textColor="#fce56f"
                 android:text="ĐTDĐ" />
 
             <EditText
@@ -61,6 +64,7 @@
                 android:layout_alignBaseline="@+id/edt_inputimageresult_email"
                 android:layout_alignBottom="@+id/edt_inputimageresult_email"
                 android:layout_alignParentLeft="true"
+                android:textColor="#fce56f"
                 android:text="Email" />
 
             <EditText
@@ -79,6 +83,7 @@
                 android:layout_alignBaseline="@+id/edt_inputimageresult_name"
                 android:layout_alignBottom="@+id/edt_inputimageresult_name"
                 android:layout_alignParentLeft="true"
+                android:textColor="#fce56f"
                 android:text="Tên" />
 
         </RelativeLayout>
