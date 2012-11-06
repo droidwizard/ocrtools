@@ -86,6 +86,15 @@
                 android:textColor="#fce56f"
                 android:text="Tên" />
 
+            <Button
+                android:id="@+id/btn_inputimageresult_addcontacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/edt_inputimageresult_name"
+                android:layout_marginTop="22dp"
+                android:text="Add Contact" />
+
         </RelativeLayout>
 
     </ScrollView>

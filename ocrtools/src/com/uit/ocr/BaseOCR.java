@@ -125,21 +125,20 @@ public class BaseOCR extends Activity {
 			case 0:
 				if (matcher.find()) {
 					result[i] = matcher.group();
-					Log.i(TAG, "got 0");
 				} else
 					result[i] = "nothing";
 				break;
 			case 1:
 				if (matcher.find()) {
-					result[i] = matcher.group();
-					Log.i(TAG, "got 1");
+					String tmp=matcher.group();
+					tmp=tmp.replaceAll("[- .,]+", "");
+					result[i] = tmp;
 				} else
 					result[i] = "nothing";
 				break;
 			case 2:
 				if (matcher.find()) {
 					result[i] = matcher.group();
-					Log.i(TAG, "got 2");
 				} else
 					result[i] = "nothing";
 				break;

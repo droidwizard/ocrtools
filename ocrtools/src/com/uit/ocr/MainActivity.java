@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
@@ -59,7 +60,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.btn_main_1: {
 			
 			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);   
-	        this.startActivityForResult(camera, 103);
+	        startActivityForResult(camera, 103);
+
 			break;
 		}
 		case R.id.btn_main_2: {
