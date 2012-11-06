@@ -28,11 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="DemoOCR" >
-        </activity>
-        <activity android:name="com.uit.ocr.camera.MyCamera"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            ></activity>
         <activity android:name="ImageCrop"></activity>
         <activity android:name=".InputImageResult"></activity>
     </application>
