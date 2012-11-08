@@ -52,7 +52,7 @@ public class BaseOCR extends Activity {
 			case ExifInterface.ORIENTATION_ROTATE_90:
 				rotate = 90;
 				break;
-			case ExifInterface.ORIENTATION_ROTATE_180:
+			case ExifInterface.ORIENTATION_ROTATE_180: 
 				rotate = 180;
 				break;
 			case ExifInterface.ORIENTATION_ROTATE_270:
