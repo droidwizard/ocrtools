@@ -108,11 +108,8 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 	public void onPhotoChosen() {
 		textResult = onHanldeOCR(imageForResult);
-		Log.i(TAG, "phan tich hinh anh xong");
 		textAnalisys = onTextAnalisys(textResult);
-		Log.i(TAG, "phan tich text xong");
 		isComplete = true;
-		Log.i(TAG, "gan true");
 	}
 
 	class RecognizeThread extends Thread {
