@@ -46,9 +46,9 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
-		
+
 		try {
-			imageForResult = onResizeImage(onReceiveData(),500, 500);
+			imageForResult = onResizeImage(onReceiveData(), 500, 500);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,34 +63,37 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		ivImageCropBack.setOnTouchListener(this);
 
 	}
+
 	// nhận Uri từ activity trc đó.
-	public Uri onReceiveData(){
+	public Uri onReceiveData() {
 		Bundle bundle = getIntent().getExtras();
 		return Uri.parse(bundle.getString("uriData"));
 	}
+
 	// thay đổi size phù hợp với imageview tránh bị tràng bộ nhớ
-	public Bitmap onResizeImage(Uri uri,int requestHeight, int requestWidth)
+	public Bitmap onResizeImage(Uri uri, int requestHeight, int requestWidth)
 			throws FileNotFoundException {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		
-		BitmapFactory.decodeStream(getContentResolver()
-				.openInputStream(uri), null, options);
+
+		BitmapFactory.decodeStream(getContentResolver().openInputStream(uri),
+				null, options);
 		options.inSampleSize = setInSampleSize(options, requestHeight,
 				requestWidth);
-		
+
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeStream(
 				getContentResolver().openInputStream(uri), null, options);
 	}
+
 	// tìm size thich hợp
 	public static int setInSampleSize(BitmapFactory.Options options,
 			int requestHeight, int requestWidth) {
-		
+
 		int imageHeight = options.outHeight;
 		int imageWidth = options.outWidth;
 		int inSampleSize = 1;
-		
+
 		if (imageHeight > requestHeight || imageWidth > requestWidth) {
 			if (imageWidth > imageHeight) {
 				inSampleSize = Math.round((float) imageHeight
@@ -102,7 +105,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		}
 		return inSampleSize;
 	}
-	
+
 	public void onPhotoChosen() {
 		textResult = onHanldeOCR(imageForResult);
 		Log.i(TAG, "phan tich hinh anh xong");
@@ -143,8 +146,18 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			}
 		};
 	}
-
-	Bitmap rotated = null;
+	// hàm xoay hình bằng matran
+	private Bitmap onImageRotation(Bitmap bitmap, float degrees) {
+		Matrix matrix = new Matrix();
+		matrix.postRotate(degrees);
+		try {
+			bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+					bitmap.getHeight(), matrix, true);
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return bitmap;
+	}
 
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -157,34 +170,13 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				break;
 			case R.id.iv_imagecrop_btnNext:
 
-				Matrix matrix = new Matrix();
-				matrix.postRotate(90);
-				try {
-					BitmapFactory.Options options = new BitmapFactory.Options();
-					options.inSampleSize = 4;
-					rotated = Bitmap.createBitmap(imageForResult, 0, 0,
-							imageForResult.getWidth(),
-							imageForResult.getHeight(), matrix, true);
-				} catch (Exception e) {
-					Log.e(TAG, e.getMessage());
-				}
-
-				ivImageCropMain.setImageBitmap(rotated);
-				rotated = null;
+				imageForResult=onImageRotation(imageForResult, 90);
+				ivImageCropMain.setImageBitmap(imageForResult);
 				break;
 			case R.id.iv_imagecrop_btnBack:
-				Matrix matrix2 = new Matrix();
-				matrix2.postRotate(-90);
-				try {
-					rotated = Bitmap.createBitmap(imageForResult, 0, 0,
-							imageForResult.getWidth(),
-							imageForResult.getHeight(), matrix2, true);
-				} catch (Exception e) {
-					Log.e(TAG, e.getMessage());
-				}
 
-				ivImageCropMain.setImageBitmap(rotated);
-				rotated = null;
+				imageForResult=onImageRotation(imageForResult, -90);
+				ivImageCropMain.setImageBitmap(imageForResult);
 				break;
 			}
 		}
@@ -199,5 +191,4 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		super.onPause();
 	}
 
-	
 }
