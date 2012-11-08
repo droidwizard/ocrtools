@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode==102){
 			if (resultCode==RESULT_OK){
-				Intent i=new Intent(context, ImageCrop.class);
+				Intent i=new Intent(context, ImageHandler.class);
 				Bundle b=new Bundle();
 				b.putString("uriData", data.getDataString());
 				i.putExtras(b);
@@ -87,7 +87,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		if (requestCode==103){
 			if (resultCode==RESULT_OK){
-				Intent i=new Intent(context, ImageCrop.class);
+				Intent i=new Intent(context, ImageHandler.class);
 				Bundle b=new Bundle();
 				b.putString("uriData", data.getDataString());
 				i.putExtras(b);
