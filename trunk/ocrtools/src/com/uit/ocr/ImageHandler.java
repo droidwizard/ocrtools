@@ -10,7 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,13 +61,26 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		// ivImageCropMain.setBitmap(imageForResult);
 
 		// hình ảnh sau khi lấy dc
-		ivImageCropMain.setImageBitmap(imageForResult);
+		ivImageCropMain.setImageBitmap(toBlackWhite(imageForResult));
 		ivImageCropProcess.setOnTouchListener(this);
 		ivImageCropNext.setOnTouchListener(this);
 		ivImageCropBack.setOnTouchListener(this);
 
 	}
-
+	public static Bitmap toBlackWhite(Bitmap bitmap)
+	{        
+	    int height = bitmap.getHeight();
+	    int width = bitmap.getWidth();    
+	    Bitmap bitmapBlackWhite = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+	    Canvas c = new Canvas(bitmapBlackWhite);
+	    Paint paint = new Paint();
+	    ColorMatrix cm = new ColorMatrix();
+	    cm.setSaturation(0);
+	    ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+	    paint.setColorFilter(f);
+	    c.drawBitmap(bitmap, 0, 0, paint);
+	    return bitmapBlackWhite;
+	}
 	// nhận Uri từ activity trc đó.
 	public Uri onReceiveData() {
 		Bundle bundle = getIntent().getExtras();
