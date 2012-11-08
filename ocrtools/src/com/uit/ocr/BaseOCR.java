@@ -6,7 +6,11 @@ import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.os.Environment;
 import android.util.Log;
@@ -26,7 +30,7 @@ public class BaseOCR extends Activity {
 	// tìm email
 	private static final String EMAIL = "[a-zA-Z][\\w]+@[\\w]+.[\\w]+(.[\\w]*)";
 	// tìm số dt dạng
-	private static final String MOBILE = "0[\\d]+[. \\-,\\d]+";
+	private static final String MOBILE = "0[19][\\d]+[. \\-,\\d]+";
 	// tìm tên
 	private static final String POPNAME_LOWER = "Nguyễn|Phạm|Lê|Trần|Hoàng|Huỳnh|Phan|Vũ|Võ|Đặng|Bùi|Đỗ|Hồ|Ngô|Dương|Lý";
 	private static final String POPNAME_UPPER = "NGUYỄN|PHẠM|LÊ|TRẦN|HOÀNG|HUỲNH|PHAN|VŨ|VÕ|ĐẶNG|BÙI|ĐỖ|HỒ|NGÔ|DƯƠNG|LÝ";
@@ -57,7 +61,7 @@ public class BaseOCR extends Activity {
 	String recognizedText;
 
 	public String onHanldeOCR(Bitmap bitmap) {
-		try {
+		/*try {
 
 			ExifInterface exif = new ExifInterface(_path);
 			int exifOrientation = exif.getAttributeInt(
@@ -100,10 +104,12 @@ public class BaseOCR extends Activity {
 
 		} catch (IOException e) {
 			Log.e(TAG, "Couldn't correct orientation: " + e.toString());
-		}
+		}*/
 
 		Log.v(TAG, "Before baseApi");
 		try {
+			bitmap=toBlackWhite(bitmap);
+			bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 			TessBaseAPI baseApi = new TessBaseAPI();
 			baseApi.setDebug(true);
 			baseApi.init(DATA_PATH, lang);
@@ -133,7 +139,21 @@ public class BaseOCR extends Activity {
 		}
 		return recognizedText;
 	}
-
+	// chuyển color image sang blackwhite
+	public static Bitmap toBlackWhite(Bitmap bitmap)
+	{        
+	    int height = bitmap.getHeight();
+	    int width = bitmap.getWidth();    
+	    Bitmap bitmapBlackWhite = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+	    Canvas c = new Canvas(bitmapBlackWhite);
+	    Paint paint = new Paint();
+	    ColorMatrix cm = new ColorMatrix();
+	    cm.setSaturation(0);
+	    ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+	    paint.setColorFilter(f);
+	    c.drawBitmap(bitmap, 0, 0, paint);
+	    return bitmapBlackWhite;
+	}
 	public String[] onTextAnalisys(String input) {
 		String[] result = new String[10];
 		String lists[] = { EMAIL, MOBILE, NAME };
