@@ -1,21 +1,16 @@
 package com.uit.ocr;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.provider.MediaStore;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
-import com.uit.ocr.camera.MyCamera;
 
 public class MainActivity extends Activity implements OnClickListener {
 	// private static final String TAG = "MainActivity.java";
@@ -25,6 +20,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button btn_main_InputImage;
 	private ProgressDialog progressDialog;
 	private InitData mInitData;
+	public static boolean is2ColorImage;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,24 +33,30 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
 	}
-
+	
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onResume() {
 		progressDialog = ProgressDialog.show(context,
 				"Please wait for a second", "Processing");
 		mInitData = new InitData(context, progressDialog);
-
 		mInitData.start();
-
+		super.onResume();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	String _path;
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getTitle().equals("Settings")){
+			startActivityForResult(new Intent(context, Settings.class), 104);
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_main_1: {
