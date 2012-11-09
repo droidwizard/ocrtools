@@ -19,14 +19,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable.Factory;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
+
 
 public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private static final String TAG = "ImageCrop.java";
@@ -60,13 +58,18 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 		// ivImageCropMain.setBitmap(imageForResult);
 
+		if (MainActivity.is2ColorImage==true){
+			imageForResult=toBlackWhite(imageForResult);
+		}
+		
 		// hình ảnh sau khi lấy dc
-		ivImageCropMain.setImageBitmap(toBlackWhite(imageForResult));
+		ivImageCropMain.setImageBitmap(imageForResult);
 		ivImageCropProcess.setOnTouchListener(this);
 		ivImageCropNext.setOnTouchListener(this);
 		ivImageCropBack.setOnTouchListener(this);
 
 	}
+	
 	public static Bitmap toBlackWhite(Bitmap bitmap)
 	{        
 	    int height = bitmap.getHeight();

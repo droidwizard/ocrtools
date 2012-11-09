@@ -108,7 +108,9 @@ public class BaseOCR extends Activity {
 
 		Log.v(TAG, "Before baseApi");
 		try {
-			bitmap=toBlackWhite(bitmap);
+			if (MainActivity.is2ColorImage==true){
+				bitmap=toBlackWhite(bitmap);
+			}
 			bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 			TessBaseAPI baseApi = new TessBaseAPI();
 			baseApi.setDebug(true);
