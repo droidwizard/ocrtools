@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class InputImageResult extends Activity implements OnClickListener{
 	private static final String TAG = "InputImageResult.java";

@@ -21,6 +21,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private ProgressDialog progressDialog;
 	private InitData mInitData;
 	public static boolean is2ColorImage;
+	public static boolean isCharFilter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
