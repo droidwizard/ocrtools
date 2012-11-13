@@ -12,4 +12,13 @@
         android:layout_marginTop="48dp"
         android:text="Thiết lập chế độ quét hình trắng đen" />
 
+    <CheckBox
+        android:id="@+id/cb_settings_charfilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cb_settings_2colorimage"
+        android:layout_below="@+id/cb_settings_2colorimage"
+        android:layout_marginTop="26dp"
+        android:text="Lọc ký tự việt cho phép" />
+
 </RelativeLayout>
