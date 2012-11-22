@@ -23,8 +23,8 @@ public class InvitationResult extends ResultClass{
 		onReceiveResult();
 		
 		edtInvitationResult_main.setText(recognizedResult);
-		edtInvitationResult_time.setText(textAnalysis[0].toString());
-		edtInvitationResult_location.setText(textAnalysis[1].toString());
+		edtInvitationResult_time.setText(textAnalysis[0].toString()+" "+textAnalysis[1].toString());
+		edtInvitationResult_location.setText(textAnalysis[2].toString());
 	}
 	
 

@@ -25,8 +25,11 @@ public class BaseOCR extends Activity {
 	
 	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
 	// tìm thời gian mời
-	private static final String TIME = "(Thời gian|Vào lúc)"+VIETCHAR+"[: ]*([0-9]|[0-9][0-9])[a-zA-ZờỜ ]+( |[0-9][0-9]|,|-)+([a-zA-ZàÀ ]+([0-9]| )+[ /]([0-9]| )+[ /]([0-9]| )+)|([a-zA-ZàÀ ]+([0-9]| )+[a-zA-ZáÁ ]+([0-9]| )+[a-zA-ZăĂ ]+([0-9]| )+)";
-	private static final String TIME2="Thời gian:.+";
+	//private static final String TIME = "(Thời gian|Vào lúc)"+VIETCHAR+"[: ]*([0-9]|[0-9][0-9])[a-zA-ZờỜ ]+( |[0-9][0-9]|,|-)+([a-zA-ZàÀ ]+([0-9]| )+[ /]([0-9]| )+[ /]([0-9]| )+)|([a-zA-ZàÀ ]+([0-9]| )+[a-zA-ZáÁ ]+([0-9]| )+[a-zA-ZăĂ ]+([0-9]| )+)";
+
+	private static final String DATE="((0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)?[0-9]{2}|[\\wàÀ]+ (0?[1-9]|[12][0-9]|3[01]) [\\wáÁ]+ (0?[1-9]|1[012]) [\\wăĂ]+ (19|20)?[0-9]{2})";
+	
+	private static final String TIME="(0?[1-9]|[12][0-9])([a-zA-zờ Ờ]+)[\\d]*";
 	// địa điểm
 	private static final String PLACE = "[Đđ](ịa điểm)[ :]+.+";
 	// tìm email
@@ -160,7 +163,7 @@ public class BaseOCR extends Activity {
 	
 	public String[] onInvitationAnalisys(String input){
 		String[] result = new String[10];
-		String lists[] = { TIME, PLACE};
+		String lists[] = { TIME,DATE, PLACE};
 		for (int i = 0; i < lists.length; i++) {
 			Pattern pattern = Pattern.compile(lists[i]);
 			Matcher matcher = pattern.matcher(input);
@@ -170,13 +173,19 @@ public class BaseOCR extends Activity {
 				if (matcher.find()) {
 					result[i] = matcher.group();
 				} else
-					result[i] = "haha";
+					result[i] = "time";
 				break;
 			case 1:
 				if (matcher.find()) {
+					result[i] = matcher.group();
+				} else
+					result[i] = "date";
+				break;
+			case 2:
+				if (matcher.find()) {
 					result[i]= matcher.group();
 				} else
-					result[i] = "nothing";
+					result[i] = "location";
 				break;
 			}
 		}
