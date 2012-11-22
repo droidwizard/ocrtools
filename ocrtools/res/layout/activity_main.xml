@@ -1,5 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background" >
@@ -12,8 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/camera"
-        />
+        android:background="@drawable/camera" />
 
     <Button
         android:id="@+id/btn_main_2"
@@ -23,7 +22,32 @@
         android:layout_alignBottom="@+id/btn_main_1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="70dp"
-        android:background="@drawable/folderpicture"
-        />
+        android:background="@drawable/folderpicture" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="36dp" >
+
+        <RadioButton
+            android:id="@+id/rabtn_main_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="#ecff3d"
+            android:onClick="onRadioButtonClicked"
+            android:text="Chế độ danh thiếp cá nhân" />
+
+        <RadioButton
+            android:id="@+id/rabtn_main_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ecff3d"
+            android:onClick="onRadioButtonClicked"
+            android:text="Chế độ thiệp mời" />
+    </RadioGroup>
 
 </RelativeLayout>

@@ -32,6 +32,7 @@
         <activity android:name=".ImageHandler"></activity>
         <activity android:name=".InputImageResult"></activity>
         <activity android:name="Settings"></activity>
+        <activity android:name="InvitationResult"></activity>
     </application>
 
 </manifest>

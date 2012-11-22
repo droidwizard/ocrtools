@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class MainActivity extends Activity implements OnClickListener {
 	// private static final String TAG = "MainActivity.java";
@@ -22,18 +24,47 @@ public class MainActivity extends Activity implements OnClickListener {
 	private InitData mInitData;
 	public static boolean is2ColorImage;
 	public static boolean isCharFilter;
+	public static boolean isNameCard;
+	private RadioGroup rg_main;
+	private RadioButton rabtn_main_name_card;
+	private RadioButton rabtn_main_invite;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		rg_main=(RadioGroup) findViewById(R.id.rg_main);
+		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_main_1);
+		rabtn_main_invite=(RadioButton) findViewById(R.id.rabtn_main_2);
 		btn_main_DemoOCR = (Button) findViewById(R.id.btn_main_1);
 		btn_main_DemoOCR.setOnClickListener(MainActivity.this);
 		btn_main_InputImage = (Button) findViewById(R.id.btn_main_2);
 		btn_main_InputImage.setOnClickListener((OnClickListener) context);
-
+		onLoadStates();
 
 	}
+	public void onLoadStates(){
+		if (isNameCard){
+			rabtn_main_name_card.setChecked(true);
+		}else{
+			rabtn_main_invite.setChecked(true);
+		}
+	}
+	
+	public void onRadioButtonClicked(View view){
+	    boolean checked = ((RadioButton) view).isChecked();
+	    switch(view.getId()) {
+	        case R.id.rabtn_main_1:
+	            if (checked)
+	            	isNameCard=true;
+	            break;
+	        case R.id.rabtn_main_2:
+	            if (checked)
+	            	isNameCard=false;
+	            break;
+	    }
+	}
+	
 	
 	@Override
 	protected void onResume() {
