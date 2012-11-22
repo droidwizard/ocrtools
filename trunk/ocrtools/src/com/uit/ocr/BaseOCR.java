@@ -22,6 +22,13 @@ public class BaseOCR extends Activity {
 
 	public static final String lang = "vie";
 	private String recognizedText;
+	
+	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
+	// tìm thời gian mời
+	private static final String TIME = "(Thời gian|Vào lúc)"+VIETCHAR+"[: ]*([0-9]|[0-9][0-9])[a-zA-ZờỜ ]+( |[0-9][0-9]|,|-)+([a-zA-ZàÀ ]+([0-9]| )+[ /]([0-9]| )+[ /]([0-9]| )+)|([a-zA-ZàÀ ]+([0-9]| )+[a-zA-ZáÁ ]+([0-9]| )+[a-zA-ZăĂ ]+([0-9]| )+)";
+	private static final String TIME2="Thời gian:.+";
+	// địa điểm
+	private static final String PLACE = "[Đđ](ịa điểm)[ :]+.+";
 	// tìm email
 	private static final String EMAIL = "[a-zA-Z][\\w]+@[\\w]+.[\\w]+(.[\\w]*)";
 	// tìm số dt dạng
@@ -55,7 +62,7 @@ public class BaseOCR extends Activity {
 	private static final String RARENAME_UPPER4 = "TĂNG|THẠCH|THÁI|THÀO|THÂN|THẬP|THI|THIỀU|THỊNH|THÔI|TIÊU|TÒNG|TÔ|TÔN|TÔNG|TỐNG|TRÀ|TRÁC|TRIỆU|TRỊNH|TRÌNH|TRƯNG|TRƯƠNG|TỪ|UÔNG|UNG|VI|VIÊN|VƯƠNG|XA|\\nYÊN";
 */
 	
-	private static final String POS_NAME = "(GSTS|PSGTS|TS|Ths|CH|TSKH|CN).+";
+	private static final String POS_NAME = "(GSTS|PSGTS|TS|Ths|CH|TSKH|CN|Dược Sĩ|Bác Sĩ).+";
 
 	private static final String NAME = "(" + POS_NAME + "|" + POPNAME_LOWER
 			+ "|" + POPNAME_UPPER + "|" + RARENAME_LOWER1 + "|"
@@ -119,10 +126,6 @@ public class BaseOCR extends Activity {
 
 			Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
-			/*
-			 * if (lang.equalsIgnoreCase("eng")) { recognizedText =
-			 * recognizedText .replaceAll("[^a-zA-Z0-9]+", " "); }
-			 */
 			if (MainActivity.isCharFilter == true) {
 				if (lang.equalsIgnoreCase("vie")) {
 					recognizedText = recognizedText
@@ -153,6 +156,31 @@ public class BaseOCR extends Activity {
 		paint.setColorFilter(f);
 		c.drawBitmap(bitmap, 0, 0, paint);
 		return bitmapBlackWhite;
+	}
+	
+	public String[] onInvitationAnalisys(String input){
+		String[] result = new String[10];
+		String lists[] = { TIME, PLACE};
+		for (int i = 0; i < lists.length; i++) {
+			Pattern pattern = Pattern.compile(lists[i]);
+			Matcher matcher = pattern.matcher(input);
+
+			switch (i) {
+			case 0:
+				if (matcher.find()) {
+					result[i] = matcher.group();
+				} else
+					result[i] = "haha";
+				break;
+			case 1:
+				if (matcher.find()) {
+					result[i]= matcher.group();
+				} else
+					result[i] = "nothing";
+				break;
+			}
+		}
+		return result;
 	}
 
 	public String[] onTextAnalisys(String input) {

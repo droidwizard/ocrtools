@@ -50,7 +50,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
 
 		try {
-			imageForResult = onResizeImage(onReceiveData(), 500, 500);
+			imageForResult = onResizeImage(onReceiveImage(), 500, 500);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	    return bitmapBlackWhite;
 	}
 	// nhận Uri từ activity trc đó.
-	public Uri onReceiveData() {
+	public Uri onReceiveImage() {
 		Bundle bundle = getIntent().getExtras();
 		return Uri.parse(bundle.getString("uriData"));
 	}
@@ -128,7 +128,11 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 	public void onPhotoChosen() {
 		textResult = onHanldeOCR(imageForResult);
-		textAnalisys = onTextAnalisys(textResult);
+		if (MainActivity.isNameCard){
+			textAnalisys = onTextAnalisys(textResult);
+		}else{
+			textAnalisys=onInvitationAnalisys(textResult);
+		}
 		isComplete = true;
 	}
 
@@ -155,10 +159,17 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			@Override
 			public void handleMessage(Message msg) {
 				progressDialog.dismiss();
-				Intent i = new Intent(mContext, InputImageResult.class);
-				i.putExtra("textResult", textResult);
-				i.putExtra("textAnalisys", textAnalisys);
-				startActivity(i);
+				if (MainActivity.isNameCard){
+					Intent i = new Intent(mContext, InputImageResult.class);
+					i.putExtra("textResult", textResult);
+					i.putExtra("textAnalisys", textAnalisys);
+					startActivity(i);
+				}else{
+					Intent i = new Intent(mContext, InvitationResult.class);
+					i.putExtra("textResult", textResult);
+					i.putExtra("textAnalisys", textAnalisys);
+					startActivity(i);
+				}
 				isComplete = false;
 			}
 		};
