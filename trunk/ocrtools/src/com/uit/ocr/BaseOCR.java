@@ -27,11 +27,12 @@ public class BaseOCR extends Activity {
 	// tìm thời gian mời
 	//private static final String TIME = "(Thời gian|Vào lúc)"+VIETCHAR+"[: ]*([0-9]|[0-9][0-9])[a-zA-ZờỜ ]+( |[0-9][0-9]|,|-)+([a-zA-ZàÀ ]+([0-9]| )+[ /]([0-9]| )+[ /]([0-9]| )+)|([a-zA-ZàÀ ]+([0-9]| )+[a-zA-ZáÁ ]+([0-9]| )+[a-zA-ZăĂ ]+([0-9]| )+)";
 
-	private static final String DATE="((0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.](19|20)?[0-9]{2}|[\\wàÀ]+ (0?[1-9]|[12][0-9]|3[01]) [\\wáÁ]+ (0?[1-9]|1[012]) [\\wăĂ]+ (19|20)?[0-9]{2})";
+	private static final String DATE="(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.]((19|20)?[0-9]{2})";
+	private static final String DATE2="[a-zA-Z àÀ]+(0?[1-9]|[12][0-9]|3[01])[a-zA-Z áÁ]+(0?[1-9]|1[012])[a-zA-Z ăĂ]+((19|20)?[0-9]{2})";
 	
-	private static final String TIME="(0?[1-9]|[12][0-9])([a-zA-zờ Ờ]+)[\\d]*";
+	private static final String TIME = "(0?[1-9]|[12][0-9])([giờ Ờh'Ò]+)([0-9]{2})";
 	// địa điểm
-	private static final String PLACE = "[Đđ](ịa điểm)[ :]+.+";
+	private static final String PLACE = "[Đđ](ịa điểm)[ :]+(.+)";
 	// tìm email
 	private static final String EMAIL = "[a-zA-Z][\\w]+@[\\w]+.[\\w]+(.[\\w]*)";
 	// tìm số dt dạng
@@ -132,9 +133,12 @@ public class BaseOCR extends Activity {
 			if (MainActivity.isCharFilter == true) {
 				if (lang.equalsIgnoreCase("vie")) {
 					recognizedText = recognizedText
-							.replaceAll(
+							/*.replaceAll(
 									"[^AĂÂBCDĐEÊGHIÍÌỈĨỊKLMNOÔƠPQRSTUƯVXYÝỲỶỸÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸẾỀỂỄỆÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤỨỪỬỮỰaăâbcdđeêghiíìỉĩịklmnoôơpqrstuưvxyýỳỷỹáàảãạắằẳẵặấầẩẫậéèẻẽẹếềểễệóòỏõọốồổỗộớờởỡợúùủũụứừửữự0123456789@:.,/\\\\n\\-_()\\^]+",
-									" ");
+									" ");*/
+					.replace(
+							"[\\d]11[\\d]",
+							"[\\d]h[\\d]");
 				}
 			}
 
@@ -163,7 +167,7 @@ public class BaseOCR extends Activity {
 	
 	public String[] onInvitationAnalisys(String input){
 		String[] result = new String[10];
-		String lists[] = { TIME,DATE, PLACE};
+		String lists[] = { TIME,DATE,DATE2, PLACE};
 		for (int i = 0; i < lists.length; i++) {
 			Pattern pattern = Pattern.compile(lists[i]);
 			Matcher matcher = pattern.matcher(input);
@@ -171,17 +175,23 @@ public class BaseOCR extends Activity {
 			switch (i) {
 			case 0:
 				if (matcher.find()) {
-					result[i] = matcher.group();
+					result[i] = matcher.group(1)+" giờ "+matcher.group(3);
 				} else
 					result[i] = "time";
 				break;
 			case 1:
 				if (matcher.find()) {
-					result[i] = matcher.group();
+					result[i] = matcher.group(1)+"/"+matcher.group(2)+"/"+matcher.group(3);
 				} else
-					result[i] = "date";
+					result[i] = "";
 				break;
 			case 2:
+				if (matcher.find()) {
+					result[i] = matcher.group(1)+"/"+matcher.group(2)+"/"+matcher.group(3);
+				} else
+					result[i] = "";
+				break;
+			case 3:
 				if (matcher.find()) {
 					result[i]= matcher.group();
 				} else
