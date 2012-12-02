@@ -32,7 +32,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private ImageView ivImageCropMain;
 
 	private String textResult;
-	private Bitmap imageForResult;
+	public static Bitmap imageForResult;
 	private Context mContext = ImageHandler.this;
 	RecognizeThread thread;
 	ProgressDialog progressDialog;

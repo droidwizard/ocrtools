@@ -30,9 +30,9 @@ public class BaseOCR extends Activity {
 	private static final String DATE="(0?[1-9]|[12][0-9]|3[01])[- /.](0?[1-9]|1[012])[- /.]((19|20)?[0-9]{2})";
 	private static final String DATE2="[a-zA-Z àÀ]+(0?[1-9]|[12][0-9]|3[01])[a-zA-Z áÁ]+(0?[1-9]|1[012])[a-zA-Z ăĂ]+((19|20)?[0-9]{2})";
 	
-	private static final String TIME = "(0?[1-9]|[12][0-9])([giờ Ờh'Ò]+)([0-9]{2})";
+	private static final String TIME = "(0?[1-9]|[12][0-9])([giờ Ờh'Ò:]+)([0-9]{2})";
 	// địa điểm
-	private static final String PLACE = "[Đđ](ịa điểm)[ :]+(.+)";
+	private static final String PLACE = "[Đđ]([ịai đểễm])[ :]+(.+)";
 	// tìm email
 	private static final String EMAIL = "[a-zA-Z][\\w]+@[\\w]+.[\\w]+(.[\\w]*)";
 	// tìm số dt dạng
@@ -175,7 +175,7 @@ public class BaseOCR extends Activity {
 			switch (i) {
 			case 0:
 				if (matcher.find()) {
-					result[i] = matcher.group(1)+" giờ "+matcher.group(3);
+					result[i] = matcher.group(1)+":"+matcher.group(3);
 				} else
 					result[i] = "time";
 				break;
