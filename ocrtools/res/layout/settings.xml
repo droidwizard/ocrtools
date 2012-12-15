@@ -21,4 +21,33 @@
         android:layout_marginTop="26dp"
         android:text="Lọc ký tự việt cho phép" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cb_settings_charfilter"
+        android:layout_centerVertical="true"
+        android:text="Thêm tiêu đề cuộc hẹn" />
+
+    <EditText
+        android:id="@+id/edt_settings_titleevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="16dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_settings_saveevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edt_settings_titleevent"
+        android:layout_alignBottom="@+id/edt_settings_titleevent"
+        android:layout_alignRight="@+id/cb_settings_2colorimage"
+        android:text="Save" />
+
 </RelativeLayout>
