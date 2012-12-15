@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background" >
-
+    android:background="@drawable/background" >
     <ImageView
-        android:id="@+id/custom_image"
+        android:id="@+id/iv_custom_image"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent" 
+        android:contentDescription="@string/iv_custom_image"/>
 	
     <RelativeLayout         
     	android:layout_width="match_parent"
@@ -18,8 +18,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_centerHorizontal="true"
+	        android:contentDescription="@string/iv_imagecrop_btnProcess"
 	        android:src="@drawable/misc_downloads_icon" />
-	
+	
 	    <ImageView
 	        android:id="@+id/iv_imagecrop_btnNext"
 	        android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentRight="true"
 	        android:layout_marginRight="40dp"
+	        android:contentDescription="@string/iv_imagecrop_btnNext"
 	        android:src="@drawable/actions_blue_arrow_redo_icon" />
 	
 	    <ImageView
@@ -36,6 +38,7 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentLeft="true"
 	        android:layout_marginLeft="40dp"
+	        android:contentDescription="@string/iv_imagecrop_btnBack"
 	        android:src="@drawable/actions_blue_arrow_undo_icon" />
     </RelativeLayout>
 

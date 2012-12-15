@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.CustomImageView;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +51,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imagehandler);
-		ivImageCropMain = (ImageView) findViewById(R.id.custom_image);
+		ivImageCropMain = (ImageView) findViewById(R.id.iv_custom_image);
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
@@ -139,22 +138,20 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 	public void onPhotoChosen() {
 		textResult = onHanldeOCR(imageForResult);
-		if (MainActivity.isNameCard) {
+		switch (MainActivity.mode) {
+		case MainActivity.MODE_NONE:
+			
+			break;
+		case MainActivity.MODE_NAMECARD:
 			textAnalisys = onTextAnalisys(textResult);
-		} else {
+			break;
+		case MainActivity.MODE_INVITATION:
 			textAnalisys = onInvitationAnalisys(textResult);
-			
-			/*settingsEventTitles=preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "");
-			
-			if(settingsEventTitles!=null && settingsEventTitles!=""){
-				if (settingsEventTitles.contains("-")){
-					String[] tmps=settingsEventTitles.split("-");
-					for (String tmp : tmps) {
-						DefaultEvents.add(tmp);
-					}
-				}
-			}	*/
-		}
+			break;
+
+		default:
+			break;
+		}		
 		isComplete = true;
 	}
 
@@ -181,7 +178,33 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			@Override
 			public void handleMessage(Message msg) {
 				progressDialog.dismiss();
+				Intent mIntent;
+				switch (MainActivity.mode) {
+				case MainActivity.MODE_NONE:
+					mIntent = new Intent(mContext, NormalResult.class);
+					mIntent.putExtra("textBaseResult", textResult);
+					startActivity(mIntent);
+					break;
+				case MainActivity.MODE_NAMECARD:
+					mIntent = new Intent(mContext, InputImageResult.class);
+					mIntent.putExtra("textResult", textResult);
+					mIntent.putExtra("textAnalisys", textAnalisys);
+					startActivity(mIntent);
+					break;
+				case MainActivity.MODE_INVITATION:
+					mIntent = new Intent(mContext, InvitationResult.class);
+					mIntent.putExtra("textResult", textResult);
+					mIntent.putExtra("textAnalisys", textAnalisys);
+					startActivity(mIntent);
+					break;
+
+				default:
+					break;
+				}
+				/*if (MainActivity.isNameCard){
+=======
 				if (MainActivity.isNameCard) {
+>>>>>>> .r26
 					Intent i = new Intent(mContext, InputImageResult.class);
 					i.putExtra("textResult", textResult);
 					i.putExtra("textAnalisys", textAnalisys);
@@ -191,7 +214,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 					i.putExtra("textResult", textResult);
 					i.putExtra("textAnalisys", textAnalisys);
 					startActivity(i);
-				}
+				}*/
 				isComplete = false;
 			}
 		};

@@ -1,11 +1,10 @@
 <resources>
 
     <string name="app_name">OCRTools</string>    
-    <string name="menu_settings">Settings</string>
+    <string name="menu_settings_1">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="btn_main_1">DemoOCR</string>
-    <string name="btn_main_2">InputImage</string>
-    <string name="btn_main_3">MyCamera</string>
+    
+    <!-- Error -->
     <string name="String_error_dir">Error: Creation of Directory on sdcard failed at</string>
     <string name="String_success">The process is completed</string>
     <string name="String_fail">The process is failed</string>
@@ -20,5 +19,62 @@
     <string name="camerapreview_checkcreatesurfaceview">Error setting camera preview: </string>
     <string name="mycamera_checkcamera">Error Camera is not found </string>
     <string name="mycamera_checkcameraforusing">Error Camera is not available (in use or does not exist)</string>
+    
+    <!-- Radio button -->
+    <string name="rabtn_danhthiep">Chế độ danh thiếp cá nhân</string>
+    <string name="rabtn_thiepmoi">Chế độ thiệp mời</string>
+    <string name="rabtn_thuong">Chế độ thường</string>
+    
+    <!-- Button -->
+    <string name="btn_inputimageresult_addcontacts">Lưu Danh Bạ</string>
+    <string name="btn_invitationresult_save">Lưu Báo Thức</string>
+    <string name="btn_translate">Dịch</string>
+    
+    
+    <!-- ImageView -->
+    <string name="iv_imagecrop_btnProcess">Processs image to text</string>
+    <string name="iv_imagecrop_btnNext">Rotate right</string>
+    <string name="iv_imagecrop_btnBack">Rotate left</string> 
+    <string name="iv_custom_image">The main image</string>
+    <string name="iv_invitationresult_main">Show image of invitation mode</string>
+    
+    <!-- EditText -->
+    <string name="edt_inputimageresult_result">This is result of OCR</string>
+    <string name="edt_inputimageresult_mobile">This is mobile number from result</string>
+    <string name="edt_inputimageresult_email">This is email from result</string>
+    <string name="edt_inputimageresult_name">This is name from result</string>
+    
+    <!-- TextView -->
+    <string name="tv_phone_number">Số Điện Thoại</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_name">Họ Tên</string>
+    <string name="tv_content">Nội dung</string>
+    <string name="tv_time">Thời gian</string>
+    <string name="tv_address">Địa điểm</string>  
+    <string name="tv_languages">Ngôn ngữ</string>
+    <string name="tv_cuochen">Thêm tiêu đề cuộc hẹn</string>
+    
+    <!-- Check Box -->
+    <string name="cb_settings_2colorimage">Thiết lập chế độ quét hình trắng đen</string>
+    <string name="cb_settings_charfilter">Lọc ký tự việt cho phép</string>
+    
+    <!-- Menu -->
+    <string name="menu_settings">Cài đặt</string>  
+    <string name="menu_about">Thông tin</string>    
+    <string name="menu_export">Xuất file</string>
+    <string name="menu_camera">Quét camera</string>
+    <string name="menu_image">Chọn hình</string>
+    
+    <!-- Spinner -->
+    <string-array name="language_items">
+        <item>Việt Nam</item>
+        <item>Anh</item>
+        <item>Trung Quốc</item>
+        <item>Ấn Độ</item>
+        <item>Nhật</item>
+        <item>Nga</item>
+    </string-array>
+    <string name="language_prompt">Chọn ngôn ngữ</string>
+    
 
 </resources>
