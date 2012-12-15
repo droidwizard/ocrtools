@@ -1,16 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:orientation="vertical" >
-
-    <ScrollView
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
+        android:layout_height="match_parent" >
         <RelativeLayout
             android:id="@+id/RelativeLayout1"
             android:layout_width="match_parent"
@@ -23,7 +15,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:ems="10" >
+                android:ems="10"                 android:hint="@string/edt_inputimageresult_result">
 
                 <requestFocus />
             </EditText>
@@ -34,19 +26,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/edt_inputimageresult_result"
-                android:layout_marginTop="35dp"
-                
-                android:ems="10" />
+                android:layout_marginTop="35dp"                
+                android:ems="10"                 android:hint="@string/edt_inputimageresult_mobile"/>
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/edt_inputimageresult_mobile"
                 android:layout_alignBottom="@+id/edt_inputimageresult_mobile"
                 android:layout_alignParentLeft="true"
                 android:textColor="#fce56f"
-                android:text="ĐTDĐ" />
+                android:text="@string/tv_phone_number" />
 
             <EditText
                 android:id="@+id/edt_inputimageresult_email"
@@ -55,17 +46,17 @@
                 android:layout_alignLeft="@+id/edt_inputimageresult_mobile"
                 android:layout_below="@+id/edt_inputimageresult_mobile"
                 android:layout_marginTop="23dp"
-                android:ems="10" />
+                android:ems="10"                android:hint="@string/edt_inputimageresult_email" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/edt_inputimageresult_email"
                 android:layout_alignBottom="@+id/edt_inputimageresult_email"
                 android:layout_alignParentLeft="true"
                 android:textColor="#fce56f"
-                android:text="Email" />
+                android:text="@string/tv_email" />
 
             <EditText
                 android:id="@+id/edt_inputimageresult_name"
@@ -74,17 +65,17 @@
                 android:layout_alignLeft="@+id/edt_inputimageresult_email"
                 android:layout_below="@+id/edt_inputimageresult_email"
                 android:layout_marginTop="23dp"
-                android:ems="10" />
+                android:ems="10"                 android:hint="@string/edt_inputimageresult_name"/>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/edt_inputimageresult_name"
                 android:layout_alignBottom="@+id/edt_inputimageresult_name"
                 android:layout_alignParentLeft="true"
                 android:textColor="#fce56f"
-                android:text="Tên" />
+                android:text="@string/tv_name" />
 
             <Button
                 android:id="@+id/btn_inputimageresult_addcontacts"
@@ -93,10 +84,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/edt_inputimageresult_name"
                 android:layout_marginTop="22dp"
-                android:text="Add Contact" />
+                android:text="@string/btn_inputimageresult_addcontacts" />
 
         </RelativeLayout>
 
     </ScrollView>
-
-</LinearLayout>

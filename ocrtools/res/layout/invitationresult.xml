@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
 
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
+        android:layout_height="fill_parent" >
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/iv_invitaionresult_main"
+                android:id="@+id/iv_invitationresult_main"
                 android:layout_width="wrap_content"
                 android:layout_height="260dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:contentDescription="@string/iv_invitationresult_main"
                 android:src="@drawable/ic_launcher" />
 
             <Spinner
@@ -29,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/edt_invitaionresult_time"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/iv_invitaionresult_main"
+                android:layout_below="@+id/iv_invitationresult_main"
                 android:layout_marginTop="20dp" />
 
             <EditText
@@ -54,32 +49,32 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/spin_invitaionresult_content"
                 android:layout_alignBottom="@+id/spin_invitaionresult_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:text="Nội dung" />
+                android:text="@string/tv_content" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/edt_invitaionresult_time"
                 android:layout_alignBottom="@+id/edt_invitaionresult_time"
-                android:layout_alignLeft="@+id/textView1"
-                android:text="Thời gian" />
+                android:layout_alignLeft="@+id/tv_content"
+                android:text="@string/tv_time" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/edt_invitation_location"
                 android:layout_alignBottom="@+id/edt_invitation_location"
-                android:layout_alignLeft="@+id/textView2"
-                android:text="Địa điểm" />
+                android:layout_alignLeft="@+id/tv_time"
+                android:text="@string/tv_address" />
 
             <Button
                 android:id="@+id/btn_invitationresult_save"
@@ -88,10 +83,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/edt_invitation_location"
                 android:layout_marginRight="21dp"
-                android:text="Save" />
+                android:text="@string/btn_invitationresult_save" />
 
         </RelativeLayout>
 
     </ScrollView>
-
-</LinearLayout>

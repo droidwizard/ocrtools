@@ -42,7 +42,7 @@ public class InvitationResult extends ResultClass {
 		edtInvitationResult_location = (EditText) findViewById(R.id.edt_invitation_location);
 		edtInvitationResult_time = (EditText) findViewById(R.id.edt_invitaionresult_time);
 		spinInvitationResult_content = (Spinner) findViewById(R.id.spin_invitaionresult_content);
-		ivInvitationResult_main = (ImageView) findViewById(R.id.iv_invitaionresult_main);
+		ivInvitationResult_main = (ImageView) findViewById(R.id.iv_invitationresult_main);
 		btnInvitationResult_save = (Button) findViewById(R.id.btn_invitationresult_save);
 
 		onReceiveResult();
@@ -196,8 +196,8 @@ public class InvitationResult extends ResultClass {
 		Pattern pattern = Pattern.compile("(0?[1-9]|[12][0-9]):([0-9]{2})");
 		Matcher matcher = pattern.matcher(time);
 		if (matcher.find()) {
-			result[0] = Integer.valueOf(matcher.group(1));// 0 là giờ
-			result[1] = Integer.valueOf(matcher.group(2));// 1 là phút
+			result[0] = Integer.valueOf(matcher.group(1));// 0 lÃ  giá»�
+			result[1] = Integer.valueOf(matcher.group(2));// 1 lÃ  phÃºt
 			Log.i(TAG, "Giờ phút : " + result[0] + " " + result[1]);
 		}
 		return result;

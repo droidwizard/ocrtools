@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/background">
 
     <CheckBox
         android:id="@+id/cb_settings_2colorimage"
@@ -10,7 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
-        android:text="Thiết lập chế độ quét hình trắng đen" />
+        android:text="@string/cb_settings_2colorimage"
+        android:textColor="@android:color/white"/>
 
     <CheckBox
         android:id="@+id/cb_settings_charfilter"
@@ -19,7 +21,30 @@
         android:layout_alignLeft="@+id/cb_settings_2colorimage"
         android:layout_below="@+id/cb_settings_2colorimage"
         android:layout_marginTop="26dp"
-        android:text="Lọc ký tự việt cho phép" />
+        android:text="@string/cb_settings_charfilter" 
+        android:textColor="@android:color/white"/>
+    
+    <TextView 
+        android:id="@+id/tv_languages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cb_settings_2colorimage"
+        android:layout_below="@+id/cb_settings_charfilter"
+        android:layout_marginTop="26dp"
+        android:textSize="18dp"
+        android:text="@string/tv_languages"
+        android:textColor="@android:color/white"/>
+    
+    <Spinner 
+        android:id="@+id/sp_languages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_languages"
+        android:layout_below="@+id/cb_settings_charfilter"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:entries="@array/language_items"
+        android:prompt="@string/language_prompt"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -27,7 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cb_settings_charfilter"
         android:layout_centerVertical="true"
-        android:text="Thêm tiêu đề cuộc hẹn" />
+        android:text="@string/tv_cuochen" 
+        android:textColor="@android:color/white"
+        android:textSize="18dp"/>
 
     <EditText
         android:id="@+id/edt_settings_titleevent"
@@ -36,6 +63,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="16dp"
+        android:hint=""
         android:ems="10" >
 
         <requestFocus />

@@ -21,12 +21,12 @@ public class InitData extends Thread {
 	private boolean isComplete = false;
 	Context mContext;
 	Resources res;
-	private static final String ROOTNAME = "OCRTools";
-	private static final String IMAGENAME = "images";
-	private static final String TESSDATANAME = "tessdata";
+	private static final String ROOT_NAME = "OCRTools";
+	private static final String IMAGE_NAME = "images";
+	private static final String TESSDATA_NAME = "tessdata";
 
 	public static final String ROOT_PATH = Environment
-			.getExternalStorageDirectory().toString() + "/" + ROOTNAME + "/";
+			.getExternalStorageDirectory().toString() + "/" + ROOT_NAME + "/";
 
 	public static final String lang = "vie";
 
@@ -38,7 +38,7 @@ public class InitData extends Thread {
 
 	@Override
 	public void run() {
-		Log.i(TAG, "g�?i hàm initOctTools");
+		Log.i(TAG, "gọi hàm initOctTools");
 		initOcrTools();
 		while (!isComplete) {
 			try {
@@ -68,8 +68,8 @@ public class InitData extends Thread {
 
 	private boolean initPath() {
 		// tessdata thu mục chứa trainneddata, images thu mục chứa hình đã chụp
-		String[] paths = new String[] { ROOT_PATH, ROOT_PATH + TESSDATANAME,
-				ROOT_PATH + IMAGENAME };
+		String[] paths = new String[] { ROOT_PATH, ROOT_PATH + TESSDATA_NAME,
+				ROOT_PATH + IMAGE_NAME };
 
 		for (String path : paths) {
 			File dir = new File(path);
@@ -90,16 +90,16 @@ public class InitData extends Thread {
 	}
 
 	private boolean initTrainedData() {
-		if (!(new File(ROOT_PATH + TESSDATANAME + "/" + lang + ".traineddata"))
+		if (!(new File(ROOT_PATH + TESSDATA_NAME + "/" + lang + ".traineddata"))
 				.exists()) {
 			try {
 
 				AssetManager assetManager = mContext.getAssets();
-				InputStream in = assetManager.open(TESSDATANAME + "/" + lang
+				InputStream in = assetManager.open(TESSDATA_NAME + "/" + lang
 						+ ".traineddata");
 
 				OutputStream out = new FileOutputStream(ROOT_PATH
-						+ TESSDATANAME + "/" + lang + ".traineddata");
+						+ TESSDATA_NAME + "/" + lang + ".traineddata");
 
 				byte[] buf = new byte[1024];
 				int len;

@@ -3,26 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background" >
+    
+    <RelativeLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/panel">        
 
     <Button
-        android:id="@+id/btn_main_1"
+        android:id="@+id/btn_main_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginLeft="70dp"       
+        android:layout_marginTop="10dp"
         android:background="@drawable/camera" />
 
     <Button
-        android:id="@+id/btn_main_2"
+        android:id="@+id/btn_main_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_main_1"
-        android:layout_alignBottom="@+id/btn_main_1"
+        android:layout_alignBaseline="@+id/btn_main_camera"
+        android:layout_alignBottom="@+id/btn_main_camera"
         android:layout_alignParentRight="true"
         android:layout_marginRight="70dp"
-        android:background="@drawable/folderpicture" />
+        android:background="@drawable/folderpicture" />    
+        
+    </RelativeLayout>
 
     <RadioGroup
         android:id="@+id/rg_main"
@@ -31,23 +40,31 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="36dp" >
-
-        <RadioButton
-            android:id="@+id/rabtn_main_1"
+        
+        <RadioButton 
+            android:id="@+id/rabtn_thuong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:textColor="#ecff3d"
             android:onClick="onRadioButtonClicked"
-            android:text="Chế độ danh thiếp cá nhân" />
+            android:text="@string/rabtn_thuong"/>
 
         <RadioButton
-            android:id="@+id/rabtn_main_2"
+            android:id="@+id/rabtn_danhthiep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:textColor="#ecff3d"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/rabtn_danhthiep" />
+
+        <RadioButton
+            android:id="@+id/rabtn_thiepmoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ecff3d"
             android:onClick="onRadioButtonClicked"
-            android:text="Chế độ thiệp mời" />
+            android:text="@string/rabtn_thiepmoi" />        
     </RadioGroup>
 
 </RelativeLayout>
