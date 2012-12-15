@@ -16,6 +16,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -135,6 +136,36 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		}
 		isComplete = true;
 	}
+	
+	/*AsyncTask<Void, Void, String[]> RecognizeTask=new AsyncTask<Void, Void, String[]>(){
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			return onPhotoChosen();
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			progressDialog.dismiss();
+			if (MainActivity.isNameCard){
+				Intent i = new Intent(mContext, InputImageResult.class);
+				i.putExtra("textResult", textResult);
+				i.putExtra("textAnalisys", result);
+				startActivity(i);
+			}else{
+				Intent i = new Intent(mContext, InvitationResult.class);
+				i.putExtra("textResult", textResult);
+				i.putExtra("textAnalisys", result);
+				startActivity(i);
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			progressDialog = ProgressDialog.show(mContext,
+					"Please wait for a second", "Processing");
+		}
+	};*/
 
 	class RecognizeThread extends Thread {
 		public RecognizeThread() {

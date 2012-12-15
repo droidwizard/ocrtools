@@ -11,6 +11,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class Settings extends Activity implements OnCheckedChangeListener {
 	CheckBox cbSettings2ColorImage, cbSettingsCharfilter;
 	private Context context = Settings.this;
+	private String titleEvent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class Settings extends Activity implements OnCheckedChangeListener {
 
 	}
 
-	public void setCheckBox() {
+	private void setCheckBox() {
 
 		cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
 		cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
@@ -62,6 +63,20 @@ public class Settings extends Activity implements OnCheckedChangeListener {
 						2000).show();
 			}
 		}
+	}
+	
+	//working
+	public String[] setTitleEvent(String newTitle){
+		String[] tmp=null;
+		String[] text=null;
+		for (int i=0;i<newTitle.length();i++){
+			tmp=newTitle.split(",");
+			text[i]=tmp[0];
+		}
+		
+		String[] titleEvents = null;
+		
+		return titleEvents;
 	}
 
 }
