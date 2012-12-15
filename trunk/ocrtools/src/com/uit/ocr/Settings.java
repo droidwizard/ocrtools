@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class Settings extends Activity{
+public class Settings extends Activity {
 	private CheckBox cbSettings2ColorImage, cbSettingsCharfilter;
 	private Context context = Settings.this;
 	private EditText edtSettingsTitleEvent;
@@ -36,10 +36,10 @@ public class Settings extends Activity{
 		cbSettings2ColorImage.setOnCheckedChangeListener(checkboxListener);
 		cbSettingsCharfilter.setOnCheckedChangeListener(checkboxListener);
 		btnSettingsSave.setOnClickListener(saveListener);
-		
+
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = preferences.edit();
-		
+
 		if (preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "").equals("")
 				|| preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "") == null) {
 			edtSettingsTitleEvent.setText("");
@@ -54,7 +54,8 @@ public class Settings extends Activity{
 	 */
 	private OnClickListener saveListener = new OnClickListener() {
 		public void onClick(View v) {
-			editor.putString(Consts.SETTINGS_TITLE_EVENTS, edtSettingsTitleEvent.getText().toString());
+			editor.putString(Consts.SETTINGS_TITLE_EVENTS,
+					edtSettingsTitleEvent.getText().toString());
 			editor.commit();
 		}
 	};
@@ -63,50 +64,45 @@ public class Settings extends Activity{
 	 * set checkbox status
 	 */
 	private void setCheckBox() {
-
 		cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
 		cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
 	}
-	
+
 	/**
 	 * checkbox click event
 	 */
-	private OnCheckedChangeListener checkboxListener=new OnCheckedChangeListener() {
-		
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	private OnCheckedChangeListener checkboxListener = new OnCheckedChangeListener() {
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
 			if (buttonView == cbSettings2ColorImage) {
 				if (isChecked == true) {
 					MainActivity.is2ColorImage = true;
-					cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
-
+					cbSettings2ColorImage
+							.setChecked(MainActivity.is2ColorImage);
 					Toast.makeText(context, "đã thiết lập quét hình trắng đen",
-							2000).show();
+							Toast.LENGTH_SHORT).show();
 				} else {
 					MainActivity.is2ColorImage = false;
-					cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
-
-					Toast.makeText(context, "đã tắt thiết lập quét hình trắng đen",
-							2000).show();
+					cbSettings2ColorImage
+							.setChecked(MainActivity.is2ColorImage);
+					Toast.makeText(context,
+							"đã tắt thiết lập quét hình trắng đen",
+							Toast.LENGTH_SHORT).show();
 				}
-
 			}
 			if (buttonView == cbSettingsCharfilter) {
 				if (isChecked == true) {
 					MainActivity.isCharFilter = true;
 					cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
-
-					Toast.makeText(context, "đã thiết lập lọc ký tự việt", 2000)
-							.show();
+					Toast.makeText(context, "đã thiết lập lọc ký tự việt",
+							Toast.LENGTH_SHORT).show();
 				} else {
 					MainActivity.isCharFilter = false;
 					cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
-
-					Toast.makeText(context, "đã tắt thiết lập lọc ký tự việt", 2000)
-							.show();
+					Toast.makeText(context, "đã tắt thiết lập lọc ký tự việt",
+							Toast.LENGTH_SHORT).show();
 				}
 			}
-			
 		}
-	}; 
-
+	};
 }

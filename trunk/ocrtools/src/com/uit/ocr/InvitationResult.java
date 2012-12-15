@@ -69,9 +69,9 @@ public class InvitationResult extends ResultClass {
 	private void onLoadTitleEvent() {
 		DefaultEvents.clear();
 
-		DefaultEvents.add("Hội họp");
-		DefaultEvents.add("Sinh nhật");
-		DefaultEvents.add("Tiệc cưới");
+		DefaultEvents.add(Consts.DEFAULT_EVENT_1);
+		DefaultEvents.add(Consts.DEFAULT_EVENT_2);
+		DefaultEvents.add(Consts.DEFAULT_EVENT_3);
 		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
