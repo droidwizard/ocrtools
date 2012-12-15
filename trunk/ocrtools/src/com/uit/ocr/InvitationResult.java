@@ -33,7 +33,6 @@ public class InvitationResult extends ResultClass {
 	private String eventLocation, eventTitle;
 	private Calendar cal;
 	private ArrayList<String> DefaultEvents = new ArrayList<String>();
-	private String[] tmpResult;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,16 +99,12 @@ public class InvitationResult extends ResultClass {
 
 		if (textAnalysis[1].equals("1") && textAnalysis[2].equals("1")
 				&& textAnalysis[3].equals("2012")) {
-			tmpResult[0] = textAnalysis[0];
-			tmpResult[1] = textAnalysis[4];
-			tmpResult[2] = textAnalysis[5];
-			tmpResult[3] = textAnalysis[6];
 
-			edtInvitationResult_time.setText(tmpResult[0] + "-" + tmpResult[1]
-					+ "/" + tmpResult[2] + "/" + tmpResult[3]);
+			edtInvitationResult_time.setText(textAnalysis[0].toString() + "-" + textAnalysis[4].toString()
+					+ "/" + textAnalysis[5].toString() + "/" + textAnalysis[6].toString());
 
 			String a = edtInvitationResult_time.getText().toString();
-			Log.i(TAG, a);
+			Log.i(TAG, "Trường hợp 1:"+a);
 
 			cal = setTimeEvent(Integer.valueOf(textAnalysis[6].toString()),
 					Integer.valueOf(textAnalysis[5].toString()),
@@ -123,7 +118,7 @@ public class InvitationResult extends ResultClass {
 					+ textAnalysis[3].toString());
 			String a = edtInvitationResult_time.getText().toString();
 
-			Log.i(TAG, a + " ");
+			Log.i(TAG, "Trường hợp 2:"+a);
 
 			cal = setTimeEvent(Integer.valueOf(textAnalysis[3].toString()),
 					Integer.valueOf(textAnalysis[2].toString()),

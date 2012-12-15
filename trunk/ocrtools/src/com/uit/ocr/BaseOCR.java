@@ -31,7 +31,7 @@ public class BaseOCR extends Activity {
 	private static final String DATE = "(0?[1-9]|[12][0-9]|3[01])[- /.]+(0?[1-9]|1[012])[- /.]+((19|20)?[0-9]{2})";
 	private static final String DATE2 = "[a-zA-Zngayàáảãắẳẵằằéèẽõóò ]+(0?[1-9]|[12][0-9]|3[01])[a-zA-Zãthngàăáắằẵặíìỉĩi ]+(0?[1-9]|1[012])[a-zA-Znmăáắằẵặã ]+((19|20)?[0-9]{2}).*";
 
-	private static final String TIME = "(0?[1-9]|[12][0-9])([giờHỜ h'Ò:]+)([0-9]{2})";
+	private static final String TIME = "[Thời gian.]+(0?[1-9]|[12][0-9])([giờHỜ“ h'Ò:]+)([0-9]{2})?";
 	// địa điểm
 	private static final String PLACE = "(Địa[ điểmễ:]+)(.+)";
 	// tìm email
@@ -191,7 +191,10 @@ public class BaseOCR extends Activity {
 			switch (i) {
 			case 0:
 				if (matcher.find()) {
-					result[0] = matcher.group(1) + ":" + matcher.group(3);
+					if (matcher.group(3) == null || matcher.group(3).equals("")) {
+						result[0] = matcher.group(1) + ":" + "00";
+					} else
+						result[0] = matcher.group(1) + ":" + matcher.group(3);
 				} else
 					result[0] = "8:00";
 				break;
@@ -200,7 +203,8 @@ public class BaseOCR extends Activity {
 					result[1] = matcher.group(1);
 					result[2] = matcher.group(2);
 					result[3] = matcher.group(3);
-				} else{
+					Log.i(TAG, result[1] + "/" + result[2] + "/" + result[3]);
+				} else {
 					result[1] = "1";
 					result[2] = "1";
 					result[3] = "2012";
@@ -211,8 +215,8 @@ public class BaseOCR extends Activity {
 					result[4] = matcher.group(1);
 					result[5] = matcher.group(2);
 					result[6] = matcher.group(3);
-					Log.i(TAG, result[4]+"/"+result[5]+"/"+result[6]);
-				} else{
+					Log.i(TAG, result[4] + "/" + result[5] + "/" + result[6]);
+				} else {
 					result[4] = "1";
 					result[5] = "1";
 					result[6] = "2012";
