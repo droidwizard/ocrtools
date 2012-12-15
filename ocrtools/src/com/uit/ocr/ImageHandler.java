@@ -3,11 +3,13 @@ package com.uit.ocr;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.CustomImageView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -20,12 +22,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-
 
 public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private static final String TAG = "ImageCrop.java";
@@ -40,6 +42,11 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private boolean isComplete = false;
 	private String[] textAnalisys;
 
+	public static ArrayList<String> DefaultEvents = new ArrayList<String>();
+
+	private String settingsEventTitles;
+	SharedPreferences preferences;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -49,6 +56,8 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
+		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
 
 		try {
 			imageForResult = onResizeImage(onReceiveImage(), 500, 500);
@@ -59,10 +68,10 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 		// ivImageCropMain.setBitmap(imageForResult);
 
-		if (MainActivity.is2ColorImage==true){
-			imageForResult=toBlackWhite(imageForResult);
+		if (MainActivity.is2ColorImage == true) {
+			imageForResult = toBlackWhite(imageForResult);
 		}
-		
+
 		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
 		ivImageCropProcess.setOnTouchListener(this);
@@ -70,21 +79,22 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		ivImageCropBack.setOnTouchListener(this);
 
 	}
-	
-	public static Bitmap toBlackWhite(Bitmap bitmap)
-	{        
-	    int height = bitmap.getHeight();
-	    int width = bitmap.getWidth();    
-	    Bitmap bitmapBlackWhite = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-	    Canvas c = new Canvas(bitmapBlackWhite);
-	    Paint paint = new Paint();
-	    ColorMatrix cm = new ColorMatrix();
-	    cm.setSaturation(0);
-	    ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-	    paint.setColorFilter(f);
-	    c.drawBitmap(bitmap, 0, 0, paint);
-	    return bitmapBlackWhite;
+
+	public static Bitmap toBlackWhite(Bitmap bitmap) {
+		int height = bitmap.getHeight();
+		int width = bitmap.getWidth();
+		Bitmap bitmapBlackWhite = Bitmap.createBitmap(width, height,
+				Bitmap.Config.RGB_565);
+		Canvas c = new Canvas(bitmapBlackWhite);
+		Paint paint = new Paint();
+		ColorMatrix cm = new ColorMatrix();
+		cm.setSaturation(0);
+		ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+		paint.setColorFilter(f);
+		c.drawBitmap(bitmap, 0, 0, paint);
+		return bitmapBlackWhite;
 	}
+
 	// nhận Uri từ activity trc đó.
 	public Uri onReceiveImage() {
 		Bundle bundle = getIntent().getExtras();
@@ -129,43 +139,24 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 	public void onPhotoChosen() {
 		textResult = onHanldeOCR(imageForResult);
-		if (MainActivity.isNameCard){
+		if (MainActivity.isNameCard) {
 			textAnalisys = onTextAnalisys(textResult);
-		}else{
-			textAnalisys=onInvitationAnalisys(textResult);
+		} else {
+			textAnalisys = onInvitationAnalisys(textResult);
+			
+			/*settingsEventTitles=preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "");
+			
+			if(settingsEventTitles!=null && settingsEventTitles!=""){
+				if (settingsEventTitles.contains("-")){
+					String[] tmps=settingsEventTitles.split("-");
+					for (String tmp : tmps) {
+						DefaultEvents.add(tmp);
+					}
+				}
+			}	*/
 		}
 		isComplete = true;
 	}
-	
-	/*AsyncTask<Void, Void, String[]> RecognizeTask=new AsyncTask<Void, Void, String[]>(){
-
-		@Override
-		protected String[] doInBackground(Void... params) {
-			return onPhotoChosen();
-		}
-
-		@Override
-		protected void onPostExecute(String[] result) {
-			progressDialog.dismiss();
-			if (MainActivity.isNameCard){
-				Intent i = new Intent(mContext, InputImageResult.class);
-				i.putExtra("textResult", textResult);
-				i.putExtra("textAnalisys", result);
-				startActivity(i);
-			}else{
-				Intent i = new Intent(mContext, InvitationResult.class);
-				i.putExtra("textResult", textResult);
-				i.putExtra("textAnalisys", result);
-				startActivity(i);
-			}
-		}
-
-		@Override
-		protected void onPreExecute() {
-			progressDialog = ProgressDialog.show(mContext,
-					"Please wait for a second", "Processing");
-		}
-	};*/
 
 	class RecognizeThread extends Thread {
 		public RecognizeThread() {
@@ -190,12 +181,12 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			@Override
 			public void handleMessage(Message msg) {
 				progressDialog.dismiss();
-				if (MainActivity.isNameCard){
+				if (MainActivity.isNameCard) {
 					Intent i = new Intent(mContext, InputImageResult.class);
 					i.putExtra("textResult", textResult);
 					i.putExtra("textAnalisys", textAnalisys);
 					startActivity(i);
-				}else{
+				} else {
 					Intent i = new Intent(mContext, InvitationResult.class);
 					i.putExtra("textResult", textResult);
 					i.putExtra("textAnalisys", textAnalisys);
@@ -205,6 +196,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			}
 		};
 	}
+
 	// hàm xoay hình bằng matran
 	private Bitmap onImageRotation(Bitmap bitmap, float degrees) {
 		Matrix matrix = new Matrix();
@@ -229,12 +221,12 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				break;
 			case R.id.iv_imagecrop_btnNext:
 
-				imageForResult=onImageRotation(imageForResult, 90);
+				imageForResult = onImageRotation(imageForResult, 90);
 				ivImageCropMain.setImageBitmap(imageForResult);
 				break;
 			case R.id.iv_imagecrop_btnBack:
 
-				imageForResult=onImageRotation(imageForResult, -90);
+				imageForResult = onImageRotation(imageForResult, -90);
 				ivImageCropMain.setImageBitmap(imageForResult);
 				break;
 			}
