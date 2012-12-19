@@ -93,7 +93,7 @@ public class NormalResult extends Activity implements OnClickListener, OnItemSel
 	private Context context = this;
 	
 	private String sourceLanguage;
-	private String tranLanguage;
+	private String tranLanguage = TRANS_ENGLISH;
 	
 	private final String TEXT_VIEW = "Chỉnh sửa";
 	private final String EDIT_TEXT = "Xong";
@@ -117,8 +117,8 @@ public class NormalResult extends Activity implements OnClickListener, OnItemSel
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.normalmode_layout);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		//textBase = getIntent().getStringExtra("textBaseResult");
-		textBase = "This has now been incorporated into the library and is run as the main class. You can view the latest source code here.";
+		textBase = getIntent().getStringExtra("textBaseResult");
+		//textBase = "This has now been incorporated into the library and is run as the main class. You can view the latest source code here.";
 		
 		textResult = (TextView) findViewById(R.id.tv_text_result);
 		//textResult.setText("Số điện thoại 0975983991. Email nam.hd23@gmail.com. địa chỉ web google.com.vn");

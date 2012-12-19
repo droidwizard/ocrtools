@@ -83,6 +83,7 @@ public class Settings extends Activity implements OnCheckedChangeListener,OnItem
 		cbSettingsCharfilter.setOnCheckedChangeListener(checkboxListener);
 		btnSettingsSave.setOnClickListener(saveListener);
 		itemLanguages.setOnItemSelectedListener(this);
+		itemLanguages.setSelection(13);
 
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = preferences.edit();
@@ -159,7 +160,6 @@ public class Settings extends Activity implements OnCheckedChangeListener,OnItem
 		{
 			MainActivity.flagLock = true;
 			BaseOCR.lang = DATA_VIETNAM;
-			Toast.makeText(getApplicationContext(), BaseOCR.lang, 200).show();
 		}
 		else
 		{
