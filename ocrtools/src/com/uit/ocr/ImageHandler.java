@@ -238,7 +238,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			switch (v.getId()) {
 			case R.id.iv_imagecrop_btnProcess:
 				progressDialog = ProgressDialog.show(mContext,
-						"Please wait for a second", "Processing");
+						"Vui lòng đợi", "Đang xử lý...");
 				thread = new RecognizeThread();
 				thread.start();
 				break;

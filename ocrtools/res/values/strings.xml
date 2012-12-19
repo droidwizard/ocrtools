@@ -67,12 +67,20 @@
     
     <!-- Spinner -->
     <string-array name="language_items">
-        <item>Việt Nam</item>
         <item>Anh</item>
-        <item>Trung Quốc</item>
-        <item>Ấn Độ</item>
-        <item>Nhật</item>
+        <item>Đức</item>
+        <item>Hà Lan</item>
+        <item>Hàn Quốc</item>
+        <item>Indonesia</item>
+        <item>Italia</item>
+        <item>Malaysia</item>
         <item>Nga</item>
+        <item>Nhật Bản</item>
+        <item>Pháp</item>
+        <item>Tây Ban Nha</item>
+        <item>Thái Lan</item>
+        <item>Trung Quốc</item>
+        <item>Việt Nam</item>
     </string-array>
     <string name="language_prompt">Chọn ngôn ngữ</string>
     

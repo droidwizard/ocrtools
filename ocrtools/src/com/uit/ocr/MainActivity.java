@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		//rg_main=(RadioGroup) findViewById(R.id.rg_main);
 		
 		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_danhthiep);
@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		progressDialog = ProgressDialog.show(context,
-				"Please wait for a second", "Processing");
+				"Vui lòng đợi", "Đang xử lý...");
 		mInitData = new InitData(context, progressDialog);
 		mInitData.start();
 		super.onResume();

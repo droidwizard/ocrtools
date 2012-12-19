@@ -20,7 +20,7 @@ public class BaseOCR extends Activity {
 	public static final String DATA_PATH = Environment
 			.getExternalStorageDirectory().toString() + "/OCRTools/";
 
-	public static final String lang = "vie";
+	public static String lang = "vie";
 	private String recognizedText;
 
 	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
