@@ -3,8 +3,8 @@ package com.uit.ocr;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.CustomImageView;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,7 +30,7 @@ import android.widget.ImageView;
 public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private static final String TAG = "ImageCrop.java";
 	private ImageView ivImageCropProcess, ivImageCropNext, ivImageCropBack;
-	private ImageView ivImageCropMain;
+	private CustomImageView ivImageCropMain;
 
 	private String textResult;
 	public static Bitmap imageForResult;
@@ -51,7 +50,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imagehandler);
-		ivImageCropMain = (ImageView) findViewById(R.id.iv_custom_image);
+		ivImageCropMain = (CustomImageView) findViewById(R.id.iv_custom_image);
 		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
 		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
 		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
@@ -73,6 +72,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
+		ivImageCropMain.setBitmap(imageForResult);
 		ivImageCropProcess.setOnTouchListener(this);
 		ivImageCropNext.setOnTouchListener(this);
 		ivImageCropBack.setOnTouchListener(this);
@@ -137,7 +137,8 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	}
 
 	public void onPhotoChosen() {
-		textResult = onHanldeOCR(imageForResult);
+		Bitmap mBitmap = ivImageCropMain.cropBitmap();
+		textResult = onHanldeOCR(mBitmap);
 		switch (MainActivity.mode) {
 		case MainActivity.MODE_NONE:
 			
@@ -246,11 +247,13 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 				imageForResult = onImageRotation(imageForResult, 90);
 				ivImageCropMain.setImageBitmap(imageForResult);
+				ivImageCropMain.setBitmap(imageForResult);
 				break;
 			case R.id.iv_imagecrop_btnBack:
 
 				imageForResult = onImageRotation(imageForResult, -90);
 				ivImageCropMain.setImageBitmap(imageForResult);
+				ivImageCropMain.setBitmap(imageForResult);
 				break;
 			}
 		}
