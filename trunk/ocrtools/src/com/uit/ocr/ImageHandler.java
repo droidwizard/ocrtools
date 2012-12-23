@@ -145,7 +145,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			
 			break;
 		case Consts.MODE_NAMECARD:
-			textAnalisys = onTextAnalisys(textResult);
+			textAnalisys = onNameCardAnalisys(textResult);
 			break;
 		case Consts.MODE_INVITATION:
 			textAnalisys = onInvitationAnalisys(textResult);
