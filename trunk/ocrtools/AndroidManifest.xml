@@ -31,7 +31,7 @@
             </intent-filter>          
         </activity>
         <activity android:name=".ImageHandler"></activity>
-        <activity android:name=".InputImageResult"></activity>
+        <activity android:name=".NameCardResult"></activity>
         <activity android:name="Settings">
             
         </activity>

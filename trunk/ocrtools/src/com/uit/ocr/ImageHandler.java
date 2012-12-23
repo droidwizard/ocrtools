@@ -160,7 +160,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 					startActivity(mIntent);
 					break;
 				case Consts.MODE_NAMECARD:
-					mIntent = new Intent(mContext, InputImageResult.class);
+					mIntent = new Intent(mContext, NameCardResult.class);
 					mIntent.putExtra("textResult", textResult);
 					mIntent.putExtra("textAnalisys", textAnalisys);
 					startActivity(mIntent);
