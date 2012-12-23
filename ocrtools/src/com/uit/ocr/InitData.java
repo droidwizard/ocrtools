@@ -19,10 +19,10 @@ public class InitData extends Thread {
 	private Context mContext;
 
 	private boolean isComplete = false;
-	private ProgressDialog mDialog;
+	private ProgressDialog progressDialog;
 
 	public InitData(Context context, ProgressDialog dialog) {
-		mDialog = dialog;
+		progressDialog = dialog;
 		mContext = context;
 	}
 
@@ -42,11 +42,11 @@ public class InitData extends Thread {
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			mDialog.dismiss();
+			progressDialog.dismiss();
 		};
 	};
 
-	public void initOcrTools() {
+	private void initOcrTools() {
 		if (initPath() == true) {
 			if (initTrainedData() == true) {
 				Log.i(TAG, "Gọi hàm initTrainedData()==true");

@@ -11,9 +11,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class InputImageResult extends ResultClass implements OnClickListener {
+public class NameCardResult extends ResultClass implements OnClickListener {
 	private static final String TAG = "InputImageResult.java";
-	Context mContext = InputImageResult.this;
+	Context mContext = NameCardResult.this;
 
 	private EditText edtInputImageResultResult, edt_inputimageresult_mobile,
 			edt_inputimageresult_email, edt_inputimageresult_name;
@@ -26,7 +26,7 @@ public class InputImageResult extends ResultClass implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.inputimageresult);
+		setContentView(R.layout.namecardresult);
 		edtInputImageResultResult = (EditText) findViewById(R.id.edt_inputimageresult_result);
 		edt_inputimageresult_mobile = (EditText) findViewById(R.id.edt_inputimageresult_mobile);
 		edt_inputimageresult_email = (EditText) findViewById(R.id.edt_inputimageresult_email);
