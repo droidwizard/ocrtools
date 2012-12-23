@@ -1,5 +1,7 @@
 package com.uit.ocr;
 
+import com.uit.ocr.utils.Consts;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,12 +17,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 public class MainActivity extends Activity implements OnClickListener {
-	// private static final String TAG = "MainActivity.java";
-	
-	public static final  int MODE_NONE = 0;
-	public static final int MODE_NAMECARD = 1;
-	public static final int MODE_INVITATION = 2;
-	public static int mode = MODE_NONE;
+	private static final String TAG = "MainActivity.java";
+
+	public static int mode = Consts.MODE_NONE;
 	public static boolean flagLock = true;
 	
 
@@ -85,19 +84,19 @@ public class MainActivity extends Activity implements OnClickListener {
 	    switch(view.getId()) {
 	    	case R.id.rabtn_thuong:
 	    		if (checked) {
-					mode = MODE_NONE;
+					mode = Consts.MODE_NONE;
 				}
 	    		break;
 	        case R.id.rabtn_danhthiep:
 	            if (checked){
 	            	//isNameCard=true;
-	            	mode = MODE_NAMECARD;
+	            	mode = Consts.MODE_NAMECARD;
 	            }
 	            break;
 	        case R.id.rabtn_thiepmoi:
 	            if (checked){
 	            	//isNameCard=false;
-	            	mode = MODE_INVITATION;
+	            	mode = Consts.MODE_INVITATION;
 	            }
 	            break;
 	    }	   

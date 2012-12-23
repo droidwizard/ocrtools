@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.uit.ocr.utils.Consts;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -21,12 +23,10 @@ public class InitData extends Thread {
 	private boolean isComplete = false;
 	Context mContext;
 	Resources res;
-	private static final String ROOT_NAME = "OCRTools";
-	private static final String IMAGE_NAME = "images";
-	private static final String TESSDATA_NAME = "tessdata";
+
 
 	public static final String ROOT_PATH = Environment
-			.getExternalStorageDirectory().toString() + "/" + ROOT_NAME + "/";
+			.getExternalStorageDirectory().toString() + "/" + Consts.ROOT_NAME + "/";
 
 	public static final String lang = "vie";
 
@@ -68,8 +68,8 @@ public class InitData extends Thread {
 
 	private boolean initPath() {
 		// tessdata thu mục chứa trainneddata, images thu mục chứa hình đã chụp
-		String[] paths = new String[] { ROOT_PATH, ROOT_PATH + TESSDATA_NAME,
-				ROOT_PATH + IMAGE_NAME };
+		String[] paths = new String[] { ROOT_PATH, ROOT_PATH + Consts.TESSDATA_NAME,
+				ROOT_PATH + Consts.IMAGE_NAME };
 
 		for (String path : paths) {
 			File dir = new File(path);
@@ -90,16 +90,16 @@ public class InitData extends Thread {
 	}
 
 	private boolean initTrainedData() {
-		if (!(new File(ROOT_PATH + TESSDATA_NAME + "/" + lang + ".traineddata"))
+		if (!(new File(ROOT_PATH + Consts.TESSDATA_NAME + "/" + lang + ".traineddata"))
 				.exists()) {
 			try {
 
 				AssetManager assetManager = mContext.getAssets();
-				InputStream in = assetManager.open(TESSDATA_NAME + "/" + lang
+				InputStream in = assetManager.open(Consts.TESSDATA_NAME + "/" + lang
 						+ ".traineddata");
 
 				OutputStream out = new FileOutputStream(ROOT_PATH
-						+ TESSDATA_NAME + "/" + lang + ".traineddata");
+						+ Consts.TESSDATA_NAME + "/" + lang + ".traineddata");
 
 				byte[] buf = new byte[1024];
 				int len;
