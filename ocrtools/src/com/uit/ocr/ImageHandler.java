@@ -10,11 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +33,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	public static Bitmap inputImage;
 	private boolean isComplete = false;
 	private String[] textAnalisys;
+	private RecognizeThread thread;
 
 	SharedPreferences preferences;
 
@@ -55,7 +52,6 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		try {
 			inputImage = onResizeImage(onReceiveImage(), 500, 500);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -74,29 +70,14 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 
 	}
 
-	public static Bitmap toBlackWhite(Bitmap bitmap) {
-		int height = bitmap.getHeight();
-		int width = bitmap.getWidth();
-		Bitmap bitmapBlackWhite = Bitmap.createBitmap(width, height,
-				Bitmap.Config.RGB_565);
-		Canvas c = new Canvas(bitmapBlackWhite);
-		Paint paint = new Paint();
-		ColorMatrix cm = new ColorMatrix();
-		cm.setSaturation(0);
-		ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-		paint.setColorFilter(f);
-		c.drawBitmap(bitmap, 0, 0, paint);
-		return bitmapBlackWhite;
-	}
-
 	// nhận Uri từ activity trc đó.
-	public Uri onReceiveImage() {
+	private Uri onReceiveImage() {
 		Bundle bundle = getIntent().getExtras();
 		return Uri.parse(bundle.getString("uriData"));
 	}
 
 	// thay đổi size phù hợp với imageview tránh bị tràng bộ nhớ
-	public Bitmap onResizeImage(Uri uri, int requestHeight, int requestWidth)
+	private Bitmap onResizeImage(Uri uri, int requestHeight, int requestWidth)
 			throws FileNotFoundException {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
@@ -112,7 +93,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	}
 
 	// tìm size thich hợp
-	public static int setInSampleSize(BitmapFactory.Options options,
+	private int setInSampleSize(BitmapFactory.Options options,
 			int requestHeight, int requestWidth) {
 
 		int imageHeight = options.outHeight;
@@ -131,7 +112,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		return inSampleSize;
 	}
 
-	public void onPhotoChosen() {
+	private void onPhotoChosen() {
 		Bitmap mBitmap = ivImageCropMain.cropBitmap();
 		textResult = onHanldeOCR(mBitmap);
 		switch (MainActivity.mode) {
@@ -162,14 +143,11 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-
 			handler.sendEmptyMessage(0);
 		}
-
 		private Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -197,20 +175,6 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				default:
 					break;
 				}
-				/*if (MainActivity.isNameCard){
-=======
-				if (MainActivity.isNameCard) {
->>>>>>> .r26
-					Intent i = new Intent(mContext, InputImageResult.class);
-					i.putExtra("textResult", textResult);
-					i.putExtra("textAnalisys", textAnalisys);
-					startActivity(i);
-				} else {
-					Intent i = new Intent(mContext, InvitationResult.class);
-					i.putExtra("textResult", textResult);
-					i.putExtra("textAnalisys", textAnalisys);
-					startActivity(i);
-				}*/
 				isComplete = false;
 			}
 		};
@@ -235,17 +199,15 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 			case R.id.iv_imagehandler_btnProcess:
 				progressDialog = ProgressDialog.show(mContext,
 						"Vui lòng đợi", "Đang xử lý...");
-				RecognizeThread thread = new RecognizeThread();
+				thread = new RecognizeThread();
 				thread.start();
 				break;
 			case R.id.iv_imagehandler_btnNext:
-
 				inputImage = onImageRotation(inputImage, 90);
 				ivImageCropMain.setImageBitmap(inputImage);
 				ivImageCropMain.setBitmap(inputImage);
 				break;
 			case R.id.iv_imagehandler_btnBack:
-
 				inputImage = onImageRotation(inputImage, -90);
 				ivImageCropMain.setImageBitmap(inputImage);
 				ivImageCropMain.setBitmap(inputImage);
@@ -254,13 +216,4 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		}
 		return true;
 	}
-
-	@Override
-	protected void onPause() {
-		if (progressDialog != null && progressDialog.isShowing()) {
-			progressDialog.cancel();
-		}
-		super.onPause();
-	}
-
 }
