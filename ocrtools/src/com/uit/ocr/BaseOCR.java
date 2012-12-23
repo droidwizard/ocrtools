@@ -132,7 +132,7 @@ public class BaseOCR extends Activity {
 		return result;
 	}
 
-	public String[] onTextAnalisys(String input) {
+	public String[] onNameCardAnalisys(String input) {
 		String[] result = new String[10];
 		String lists[] = { Consts.EMAIL, Consts.MOBILE, Consts.NAME };
 		for (int i = 0; i < lists.length; i++) {
