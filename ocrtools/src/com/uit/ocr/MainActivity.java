@@ -156,7 +156,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			if (resultCode==RESULT_OK){
 				Intent i=new Intent(context, ImageHandler.class);
 				Bundle b=new Bundle();
-				b.putString("uriData", data.getDataString());
+				b.putString(Consts.URIDATA, data.getDataString());
 				i.putExtras(b);
 				startActivity(i);
 			}
@@ -165,7 +165,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			if (resultCode==RESULT_OK){
 				Intent i=new Intent(context, ImageHandler.class);
 				Bundle b=new Bundle();
-				b.putString("uriData", data.getDataString());
+				b.putString(Consts.URIDATA, data.getDataString());
 				i.putExtras(b);
 				startActivity(i);
 			}

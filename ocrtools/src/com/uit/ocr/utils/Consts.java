@@ -14,6 +14,11 @@ public class Consts {
 	public static final String DEFAULT_EVENT_1 = "Hội họp";
 	public static final String DEFAULT_EVENT_2 = "Tiệc cưới";
 	public static final String DEFAULT_EVENT_3 = "Sinh nhật";
+	
+	public static final String TEXTBASERESULT="textBaseResult";
+	public static final String TEXTRESULT="textResult";
+	public static final String TEXTANALISYS="textAnalisys";
+	public static final String URIDATA="uriData";
 
 	public static final String DATA_ENGLISH = "eng";
 	public static final String DATA_GERMAN = "deu";

@@ -1,8 +1,8 @@
 package com.uit.ocr;
 
+import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.ResultClass;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Contacts;
@@ -10,59 +10,63 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
-public class NameCardResult extends ResultClass implements OnClickListener {
-	private static final String TAG = "InputImageResult.java";
-	Context mContext = NameCardResult.this;
+@SuppressWarnings("deprecation")
+public class NameCardResult extends ResultClass {
+	private static final String TAG = NameCardResult.class.getSimpleName();
 
-	private EditText edtInputImageResultResult, edt_inputimageresult_mobile,
-			edt_inputimageresult_email, edt_inputimageresult_name;
+	private EditText edtNameCardResultMobile, edtNameCardResultEmail,
+			edtNameCardResultName;
 
-	private Button btnInputImageResult_AddContact;
+	private ImageView ivNameCardResultImage;
+
+	private Button btnNameCardResultAddContact;
 	private String recognizedResult;
 	private String[] textAnalysis;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.namecardresult);
-		edtInputImageResultResult = (EditText) findViewById(R.id.edt_inputimageresult_result);
-		edt_inputimageresult_mobile = (EditText) findViewById(R.id.edt_inputimageresult_mobile);
-		edt_inputimageresult_email = (EditText) findViewById(R.id.edt_inputimageresult_email);
-		edt_inputimageresult_name = (EditText) findViewById(R.id.edt_inputimageresult_name);
+		edtNameCardResultMobile = (EditText) findViewById(R.id.edt_namecardresult_phone);
+		edtNameCardResultEmail = (EditText) findViewById(R.id.edt_namecardresult_email);
+		edtNameCardResultName = (EditText) findViewById(R.id.edt_namecardresult_name);
+		btnNameCardResultAddContact = (Button) findViewById(R.id.btn_namecardresult_add);
+		ivNameCardResultImage = (ImageView) findViewById(R.id.iv_namecardresult_image);
 
-		btnInputImageResult_AddContact = (Button) findViewById(R.id.btn_inputimageresult_addcontacts);
 		// hàm lấy kết quả
 		onReceiveResult();
-		edtInputImageResultResult.setText(recognizedResult);
-		edt_inputimageresult_email.setText(textAnalysis[0].toString());
-		edt_inputimageresult_mobile.setText(textAnalysis[1].toString());
-		edt_inputimageresult_name.setText(textAnalysis[2].toString());
+		ivNameCardResultImage.setImageBitmap(ImageHandler.inputImage);
 
-		btnInputImageResult_AddContact.setOnClickListener(this);
+		edtNameCardResultEmail.setText(textAnalysis[0].toString());
+		edtNameCardResultMobile.setText(textAnalysis[1].toString());
+		edtNameCardResultName.setText(textAnalysis[2].toString());
+
+		btnNameCardResultAddContact.setOnClickListener(addContactsListener);
 
 	}
-	
+
 	@Override
 	public void onReceiveResult() {
-		recognizedResult = getIntent().getStringExtra("textResult");
-		textAnalysis = getIntent().getStringArrayExtra("textAnalisys");
+		recognizedResult = getIntent().getStringExtra(Consts.TEXTRESULT);
+		textAnalysis = getIntent().getStringArrayExtra(Consts.TEXTANALISYS);
 	}
 
-	public void onClick(View v) {
-		if (v == btnInputImageResult_AddContact) {
-			Intent addContact = new Intent(Contacts.Intents.Insert.ACTION,
-					Contacts.People.CONTENT_URI);
-			addContact.putExtra(Contacts.Intents.Insert.NAME,
-					textAnalysis[2].toString());
-			addContact.putExtra(Contacts.Intents.Insert.EMAIL,
-					textAnalysis[0].toString());
-			addContact.putExtra(Contacts.Intents.Insert.PHONE,
-					textAnalysis[1].toString());
-			startActivity(addContact);
+	private OnClickListener addContactsListener = new OnClickListener() {
+		public void onClick(View v) {
+			if (v == btnNameCardResultAddContact) {
+				Intent addContact = new Intent(Contacts.Intents.Insert.ACTION,
+						Contacts.People.CONTENT_URI);
+				addContact.putExtra(Contacts.Intents.Insert.NAME,
+						textAnalysis[2].toString());
+				addContact.putExtra(Contacts.Intents.Insert.EMAIL,
+						textAnalysis[0].toString());
+				addContact.putExtra(Contacts.Intents.Insert.PHONE,
+						textAnalysis[1].toString());
+				startActivity(addContact);
+			}
 		}
-
-	}
+	};
 
 }
