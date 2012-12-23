@@ -93,7 +93,7 @@ public class InvitationResult extends ResultClass {
 	 * load dữ liệu vào edittext, imageview
 	 */
 	private void onLoadData() {
-		ivInvitationResult_main.setImageBitmap(ImageHandler.imageForResult);
+		ivInvitationResult_main.setImageBitmap(ImageHandler.inputImage);
 
 		int[] time = getTime(textAnalysis[0].toString());
 
