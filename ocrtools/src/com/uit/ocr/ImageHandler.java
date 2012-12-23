@@ -3,6 +3,7 @@ package com.uit.ocr;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.CustomImageView;
 
 import android.app.ProgressDialog;
@@ -140,13 +141,13 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		Bitmap mBitmap = ivImageCropMain.cropBitmap();
 		textResult = onHanldeOCR(mBitmap);
 		switch (MainActivity.mode) {
-		case MainActivity.MODE_NONE:
+		case Consts.MODE_NONE:
 			
 			break;
-		case MainActivity.MODE_NAMECARD:
+		case Consts.MODE_NAMECARD:
 			textAnalisys = onTextAnalisys(textResult);
 			break;
-		case MainActivity.MODE_INVITATION:
+		case Consts.MODE_INVITATION:
 			textAnalisys = onInvitationAnalisys(textResult);
 			break;
 
@@ -181,18 +182,18 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				progressDialog.dismiss();
 				Intent mIntent;
 				switch (MainActivity.mode) {
-				case MainActivity.MODE_NONE:
+				case Consts.MODE_NONE:
 					mIntent = new Intent(mContext, NormalResult.class);
 					mIntent.putExtra("textBaseResult", textResult);
 					startActivity(mIntent);
 					break;
-				case MainActivity.MODE_NAMECARD:
+				case Consts.MODE_NAMECARD:
 					mIntent = new Intent(mContext, InputImageResult.class);
 					mIntent.putExtra("textResult", textResult);
 					mIntent.putExtra("textAnalisys", textAnalisys);
 					startActivity(mIntent);
 					break;
-				case MainActivity.MODE_INVITATION:
+				case Consts.MODE_INVITATION:
 					mIntent = new Intent(mContext, InvitationResult.class);
 					mIntent.putExtra("textResult", textResult);
 					mIntent.putExtra("textAnalisys", textAnalisys);
