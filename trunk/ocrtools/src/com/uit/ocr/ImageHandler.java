@@ -73,7 +73,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	// nhận Uri từ activity trc đó.
 	private Uri onReceiveImage() {
 		Bundle bundle = getIntent().getExtras();
-		return Uri.parse(bundle.getString("uriData"));
+		return Uri.parse(bundle.getString(Consts.URIDATA));
 	}
 
 	// thay đổi size phù hợp với imageview tránh bị tràng bộ nhớ
@@ -156,19 +156,19 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				switch (MainActivity.mode) {
 				case Consts.MODE_NONE:
 					mIntent = new Intent(mContext, NormalResult.class);
-					mIntent.putExtra("textBaseResult", textResult);
+					mIntent.putExtra(Consts.TEXTBASERESULT, textResult);
 					startActivity(mIntent);
 					break;
 				case Consts.MODE_NAMECARD:
 					mIntent = new Intent(mContext, NameCardResult.class);
-					mIntent.putExtra("textResult", textResult);
-					mIntent.putExtra("textAnalisys", textAnalisys);
+					mIntent.putExtra(Consts.TEXTRESULT, textResult);
+					mIntent.putExtra(Consts.TEXTANALISYS, textAnalisys);
 					startActivity(mIntent);
 					break;
 				case Consts.MODE_INVITATION:
 					mIntent = new Intent(mContext, InvitationResult.class);
-					mIntent.putExtra("textResult", textResult);
-					mIntent.putExtra("textAnalisys", textAnalisys);
+					mIntent.putExtra(Consts.TEXTRESULT, textResult);
+					mIntent.putExtra(Consts.TEXTANALISYS, textAnalisys);
 					startActivity(mIntent);
 					break;
 

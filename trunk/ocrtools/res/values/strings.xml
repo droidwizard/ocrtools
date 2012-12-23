@@ -83,6 +83,12 @@
         <item>Việt Nam</item>
     </string-array>
     <string name="language_prompt">Chọn ngôn ngữ</string>
-    
+    <string name="namecardresult_tv_name">Họ tên :</string>
+    <string name="namecardresult_edt_name_hint">Nhận dạng tên</string>
+    <string name="namecardresult_tv_phone">Điện thoại :</string>
+    <string name="namecardresult_tv_email">Email :</string>
+    <string name="namecardresult_edt_phone_hint">Điện thoại</string>
+    <string name="namecardresult_edt_email_hint">Email</string>
+    <string name="namecardresult_btn_add">Thêm danh bạ</string>
 
 </resources>
