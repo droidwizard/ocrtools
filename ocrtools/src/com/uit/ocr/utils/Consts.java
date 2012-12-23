@@ -59,10 +59,16 @@ public class Consts {
 	public static final String TRANS_THAILAND = "th";
 	public static final String TRANS_CHINA = "zh-TW";
 	public static final String TRANS_VIETNAM = "vi";
-	
+
 	public static final String DATA_PATH = Environment
 			.getExternalStorageDirectory().toString() + "/OCRTools/";
-	
+
+	public static final String ROOT_PATH = Environment
+			.getExternalStorageDirectory().toString()
+			+ "/"
+			+ Consts.ROOT_NAME
+			+ "/";
+
 	public static final String DATE = "(0?[1-9]|[12][0-9]|3[01])[- /.]+(0?[1-9]|1[012])[- /.]+((19|20)?[0-9]{2})";
 	public static final String DATE2 = "[a-zA-Zngayàáảãắẳẵằằéèẽõóò ]+(0?[1-9]|[12][0-9]|3[01])[a-zA-Zãthngàăáắằẵặíìỉĩi ]+(0?[1-9]|1[012])[a-zA-Znmăáắằẵặã ]+((19|20)?[0-9]{2}).*";
 
