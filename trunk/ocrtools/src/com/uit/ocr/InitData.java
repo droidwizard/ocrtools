@@ -11,29 +11,19 @@ import com.uit.ocr.utils.Consts;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
 public class InitData extends Thread {
-	private ProgressDialog mDialog;
-	private static final String TAG = "InitData.java";
+	private static final String TAG = InitData.class.getSimpleName();
+	private Context mContext;
 
 	private boolean isComplete = false;
-	Context mContext;
-	Resources res;
-
-
-	public static final String ROOT_PATH = Environment
-			.getExternalStorageDirectory().toString() + "/" + Consts.ROOT_NAME + "/";
-
-	public static final String lang = "vie";
+	private ProgressDialog mDialog;
 
 	public InitData(Context context, ProgressDialog dialog) {
 		mDialog = dialog;
 		mContext = context;
-		res = mContext.getResources();
 	}
 
 	@Override
@@ -57,10 +47,9 @@ public class InitData extends Thread {
 	};
 
 	public void initOcrTools() {
-		if (initPath() == true) {	
+		if (initPath() == true) {
 			if (initTrainedData() == true) {
-				Log.i(TAG, res.getString(R.string.String_success)
-						+ " initTrainedData()");
+				Log.i(TAG, "Gọi hàm initTrainedData()==true");
 				isComplete = true;
 			}
 		}
@@ -68,8 +57,9 @@ public class InitData extends Thread {
 
 	private boolean initPath() {
 		// tessdata thu mục chứa trainneddata, images thu mục chứa hình đã chụp
-		String[] paths = new String[] { ROOT_PATH, ROOT_PATH + Consts.TESSDATA_NAME,
-				ROOT_PATH + Consts.IMAGE_NAME };
+		String[] paths = new String[] { Consts.ROOT_PATH,
+				Consts.ROOT_PATH + Consts.TESSDATA_NAME,
+				Consts.ROOT_PATH + Consts.IMAGE_NAME };
 
 		for (String path : paths) {
 			File dir = new File(path);
@@ -84,22 +74,22 @@ public class InitData extends Thread {
 				}
 			}
 		}
-		// Environment.getExternalStoragePublicDirectory(IMAGENAME);
-		Log.i(TAG, res.getString(R.string.String_success) + " initPath()");
+		Log.i(TAG, "Gọi hàm initPath()");
 		return true;
 	}
 
 	private boolean initTrainedData() {
-		if (!(new File(ROOT_PATH + Consts.TESSDATA_NAME + "/" + lang + ".traineddata"))
-				.exists()) {
+		if (!(new File(Consts.ROOT_PATH + Consts.TESSDATA_NAME + "/"
+				+ Consts.DATA_VIETNAM + ".traineddata")).exists()) {
 			try {
 
 				AssetManager assetManager = mContext.getAssets();
-				InputStream in = assetManager.open(Consts.TESSDATA_NAME + "/" + lang
-						+ ".traineddata");
+				InputStream in = assetManager.open(Consts.TESSDATA_NAME + "/"
+						+ Consts.DATA_VIETNAM + ".traineddata");
 
-				OutputStream out = new FileOutputStream(ROOT_PATH
-						+ Consts.TESSDATA_NAME + "/" + lang + ".traineddata");
+				OutputStream out = new FileOutputStream(Consts.ROOT_PATH
+						+ Consts.TESSDATA_NAME + "/" + Consts.DATA_VIETNAM
+						+ ".traineddata");
 
 				byte[] buf = new byte[1024];
 				int len;
@@ -111,7 +101,7 @@ public class InitData extends Thread {
 				out.close();
 
 			} catch (IOException e) {
-				Log.e(TAG, res.getString(R.string.String_fail));
+				Log.e(TAG, "fail");
 			}
 			return true;
 		} else {
