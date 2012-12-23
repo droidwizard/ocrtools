@@ -13,7 +13,7 @@
     	android:layout_width="match_parent"
     	android:layout_height="match_parent">
 	    <ImageView
-	        android:id="@+id/iv_imagecrop_btnProcess"
+	        android:id="@+id/iv_imagehandler_btnProcess"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
@@ -22,7 +22,7 @@
 	        android:src="@drawable/misc_downloads_icon" />
 	
 	    <ImageView
-	        android:id="@+id/iv_imagecrop_btnNext"
+	        android:id="@+id/iv_imagehandler_btnNext"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
@@ -32,7 +32,7 @@
 	        android:src="@drawable/actions_blue_arrow_redo_icon" />
 	
 	    <ImageView
-	        android:id="@+id/iv_imagecrop_btnBack"
+	        android:id="@+id/iv_imagehandler_btnBack"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"

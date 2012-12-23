@@ -1,8 +1,6 @@
 package com.uit.ocr;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
 import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.CustomImageView;
 
@@ -29,21 +27,17 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
 public class ImageHandler extends BaseOCR implements OnTouchListener {
-	private static final String TAG = "ImageCrop.java";
-	private ImageView ivImageCropProcess, ivImageCropNext, ivImageCropBack;
+	private static final String TAG = ImageHandler.class.getSimpleName();
+	private Context mContext = ImageHandler.this;
+	
+	private ImageView ivImageHandlerProcess, ivImageHandlerNext, ivImageHandlerBack;
 	private CustomImageView ivImageCropMain;
-
+	private ProgressDialog progressDialog;
 	private String textResult;
 	public static Bitmap imageForResult;
-	private Context mContext = ImageHandler.this;
-	RecognizeThread thread;
-	ProgressDialog progressDialog;
 	private boolean isComplete = false;
 	private String[] textAnalisys;
 
-	public static ArrayList<String> DefaultEvents = new ArrayList<String>();
-
-	private String settingsEventTitles;
 	SharedPreferences preferences;
 
 	@Override
@@ -52,9 +46,9 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imagehandler);
 		ivImageCropMain = (CustomImageView) findViewById(R.id.iv_custom_image);
-		ivImageCropProcess = (ImageView) findViewById(R.id.iv_imagecrop_btnProcess);
-		ivImageCropNext = (ImageView) findViewById(R.id.iv_imagecrop_btnNext);
-		ivImageCropBack = (ImageView) findViewById(R.id.iv_imagecrop_btnBack);
+		ivImageHandlerProcess = (ImageView) findViewById(R.id.iv_imagehandler_btnProcess);
+		ivImageHandlerNext = (ImageView) findViewById(R.id.iv_imagehandler_btnNext);
+		ivImageHandlerBack = (ImageView) findViewById(R.id.iv_imagehandler_btnBack);
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
 
@@ -74,9 +68,9 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		// hình ảnh sau khi lấy dc
 		ivImageCropMain.setImageBitmap(imageForResult);
 		ivImageCropMain.setBitmap(imageForResult);
-		ivImageCropProcess.setOnTouchListener(this);
-		ivImageCropNext.setOnTouchListener(this);
-		ivImageCropBack.setOnTouchListener(this);
+		ivImageHandlerProcess.setOnTouchListener(this);
+		ivImageHandlerNext.setOnTouchListener(this);
+		ivImageHandlerBack.setOnTouchListener(this);
 
 	}
 
@@ -238,19 +232,19 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			switch (v.getId()) {
-			case R.id.iv_imagecrop_btnProcess:
+			case R.id.iv_imagehandler_btnProcess:
 				progressDialog = ProgressDialog.show(mContext,
 						"Vui lòng đợi", "Đang xử lý...");
-				thread = new RecognizeThread();
+				RecognizeThread thread = new RecognizeThread();
 				thread.start();
 				break;
-			case R.id.iv_imagecrop_btnNext:
+			case R.id.iv_imagehandler_btnNext:
 
 				imageForResult = onImageRotation(imageForResult, 90);
 				ivImageCropMain.setImageBitmap(imageForResult);
 				ivImageCropMain.setBitmap(imageForResult);
 				break;
-			case R.id.iv_imagecrop_btnBack:
+			case R.id.iv_imagehandler_btnBack:
 
 				imageForResult = onImageRotation(imageForResult, -90);
 				ivImageCropMain.setImageBitmap(imageForResult);
