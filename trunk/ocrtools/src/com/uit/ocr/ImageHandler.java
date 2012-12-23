@@ -34,7 +34,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	private CustomImageView ivImageCropMain;
 	private ProgressDialog progressDialog;
 	private String textResult;
-	public static Bitmap imageForResult;
+	public static Bitmap inputImage;
 	private boolean isComplete = false;
 	private String[] textAnalisys;
 
@@ -53,7 +53,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		
 
 		try {
-			imageForResult = onResizeImage(onReceiveImage(), 500, 500);
+			inputImage = onResizeImage(onReceiveImage(), 500, 500);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,12 +62,12 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		// ivImageCropMain.setBitmap(imageForResult);
 
 		if (MainActivity.is2ColorImage == true) {
-			imageForResult = toBlackWhite(imageForResult);
+			inputImage = toBlackWhite(inputImage);
 		}
 
 		// hình ảnh sau khi lấy dc
-		ivImageCropMain.setImageBitmap(imageForResult);
-		ivImageCropMain.setBitmap(imageForResult);
+		ivImageCropMain.setImageBitmap(inputImage);
+		ivImageCropMain.setBitmap(inputImage);
 		ivImageHandlerProcess.setOnTouchListener(this);
 		ivImageHandlerNext.setOnTouchListener(this);
 		ivImageHandlerBack.setOnTouchListener(this);
@@ -240,15 +240,15 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 				break;
 			case R.id.iv_imagehandler_btnNext:
 
-				imageForResult = onImageRotation(imageForResult, 90);
-				ivImageCropMain.setImageBitmap(imageForResult);
-				ivImageCropMain.setBitmap(imageForResult);
+				inputImage = onImageRotation(inputImage, 90);
+				ivImageCropMain.setImageBitmap(inputImage);
+				ivImageCropMain.setBitmap(inputImage);
 				break;
 			case R.id.iv_imagehandler_btnBack:
 
-				imageForResult = onImageRotation(imageForResult, -90);
-				ivImageCropMain.setImageBitmap(imageForResult);
-				ivImageCropMain.setBitmap(imageForResult);
+				inputImage = onImageRotation(inputImage, -90);
+				ivImageCropMain.setImageBitmap(inputImage);
+				ivImageCropMain.setBitmap(inputImage);
 				break;
 			}
 		}
