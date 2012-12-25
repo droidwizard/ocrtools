@@ -20,19 +20,15 @@ import android.widget.Toast;
 
 import com.uit.ocr.utils.Consts;
 
-public class Settings extends Activity implements OnCheckedChangeListener,
-		OnItemSelectedListener {
-
-	private String language;
-
-	CheckBox cbSettings2ColorImage, cbSettingsCharfilter;
-
+public class Settings extends Activity{
+	private static final String TAG = Settings.class.getSimpleName();
 	private Context context = Settings.this;
+	
+	private CheckBox cbSettings2ColorImage, cbSettingsCharfilter;
 	private Spinner itemLanguages;
 	private EditText edtSettingsTitleEvent;
 	private Button btnSettingsSave;
 	private SharedPreferences preferences;
-	private SharedPreferences.Editor editor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +41,16 @@ public class Settings extends Activity implements OnCheckedChangeListener,
 		itemLanguages = (Spinner) findViewById(R.id.sp_languages);
 		edtSettingsTitleEvent = (EditText) findViewById(R.id.edt_settings_titleevent);
 		btnSettingsSave = (Button) findViewById(R.id.btn_settings_saveevent);
+		
 		setCheckBox();
 
-		cbSettings2ColorImage.setOnCheckedChangeListener(this);
-		cbSettingsCharfilter.setOnCheckedChangeListener(this);
 		cbSettings2ColorImage.setOnCheckedChangeListener(checkboxListener);
 		cbSettingsCharfilter.setOnCheckedChangeListener(checkboxListener);
 		btnSettingsSave.setOnClickListener(saveListener);
-		itemLanguages.setOnItemSelectedListener(this);
+		itemLanguages.setOnItemSelectedListener(languagesListener);
 		itemLanguages.setSelection(13);
 
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		editor = preferences.edit();
 
 		if (preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "").equals("")
 				|| preferences.getString(Consts.SETTINGS_TITLE_EVENTS, "") == null) {
@@ -66,18 +60,7 @@ public class Settings extends Activity implements OnCheckedChangeListener,
 					Consts.SETTINGS_TITLE_EVENTS, ""));
 		}
 	}
-
-	/**
-	 * button click event
-	 */
-	private OnClickListener saveListener = new OnClickListener() {
-		public void onClick(View v) {
-			editor.putString(Consts.SETTINGS_TITLE_EVENTS,
-					edtSettingsTitleEvent.getText().toString());
-			editor.commit();
-		}
-	};
-
+	
 	/**
 	 * set checkbox status
 	 */
@@ -85,6 +68,20 @@ public class Settings extends Activity implements OnCheckedChangeListener,
 		cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
 		cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
 	}
+
+
+	/**
+	 * button click event
+	 */
+	private OnClickListener saveListener = new OnClickListener() {
+		public void onClick(View v) {
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.putString(Consts.SETTINGS_TITLE_EVENTS,
+					edtSettingsTitleEvent.getText().toString());
+			editor.commit();
+		}
+	};
+
 
 	/**
 	 * checkbox click event
@@ -123,55 +120,50 @@ public class Settings extends Activity implements OnCheckedChangeListener,
 			}
 		}
 	};
-
-	public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		// TODO Auto-generated method stub
-		language = parent.getItemAtPosition(pos).toString();
-		if (language.equals(Consts.LANG_VIETNAM)) {
-			MainActivity.flagLock = true;
-			BaseOCR.lang = Consts.DATA_VIETNAM;
-		} else {
-			MainActivity.flagLock = false;
-			if (language.equals(Consts.LANG_GERMAN)) {
-				BaseOCR.lang = Consts.DATA_GERMAN;
-			} else if (language.equals(Consts.LANG_DUTCH)) {
-				BaseOCR.lang = Consts.DATA_DUTCH;
-			} else if (language.equals(Consts.LANG_KOREAN)) {
-				BaseOCR.lang = Consts.DATA_KOREAN;
-			} else if (language.equals(Consts.LANG_INDONESIA)) {
-				BaseOCR.lang = Consts.DATA_INDONESIA;
-			} else if (language.equals(Consts.LANG_ITALIA)) {
-				BaseOCR.lang = Consts.DATA_ITALIA;
-			} else if (language.equals(Consts.LANG_MALAYSIA)) {
-				BaseOCR.lang = Consts.DATA_MALAYSIA;
-			} else if (language.equals(Consts.LANG_RUSSIA)) {
-				BaseOCR.lang = Consts.DATA_RUSSIA;
-			} else if (language.equals(Consts.LANG_JAPAN)) {
-				BaseOCR.lang = Consts.DATA_JAPAN;
-			} else if (language.equals(Consts.LANG_FRANCE)) {
-				BaseOCR.lang = Consts.DATA_FRANCE;
-			} else if (language.equals(Consts.LANG_SPAIN)) {
-				BaseOCR.lang = Consts.DATA_SPAIN;
-			} else if (language.equals(Consts.LANG_THAILAND)) {
-				BaseOCR.lang = Consts.DATA_THAILAND;
-			} else if (language.equals(Consts.LANG_CHINA)) {
-				BaseOCR.lang = Consts.DATA_CHINA;
-			} else if (language.equals(Consts.LANG_ENGLISH)) {
-				BaseOCR.lang = Consts.DATA_ENGLISH;
+	
+	private OnItemSelectedListener languagesListener=new OnItemSelectedListener() {
+		public void onItemSelected(AdapterView<?> parent, View arg1, int pos,
+				long arg3) {
+			String language = parent.getItemAtPosition(pos).toString();
+			if (language.equals(Consts.LANG_VIETNAM)) {
+				MainActivity.flagLock = true;
+				BaseOCR.lang = Consts.DATA_VIETNAM;
+			} else {
+				MainActivity.flagLock = false;
+				if (language.equals(Consts.LANG_GERMAN)) {
+					BaseOCR.lang = Consts.DATA_GERMAN;
+				} else if (language.equals(Consts.LANG_DUTCH)) {
+					BaseOCR.lang = Consts.DATA_DUTCH;
+				} else if (language.equals(Consts.LANG_KOREAN)) {
+					BaseOCR.lang = Consts.DATA_KOREAN;
+				} else if (language.equals(Consts.LANG_INDONESIA)) {
+					BaseOCR.lang = Consts.DATA_INDONESIA;
+				} else if (language.equals(Consts.LANG_ITALIA)) {
+					BaseOCR.lang = Consts.DATA_ITALIA;
+				} else if (language.equals(Consts.LANG_MALAYSIA)) {
+					BaseOCR.lang = Consts.DATA_MALAYSIA;
+				} else if (language.equals(Consts.LANG_RUSSIA)) {
+					BaseOCR.lang = Consts.DATA_RUSSIA;
+				} else if (language.equals(Consts.LANG_JAPAN)) {
+					BaseOCR.lang = Consts.DATA_JAPAN;
+				} else if (language.equals(Consts.LANG_FRANCE)) {
+					BaseOCR.lang = Consts.DATA_FRANCE;
+				} else if (language.equals(Consts.LANG_SPAIN)) {
+					BaseOCR.lang = Consts.DATA_SPAIN;
+				} else if (language.equals(Consts.LANG_THAILAND)) {
+					BaseOCR.lang = Consts.DATA_THAILAND;
+				} else if (language.equals(Consts.LANG_CHINA)) {
+					BaseOCR.lang = Consts.DATA_CHINA;
+				} else if (language.equals(Consts.LANG_ENGLISH)) {
+					BaseOCR.lang = Consts.DATA_ENGLISH;
+				}
 			}
+			
 		}
 
-	}
-
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 }

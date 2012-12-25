@@ -22,7 +22,6 @@ public class NameCardResult extends ResultClass {
 	private ImageView ivNameCardResultImage;
 
 	private Button btnNameCardResultAddContact;
-	private String recognizedResult;
 	private String[] textAnalysis;
 
 	@Override
@@ -49,7 +48,6 @@ public class NameCardResult extends ResultClass {
 
 	@Override
 	public void onReceiveResult() {
-		recognizedResult = getIntent().getStringExtra(Consts.TEXTRESULT);
 		textAnalysis = getIntent().getStringArrayExtra(Consts.TEXTANALISYS);
 	}
 
