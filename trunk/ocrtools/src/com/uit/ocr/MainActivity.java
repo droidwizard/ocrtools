@@ -16,14 +16,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-public class MainActivity extends Activity implements OnClickListener {
-	private static final String TAG = "MainActivity.java";
-
+public class MainActivity extends Activity{
+	private static final String TAG = MainActivity.class.getSimpleName();
+	private Context context = MainActivity.this;
+	
 	public static int mode = Consts.MODE_NONE;
 	public static boolean flagLock = true;
-	
 
-	private Context context = MainActivity.this;
 	private Button btn_main_DemoOCR;
 	private Button btn_main_InputImage;
 	private ProgressDialog progressDialog;
@@ -36,8 +35,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private RadioButton rabtn_main_invite;
 	private RadioButton rabtn_main_normal;
 	
-	private static final int SETTINGS_ID = Menu.FIRST;
-	private static final int ABOUT_ID = Menu.FIRST + 1;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,8 +51,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		btn_main_DemoOCR = (Button) findViewById(R.id.btn_main_camera);		
 		btn_main_InputImage = (Button) findViewById(R.id.btn_main_image);
 		
-		btn_main_DemoOCR.setOnClickListener(MainActivity.this);
-		btn_main_InputImage.setOnClickListener((OnClickListener) context);
+		btn_main_DemoOCR.setOnClickListener(btnListener);
+		btn_main_InputImage.setOnClickListener(btnListener);
 		
 		if(flagLock == false)
 		{
@@ -135,21 +133,25 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}*/
-
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_main_camera:
-			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);   
-	        startActivityForResult(camera, 103);
-			break;
-		case R.id.btn_main_image: 
-			Intent i = new Intent();
-			i.setType("image/*");
-			i.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(Intent.createChooser(i, "Application Chooser"),102);
-			break;
+	
+	private OnClickListener btnListener=new OnClickListener() {
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.btn_main_camera:
+				Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);   
+		        startActivityForResult(camera, 103);
+				break;
+			case R.id.btn_main_image: 
+				Intent i = new Intent();
+				i.setType("image/*");
+				i.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(Intent.createChooser(i, "Application Chooser"),102);
+				break;
+			}
+			
 		}
-	}
+	};
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode==102){
@@ -175,9 +177,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);		
-		menu.add(Menu.NONE, SETTINGS_ID, Menu.NONE, R.string.menu_settings).setIcon(
+		menu.add(Menu.NONE, Consts.SETTINGS_ID, Menu.NONE, R.string.menu_settings).setIcon(
 				android.R.drawable.ic_menu_manage);
-		menu.add(Menu.NONE, ABOUT_ID, Menu.NONE, R.string.menu_about).setIcon(
+		menu.add(Menu.NONE, Consts.ABOUT_ID, Menu.NONE, R.string.menu_about).setIcon(
 				android.R.drawable.ic_menu_info_details);
 		return true;
 	}
@@ -187,10 +189,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		switch (item.getItemId()) {
-		case SETTINGS_ID:
+		case Consts.SETTINGS_ID:
 			startActivityForResult(new Intent(context, Settings.class), 104);
             break;
-        case ABOUT_ID:
+        case Consts.ABOUT_ID:
             break;	
 		default:
 			return super.onOptionsItemSelected(item);
