@@ -25,14 +25,15 @@ import android.widget.Spinner;
 
 public class InvitationResult extends ResultClass {
 	private static final String TAG = InvitationResult.class.getSimpleName();
+	
 	private String[] textAnalysis;
 	private EditText edtInvitationResult_location, edtInvitationResult_time;
 	private Spinner spinInvitationResult_content;
 	private ImageView ivInvitationResult_main;
 	private Button btnInvitationResult_save;
 	private String eventLocation, eventTitle;
-	private Calendar cal;
-	private ArrayList<String> DefaultEvents = new ArrayList<String>();
+	private Calendar calendar;
+	private ArrayList<String> defaultEvents = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class InvitationResult extends ResultClass {
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				InvitationResult.this,
-				android.R.layout.simple_spinner_dropdown_item, DefaultEvents);
+				android.R.layout.simple_spinner_dropdown_item, defaultEvents);
 		spinInvitationResult_content.setAdapter(adapter);
 
 		spinInvitationResult_content.setOnItemSelectedListener(spinListener);
@@ -66,11 +67,11 @@ public class InvitationResult extends ResultClass {
 	 * (được lưu trong SharedPreference)
 	 */
 	private void onLoadTitleEvent() {
-		DefaultEvents.clear();
+		defaultEvents.clear();
 
-		DefaultEvents.add(Consts.DEFAULT_EVENT_1);
-		DefaultEvents.add(Consts.DEFAULT_EVENT_2);
-		DefaultEvents.add(Consts.DEFAULT_EVENT_3);
+		defaultEvents.add(Consts.DEFAULT_EVENT_1);
+		defaultEvents.add(Consts.DEFAULT_EVENT_2);
+		defaultEvents.add(Consts.DEFAULT_EVENT_3);
 		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -82,7 +83,7 @@ public class InvitationResult extends ResultClass {
 				String[] tmps = settingsEventTitles.split("-");
 				for (String tmp : tmps) {
 					if (!tmp.equals("") && tmp != null && !tmp.equals(" ")) {
-						DefaultEvents.add(tmp);
+						defaultEvents.add(tmp);
 					}
 				}
 			}
@@ -106,7 +107,7 @@ public class InvitationResult extends ResultClass {
 			String a = edtInvitationResult_time.getText().toString();
 			Log.i(TAG, "Trường hợp 1:"+a);
 
-			cal = setTimeEvent(Integer.valueOf(textAnalysis[6].toString()),
+			calendar = setTimeEvent(Integer.valueOf(textAnalysis[6].toString()),
 					Integer.valueOf(textAnalysis[5].toString()),
 					Integer.valueOf(textAnalysis[4].toString()), time[0],
 					time[1]);
@@ -120,7 +121,7 @@ public class InvitationResult extends ResultClass {
 
 			Log.i(TAG, "Trường hợp 2:"+a);
 
-			cal = setTimeEvent(Integer.valueOf(textAnalysis[3].toString()),
+			calendar = setTimeEvent(Integer.valueOf(textAnalysis[3].toString()),
 					Integer.valueOf(textAnalysis[2].toString()),
 					Integer.valueOf(textAnalysis[1].toString()), time[0],
 					time[1]);
@@ -135,7 +136,7 @@ public class InvitationResult extends ResultClass {
 	 */
 	private OnClickListener saveListener = new OnClickListener() {
 		public void onClick(View v) {
-			onInvite(cal);
+			onInvite(calendar);
 		}
 	};
 
