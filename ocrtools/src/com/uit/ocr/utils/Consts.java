@@ -1,6 +1,7 @@
 package com.uit.ocr.utils;
 
 import android.os.Environment;
+import android.view.Menu;
 
 public class Consts {
 
@@ -65,6 +66,9 @@ public class Consts {
 	public static final String TRANS_CHINA = "zh-TW";
 	public static final String TRANS_VIETNAM = "vi";
 
+	public static final int SETTINGS_ID = Menu.FIRST;
+	public static final int ABOUT_ID = Menu.FIRST + 1;
+	
 	public static final String DATA_PATH = Environment
 			.getExternalStorageDirectory().toString() + "/OCRTools/";
 
