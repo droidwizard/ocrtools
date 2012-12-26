@@ -1,12 +1,9 @@
 package com.uit.ocr;
 
-import java.io.UnsupportedEncodingException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,45 +24,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.uit.ocr.ImageHandler.RecognizeThread;
 import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.JSONfunctions;
+import com.uit.ocr.utils.ResultClass;
 
-public class NormalResult extends Activity implements OnClickListener,
-		OnItemSelectedListener {
-
+public class NormalResult extends ResultClass {
+	private static final String TAG = NormalResult.class.getSimpleName();
+	private Context context = NormalResult.this;
+	
 	private TextView textResult;
 	private EditText textTranslate;
 	private EditText textEdit;
 	private Button changeMode;
 	private Button translate;
 	private Spinner spTranslate;
-
 	private String langTranslate;
 	private String textBase;
 	private String resultTranslate;
-
-	private Context context = this;
-
 	private String sourceLanguage;
 	private String tranLanguage = Consts.TRANS_ENGLISH;
-
-	private final String TEXT_VIEW = "Chỉnh sửa";
-	private final String EDIT_TEXT = "Xong";
-
-	private final int MODE_TEXT = 0;
-	private final int MODE_EDIT = 1;
-
-	private int mode = MODE_TEXT;
-
-	private static final int EXPORT_ID = Menu.FIRST;
-	private static final int CAMERA_ID = Menu.FIRST + 1;
-	private static final int IMAGE_ID = Menu.FIRST + 2;
-
-	RecognizeThread thread;
-	ProgressDialog progressDialog;
+	private int mode = Consts.MODE_TEXT;
+	private RecognizeThread thread;
+	private ProgressDialog progressDialog;
 	private boolean isComplete = false;
 
 	@Override
@@ -74,34 +54,27 @@ public class NormalResult extends Activity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.normalmode_layout);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		textBase = getIntent().getStringExtra("textBaseResult");
-		// textBase =
-		// "This has now been incorporated into the library and is run as the main class. You can view the latest source code here.";
-
 		textResult = (TextView) findViewById(R.id.tv_text_result);
-		// textResult.setText("Số điện thoại 0975983991. Email nam.hd23@gmail.com. địa chỉ web google.com.vn");
+		textEdit = (EditText) findViewById(R.id.edt_text_result);
+		textTranslate = (EditText) findViewById(R.id.edt_result_translate);
+		spTranslate = (Spinner) findViewById(R.id.sp_translate);
+		changeMode = (Button) findViewById(R.id.btn_edit_text_result);
+		translate = (Button) findViewById(R.id.btn_translate);
+		
+		onReceiveResult();
+		
 		textResult.setText(textBase);
 		Linkify.addLinks(textResult, Linkify.ALL);
 
-		textEdit = (EditText) findViewById(R.id.edt_text_result);
-
-		textTranslate = (EditText) findViewById(R.id.edt_result_translate);
-		spTranslate = (Spinner) findViewById(R.id.sp_translate);
-
-		// textTranslate.setText("Số điện thoại 0975983991. Email nam.hd23@gmail.com. địa chỉ web google.com.vn");
-
-		if (mode == MODE_TEXT) {
+		if (mode == Consts.MODE_TEXT) {
 			textEdit.setVisibility(View.GONE);
 		}
 
-		changeMode = (Button) findViewById(R.id.btn_edit_text_result);
-		changeMode.setText(TEXT_VIEW);
+		changeMode.setText(Consts.TEXT_VIEW);
 
-		translate = (Button) findViewById(R.id.btn_translate);
-
-		changeMode.setOnClickListener(this);
-		translate.setOnClickListener(this);
-		spTranslate.setOnItemSelectedListener(this);
+		changeMode.setOnClickListener(clickListener);
+		translate.setOnClickListener(clickListener);
+		spTranslate.setOnItemSelectedListener(spinnerListener);
 
 		if (BaseOCR.lang.equals(Consts.DATA_VIETNAM)) {
 			sourceLanguage = Consts.TRANS_VIETNAM;
@@ -132,52 +105,65 @@ public class NormalResult extends Activity implements OnClickListener,
 		} else if (BaseOCR.lang.equals(Consts.DATA_ENGLISH)) {
 			sourceLanguage = Consts.TRANS_ENGLISH;
 		}
-
 	}
 
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.btn_edit_text_result:
-			if (mode == MODE_TEXT) {
-				textEdit.setText(textBase);
-				textEdit.setVisibility(View.VISIBLE);
-				textResult.setVisibility(View.GONE);
-				changeMode.setText(EDIT_TEXT);
-				mode = MODE_EDIT;
-			} else {
-				textBase = textEdit.getText().toString();
-				textResult.setText(textBase);
-				Linkify.addLinks(textResult, Linkify.ALL);
-				textResult.setVisibility(View.VISIBLE);
-				textEdit.setVisibility(View.GONE);
-				changeMode.setText(TEXT_VIEW);
-				mode = MODE_TEXT;
+	@Override
+	public void onReceiveResult() {
+		textBase = getIntent().getStringExtra("textBaseResult");
+	}
 
-			}
-			break;
-		case R.id.btn_translate:
-			progressDialog = ProgressDialog.show(v.getContext(),
-					"Vui lòng đợi", "Đang xử lý...");
-			thread = new RecognizeThread();
-			thread.start();
-			break;
-
-		default:
-			break;
+	private OnItemSelectedListener spinnerListener = new OnItemSelectedListener() {
+		public void onItemSelected(AdapterView<?> parent, View arg1, int pos,
+				long arg3) {
+			langTranslate = parent.getItemAtPosition(pos).toString();
 		}
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
+	};
 
-	}
+	private OnClickListener clickListener = new OnClickListener() {
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.btn_edit_text_result:
+				if (mode == Consts.MODE_TEXT) {
+					textEdit.setText(textBase);
+					textEdit.setVisibility(View.VISIBLE);
+					textResult.setVisibility(View.GONE);
+					changeMode.setText(Consts.EDIT_TEXT);
+					mode = Consts.MODE_EDIT;
+				} else {
+					textBase = textEdit.getText().toString();
+					textResult.setText(textBase);
+					Linkify.addLinks(textResult, Linkify.ALL);
+					textResult.setVisibility(View.VISIBLE);
+					textEdit.setVisibility(View.GONE);
+					changeMode.setText(Consts.TEXT_VIEW);
+					mode = Consts.MODE_TEXT;
+
+				}
+				break;
+			case R.id.btn_translate:
+				progressDialog = ProgressDialog.show(v.getContext(),
+						"Vui lòng đợi", "Đang xử lý...");
+				thread = new RecognizeThread();
+				thread.start();
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(Menu.NONE, EXPORT_ID, Menu.NONE, R.string.menu_export)
+		menu.add(Menu.NONE, Consts.EXPORT_ID, Menu.NONE, R.string.menu_export)
 				.setIcon(android.R.drawable.ic_menu_view);
-		menu.add(Menu.NONE, CAMERA_ID, Menu.NONE, R.string.menu_camera)
+		menu.add(Menu.NONE, Consts.CAMERA_ID, Menu.NONE, R.string.menu_camera)
 				.setIcon(android.R.drawable.ic_menu_camera);
-		menu.add(Menu.NONE, IMAGE_ID, Menu.NONE, R.string.menu_image).setIcon(
-				android.R.drawable.ic_menu_gallery);
+		menu.add(Menu.NONE, Consts.IMAGE_ID, Menu.NONE, R.string.menu_image)
+				.setIcon(android.R.drawable.ic_menu_gallery);
 		return true;
 	}
 
@@ -186,14 +172,14 @@ public class NormalResult extends Activity implements OnClickListener,
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		switch (item.getItemId()) {
-		case EXPORT_ID:
+		case Consts.EXPORT_ID:
 
 			break;
-		case CAMERA_ID:
+		case Consts.CAMERA_ID:
 			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 			startActivityForResult(camera, 103);
 			break;
-		case IMAGE_ID:
+		case Consts.IMAGE_ID:
 			Intent i = new Intent();
 			i.setType("image/*");
 			i.setAction(Intent.ACTION_GET_CONTENT);
@@ -273,8 +259,8 @@ public class NormalResult extends Activity implements OnClickListener,
 			}
 		}
 
-		JSONObject json = JSONfunctions
-				.getJSONfromURL("http://translate.google.vn/translate_a/t?client=p&text="
+		JSONObject json = JSONfunctions.getInstance().getJSONfromURL(
+				"http://translate.google.vn/translate_a/t?client=p&text="
 						+ result + "&sl=" + sl + "&tl=" + tl);
 		try {
 			JSONArray sentences = json.getJSONArray("sentences");
@@ -285,18 +271,6 @@ public class NormalResult extends Activity implements OnClickListener,
 			Log.e("log_tag", "Error parsing data " + e.toString());
 		}
 		return result;
-	}
-
-	public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		// TODO Auto-generated method stub
-		langTranslate = parent.getItemAtPosition(pos).toString();
-
-	}
-
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	class RecognizeThread extends Thread {
@@ -327,4 +301,5 @@ public class NormalResult extends Activity implements OnClickListener,
 			}
 		};
 	}
+
 }

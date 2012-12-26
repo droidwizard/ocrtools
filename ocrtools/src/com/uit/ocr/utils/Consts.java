@@ -69,6 +69,23 @@ public class Consts {
 	public static final int SETTINGS_ID = Menu.FIRST;
 	public static final int ABOUT_ID = Menu.FIRST + 1;
 	
+	public static final int NONE = 0;
+	public static final int DRAG = 1;
+	public static final int ZOOM_LEFT = 2;
+	public static final int ZOOM_RIGHT = 3;
+	public static final int ZOOM_TOP = 4;
+	public static final int ZOOM_BOT = 5;
+	
+	public static final int EXPORT_ID = Menu.FIRST;
+	public static final int CAMERA_ID = Menu.FIRST + 1;
+	public static final int IMAGE_ID = Menu.FIRST + 2;
+	
+	public static final String TEXT_VIEW = "Chỉnh sửa";
+	public static final String EDIT_TEXT = "Xong";
+
+	public static final int MODE_TEXT = 0;
+	public static final int MODE_EDIT = 1;
+	
 	public static final String DATA_PATH = Environment
 			.getExternalStorageDirectory().toString() + "/OCRTools/";
 
