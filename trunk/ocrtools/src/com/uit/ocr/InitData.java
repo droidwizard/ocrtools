@@ -29,7 +29,12 @@ public class InitData extends Thread {
 	@Override
 	public void run() {
 		Log.i(TAG, "gọi hàm initOctTools");
-		initOcrTools();
+		if (initPath() == true) {
+			if (initTrainedData() == true) {
+				Log.i(TAG, "Gọi hàm initTrainedData()==true");
+				isComplete = true;
+			}
+		}
 		while (!isComplete) {
 			try {
 				Thread.sleep(1000);
@@ -45,15 +50,6 @@ public class InitData extends Thread {
 			progressDialog.dismiss();
 		};
 	};
-
-	private void initOcrTools() {
-		if (initPath() == true) {
-			if (initTrainedData() == true) {
-				Log.i(TAG, "Gọi hàm initTrainedData()==true");
-				isComplete = true;
-			}
-		}
-	}
 
 	private boolean initPath() {
 		// tessdata thu mục chứa trainneddata, images thu mục chứa hình đã chụp

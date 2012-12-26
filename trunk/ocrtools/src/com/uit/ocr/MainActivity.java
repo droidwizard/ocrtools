@@ -21,7 +21,7 @@ public class MainActivity extends Activity{
 	
 	public static int mode = Consts.MODE_NONE;
 	public static boolean flagLock = true;
-	private Button btn_main_DemoOCR;
+	private Button btn_main_Camera;
 	private Button btn_main_InputImage;
 	private ProgressDialog progressDialog;
 	private InitData mInitData;
@@ -37,9 +37,9 @@ public class MainActivity extends Activity{
 		setContentView(R.layout.activity_main);		
 		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_danhthiep);
 		rabtn_main_invite=(RadioButton) findViewById(R.id.rabtn_thiepmoi);
-		btn_main_DemoOCR = (Button) findViewById(R.id.btn_main_camera);		
+		btn_main_Camera = (Button) findViewById(R.id.btn_main_camera);		
 		btn_main_InputImage = (Button) findViewById(R.id.btn_main_image);
-		btn_main_DemoOCR.setOnClickListener(btnListener);
+		btn_main_Camera.setOnClickListener(btnListener);
 		btn_main_InputImage.setOnClickListener(btnListener);
 		
 		if(flagLock == false)
