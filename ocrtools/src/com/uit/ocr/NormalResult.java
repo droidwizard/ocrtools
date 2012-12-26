@@ -214,7 +214,7 @@ public class NormalResult extends ResultClass {
 		}
 	}
 
-	public void progress() {
+	private void progress() {
 		if (langTranslate.equals(Consts.LANG_VIETNAM)) {
 			tranLanguage = Consts.TRANS_VIETNAM;
 		} else if (langTranslate.equals(Consts.LANG_GERMAN)) {
