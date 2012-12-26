@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -22,35 +21,24 @@ public class MainActivity extends Activity{
 	
 	public static int mode = Consts.MODE_NONE;
 	public static boolean flagLock = true;
-
 	private Button btn_main_DemoOCR;
 	private Button btn_main_InputImage;
 	private ProgressDialog progressDialog;
 	private InitData mInitData;
 	public static boolean is2ColorImage;
 	public static boolean isCharFilter;
-	//public static boolean isNameCard;
-	//private RadioGroup rg_main;
 	private RadioButton rabtn_main_name_card;
 	private RadioButton rabtn_main_invite;
-	private RadioButton rabtn_main_normal;
-	
 	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		//rg_main=(RadioGroup) findViewById(R.id.rg_main);
-		
+		setContentView(R.layout.activity_main);		
 		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_danhthiep);
 		rabtn_main_invite=(RadioButton) findViewById(R.id.rabtn_thiepmoi);
-		rabtn_main_normal = (RadioButton) findViewById(R.id.rabtn_thuong);
-		
 		btn_main_DemoOCR = (Button) findViewById(R.id.btn_main_camera);		
 		btn_main_InputImage = (Button) findViewById(R.id.btn_main_image);
-		
 		btn_main_DemoOCR.setOnClickListener(btnListener);
 		btn_main_InputImage.setOnClickListener(btnListener);
 		
@@ -64,17 +52,6 @@ public class MainActivity extends Activity{
 			rabtn_main_invite.setEnabled(true);
 			rabtn_main_name_card.setEnabled(true);
 		}
-		//rabtn_main_normal.setChecked(true);		
-		//onLoadStates();
-
-	}
-	public void onLoadStates(){
-		/*if (isNameCard){
-			rabtn_main_name_card.setChecked(true);
-		}else{
-			rabtn_main_invite.setChecked(true);
-		}*/
-		//rabtn_main_normal.setChecked(true);
 	}
 	
 	public void onRadioButtonClicked(View view){
@@ -87,13 +64,11 @@ public class MainActivity extends Activity{
 	    		break;
 	        case R.id.rabtn_danhthiep:
 	            if (checked){
-	            	//isNameCard=true;
 	            	mode = Consts.MODE_NAMECARD;
 	            }
 	            break;
 	        case R.id.rabtn_thiepmoi:
 	            if (checked){
-	            	//isNameCard=false;
 	            	mode = Consts.MODE_INVITATION;
 	            }
 	            break;
@@ -119,20 +94,6 @@ public class MainActivity extends Activity{
 			rabtn_main_name_card.setEnabled(true);
 		}
 	}
-
-
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getTitle().equals("Settings")){
-			startActivityForResult(new Intent(context, Settings.class), 104);
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
 	
 	private OnClickListener btnListener=new OnClickListener() {
 		public void onClick(View v) {
