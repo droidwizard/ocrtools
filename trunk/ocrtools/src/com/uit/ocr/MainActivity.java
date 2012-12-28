@@ -154,6 +154,7 @@ public class MainActivity extends Activity{
 			startActivityForResult(new Intent(context, Settings.class), 104);
             break;
         case Consts.ABOUT_ID:
+        	startActivityForResult(new Intent(context, AboutActivity.class), 105);
             break;	
 		default:
 			return super.onOptionsItemSelected(item);

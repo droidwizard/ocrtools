@@ -42,7 +42,8 @@ public class Settings extends Activity{
 		edtSettingsTitleEvent = (EditText) findViewById(R.id.edt_settings_titleevent);
 		btnSettingsSave = (Button) findViewById(R.id.btn_settings_saveevent);
 		
-		setCheckBox();
+		cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
+		cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
 
 		cbSettings2ColorImage.setOnCheckedChangeListener(checkboxListener);
 		cbSettingsCharfilter.setOnCheckedChangeListener(checkboxListener);
@@ -61,15 +62,6 @@ public class Settings extends Activity{
 		}
 	}
 	
-	/**
-	 * set checkbox status
-	 */
-	private void setCheckBox() {
-		cbSettings2ColorImage.setChecked(MainActivity.is2ColorImage);
-		cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
-	}
-
-
 	/**
 	 * button click event
 	 */

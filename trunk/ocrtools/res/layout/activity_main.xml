@@ -3,34 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background" >
-    
-    <RelativeLayout 
-        android:layout_height="wrap_content"
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp">
-        <!--android:background="@drawable/panel"-->       
-
-    <Button
-        android:id="@+id/btn_main_camera"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="70dp"       
-        android:layout_marginTop="10dp"
-        android:background="@drawable/camera" />
+        android:layout_marginTop="40dp"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_main_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_main_camera"
-        android:layout_alignBottom="@+id/btn_main_camera"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="70dp"
-        android:background="@drawable/folderpicture" />    
-        
+        <!-- android:background="@drawable/panel"> -->
+
+        <Button
+            android:id="@+id/btn_main_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/camera" />
+
+        <Button
+            android:id="@+id/btn_main_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btn_main_camera"
+            android:layout_alignBottom="@+id/btn_main_camera"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/folderpicture" />
     </RelativeLayout>
 
     <RadioGroup
@@ -40,31 +40,31 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="36dp" >
-        
-        <RadioButton 
+
+        <RadioButton
             android:id="@+id/rabtn_thuong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:textColor="#ecff3d"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/rabtn_thuong"/>
-
-        <RadioButton
-            android:id="@+id/rabtn_danhthiep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"            
-            android:textColor="#ecff3d"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/rabtn_danhthiep" />
+            android:text="@string/rabtn_thuong"
+            android:textColor="#99d11c" />
 
         <RadioButton
             android:id="@+id/rabtn_thiepmoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ecff3d"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/rabtn_thiepmoi" />        
+            android:text="@string/rabtn_thiepmoi"
+            android:textColor="#99d11c" />
+
+        <RadioButton
+            android:id="@+id/rabtn_danhthiep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/rabtn_danhthiep"
+            android:textColor="#99d11c" />
     </RadioGroup>
 
 </RelativeLayout>
