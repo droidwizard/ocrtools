@@ -27,7 +27,8 @@ public class InvitationResult extends ResultClass {
 	private static final String TAG = InvitationResult.class.getSimpleName();
 	
 	private String[] textAnalysis;
-	private EditText edtInvitationResult_location, edtInvitationResult_time;
+	private EditText edtInvitationResult_location;
+	private EditText edtInvitationResult_time;
 	private Spinner spinInvitationResult_content;
 	private ImageView ivInvitationResult_main;
 	private Button btnInvitationResult_save;

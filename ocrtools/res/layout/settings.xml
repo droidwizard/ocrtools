@@ -1,81 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@drawable/background">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <CheckBox
-        android:id="@+id/cb_settings_2colorimage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:text="@string/cb_settings_2colorimage"
-        android:textColor="@android:color/white"/>
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >
 
-    <CheckBox
-        android:id="@+id/cb_settings_charfilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cb_settings_2colorimage"
-        android:layout_below="@+id/cb_settings_2colorimage"
-        android:layout_marginTop="26dp"
-        android:text="@string/cb_settings_charfilter" 
-        android:textColor="@android:color/white"/>
-    
-    <TextView 
-        android:id="@+id/tv_languages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cb_settings_2colorimage"
-        android:layout_below="@+id/cb_settings_charfilter"
-        android:layout_marginTop="26dp"
-        android:textSize="18dp"
-        android:text="@string/tv_languages"
-        android:textColor="@android:color/white"/>
-    
-    <Spinner 
-        android:id="@+id/sp_languages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tv_languages"
-        android:layout_below="@+id/cb_settings_charfilter"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:entries="@array/language_items"
-        android:prompt="@string/language_prompt"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cb_settings_charfilter"
-        android:layout_centerVertical="true"
-        android:text="@string/tv_cuochen" 
-        android:textColor="@android:color/white"
-        android:textSize="18dp"/>
-
-    <EditText
-        android:id="@+id/edt_settings_titleevent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="16dp"
-        android:hint=""
-        android:ems="10" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background" >
 
-        <requestFocus />
-    </EditText>
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp" >
 
-    <Button
-        android:id="@+id/btn_settings_saveevent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/edt_settings_titleevent"
-        android:layout_alignBottom="@+id/edt_settings_titleevent"
-        android:layout_alignRight="@+id/cb_settings_2colorimage"
-        android:text="Save" />
+                    <CheckBox
+                        android:id="@+id/cb_settings_2colorimage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="40dp"
+                        android:text="@string/cb_settings_2colorimage"
+                        android:textColor="#99d11c" />
 
-</RelativeLayout>
+                    <CheckBox
+                        android:id="@+id/cb_settings_charfilter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/cb_settings_charfilter"
+                        android:textColor="#99d11c" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout2"
+                    android:layout_marginTop="30dp" >
+
+                    <Spinner
+                        android:id="@+id/sp_languages"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:entries="@array/language_items"
+                        android:prompt="@string/language_prompt" />
+
+                    <TextView
+                        android:id="@+id/tv_languages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/tv_languages"
+                        android:textColor="#99d11c"
+                        android:textSize="18dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout1"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="27dp"
+                        android:text="@string/tv_cuochen"
+                        android:textColor="#99d11c"
+                        android:textSize="18dp" />
+
+                    <EditText
+                        android:id="@+id/edt_settings_titleevent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView1"
+                        android:layout_below="@+id/textView1"
+                        android:ems="10" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/btn_settings_saveevent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/edt_settings_titleevent"
+                        android:layout_toRightOf="@+id/edt_settings_titleevent"
+                        android:text="Lưu" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
