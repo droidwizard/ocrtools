@@ -52,8 +52,8 @@ public class NormalResult extends ResultClass {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.normalmode_layout);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		setContentView(R.layout.normalresult);
+		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		textResult = (TextView) findViewById(R.id.tv_text_result);
 		textEdit = (EditText) findViewById(R.id.edt_text_result);
 		textTranslate = (EditText) findViewById(R.id.edt_result_translate);
