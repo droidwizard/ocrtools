@@ -41,7 +41,7 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.imagehandler);
+		setContentView(R.layout.layout_imagehandler_activity);
 		ivImageCropMain = (CustomImageView) findViewById(R.id.iv_custom_image);
 		ivImageHandlerProcess = (ImageView) findViewById(R.id.iv_imagehandler_btnProcess);
 		ivImageHandlerNext = (ImageView) findViewById(R.id.iv_imagehandler_btnNext);

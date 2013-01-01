@@ -34,7 +34,7 @@ public class Settings extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.settings);
+		setContentView(R.layout.layout_settings_activity);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		cbSettings2ColorImage = (CheckBox) findViewById(R.id.cb_settings_2colorimage);
 		cbSettingsCharfilter = (CheckBox) findViewById(R.id.cb_settings_charfilter);
