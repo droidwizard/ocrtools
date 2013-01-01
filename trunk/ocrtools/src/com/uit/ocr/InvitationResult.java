@@ -39,12 +39,12 @@ public class InvitationResult extends ResultClass {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.invitationresult);
+		setContentView(R.layout.layout_invitationresult_activity);
 		edtInvitationResult_location = (EditText) findViewById(R.id.edt_invitation_location);
 		edtInvitationResult_time = (EditText) findViewById(R.id.edt_invitaionresult_time);
 		spinInvitationResult_content = (Spinner) findViewById(R.id.spin_invitaionresult_content);
 		ivInvitationResult_main = (ImageView) findViewById(R.id.iv_invitationresult_main);
-		btnInvitationResult_save = (Button) findViewById(R.id.btn_invitationresult_save);
+		btnInvitationResult_save = (Button) findViewById(R.id.btn_invitationresult_add);
 
 		onReceiveResult();
 

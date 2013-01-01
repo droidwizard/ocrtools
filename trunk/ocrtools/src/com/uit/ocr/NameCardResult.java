@@ -27,7 +27,7 @@ public class NameCardResult extends ResultClass {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.namecardresult);
+		setContentView(R.layout.layout_namecardresult_activity);
 		edtNameCardResultMobile = (EditText) findViewById(R.id.edt_namecardresult_phone);
 		edtNameCardResultEmail = (EditText) findViewById(R.id.edt_namecardresult_email);
 		edtNameCardResultName = (EditText) findViewById(R.id.edt_namecardresult_name);

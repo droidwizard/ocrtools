@@ -34,7 +34,7 @@ public class MainActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);		
+		setContentView(R.layout.layout_main_activity);		
 		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_danhthiep);
 		rabtn_main_invite=(RadioButton) findViewById(R.id.rabtn_thiepmoi);
 		btn_main_Camera = (Button) findViewById(R.id.btn_main_camera);		
