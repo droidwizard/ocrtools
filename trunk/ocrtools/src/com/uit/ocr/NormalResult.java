@@ -157,18 +157,18 @@ public class NormalResult extends ResultClass {
 				}
 				break;
 			case R.id.btn_translate:
-				//mConnect = new ConnectionDetector(getApplicationContext());
-				//if(mConnect.isConnectingToInternet())
-				//{
+				mConnect = new ConnectionDetector(context);
+				if(mConnect.isConnectingToInternet())
+				{
 					progressDialog = ProgressDialog.show(v.getContext(),
 							"Vui lòng đợi", "Đang xử lý...");
 					thread = new RecognizeThread();
 					thread.start();
-				//}
-				/*else
+				}
+				else
 				{
-					//Toast.makeText(context, "Vui lòng kết nối mạng", Toast.LENGTH_SHORT).show();
-				}*/
+					Toast.makeText(context, "Vui lòng kết nối mạng", Toast.LENGTH_SHORT).show();
+				}
 				break;
 
 			default:
