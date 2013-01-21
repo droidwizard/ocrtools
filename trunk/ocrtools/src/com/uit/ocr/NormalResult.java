@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.bool;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,12 +32,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.uit.ocr.utils.ConnectionDetector;
 import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.JSONfunctions;
 import com.uit.ocr.utils.ResultClass;
 
 public class NormalResult extends ResultClass {
-	private Context context = NormalResult.this;
+	private Context context = NormalResult.this;	
 	
 	private TextView textResult;
 	private EditText textTranslate;
@@ -56,6 +56,8 @@ public class NormalResult extends ResultClass {
 	private RecognizeThread thread;
 	private ProgressDialog progressDialog;
 	private boolean isComplete = false;
+	
+	ConnectionDetector mConnect;
 	
 	
 	@Override
@@ -155,10 +157,18 @@ public class NormalResult extends ResultClass {
 				}
 				break;
 			case R.id.btn_translate:
-				progressDialog = ProgressDialog.show(v.getContext(),
-						"Vui lòng đợi", "Đang xử lý...");
-				thread = new RecognizeThread();
-				thread.start();
+				//mConnect = new ConnectionDetector(getApplicationContext());
+				//if(mConnect.isConnectingToInternet())
+				//{
+					progressDialog = ProgressDialog.show(v.getContext(),
+							"Vui lòng đợi", "Đang xử lý...");
+					thread = new RecognizeThread();
+					thread.start();
+				//}
+				/*else
+				{
+					//Toast.makeText(context, "Vui lòng kết nối mạng", Toast.LENGTH_SHORT).show();
+				}*/
 				break;
 
 			default:
@@ -375,7 +385,7 @@ public class NormalResult extends ResultClass {
 	
 	public Boolean exportText()
 	{		
-		File myFile = new File(Consts.ROOT_PATH + Consts.TESSDATA_NAME + "/text.txt");
+		File myFile = new File(Consts.ROOT_PATH + Consts.FILE_NAME + "/text.txt");
 		try {
 			myFile.createNewFile();
 			FileOutputStream fOut = new FileOutputStream(myFile);
