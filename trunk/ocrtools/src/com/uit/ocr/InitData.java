@@ -55,7 +55,8 @@ public class InitData extends Thread {
 		// tessdata thu mục chứa trainneddata, images thu mục chứa hình đã chụp
 		String[] paths = new String[] { Consts.ROOT_PATH,
 				Consts.ROOT_PATH + Consts.TESSDATA_NAME,
-				Consts.ROOT_PATH + Consts.IMAGE_NAME };
+				Consts.ROOT_PATH + Consts.IMAGE_NAME ,
+				Consts.ROOT_PATH + Consts.FILE_NAME};
 
 		for (String path : paths) {
 			File dir = new File(path);

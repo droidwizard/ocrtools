@@ -1,13 +1,20 @@
 package com.uit.ocr;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.bool;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,12 +31,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.JSONfunctions;
 import com.uit.ocr.utils.ResultClass;
 
 public class NormalResult extends ResultClass {
-	private static final String TAG = NormalResult.class.getSimpleName();
 	private Context context = NormalResult.this;
 	
 	private TextView textResult;
@@ -42,12 +50,14 @@ public class NormalResult extends ResultClass {
 	private String textBase;
 	private String resultTranslate;
 	private String sourceLanguage;
+	private String encoding;
 	private String tranLanguage = Consts.TRANS_ENGLISH;
 	private int mode = Consts.MODE_TEXT;
 	private RecognizeThread thread;
 	private ProgressDialog progressDialog;
 	private boolean isComplete = false;
-
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -61,21 +71,6 @@ public class NormalResult extends ResultClass {
 		changeMode = (Button) findViewById(R.id.btn_edit_text_result);
 		translate = (Button) findViewById(R.id.btn_translate);
 		
-		onReceiveResult();
-		
-		textResult.setText(textBase);
-		Linkify.addLinks(textResult, Linkify.ALL);
-
-		if (mode == Consts.MODE_TEXT) {
-			textEdit.setVisibility(View.GONE);
-		}
-
-		changeMode.setText(Consts.TEXT_VIEW);
-
-		changeMode.setOnClickListener(clickListener);
-		translate.setOnClickListener(clickListener);
-		spTranslate.setOnItemSelectedListener(spinnerListener);
-
 		if (BaseOCR.lang.equals(Consts.DATA_VIETNAM)) {
 			sourceLanguage = Consts.TRANS_VIETNAM;
 		} else if (BaseOCR.lang.equals(Consts.DATA_GERMAN)) {
@@ -105,6 +100,23 @@ public class NormalResult extends ResultClass {
 		} else if (BaseOCR.lang.equals(Consts.DATA_ENGLISH)) {
 			sourceLanguage = Consts.TRANS_ENGLISH;
 		}
+		//sourceLanguage = "vi";
+		
+		onReceiveResult();
+		
+		textResult.setText(textBase);
+		Linkify.addLinks(textResult, Linkify.ALL);
+
+		if (mode == Consts.MODE_TEXT) {
+			textEdit.setVisibility(View.GONE);
+		}
+
+		changeMode.setText(Consts.TEXT_VIEW);
+
+		changeMode.setOnClickListener(clickListener);
+		translate.setOnClickListener(clickListener);
+		spTranslate.setOnItemSelectedListener(spinnerListener);
+		
 	}
 
 	@Override
@@ -173,7 +185,15 @@ public class NormalResult extends ResultClass {
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		switch (item.getItemId()) {
 		case Consts.EXPORT_ID:
-
+			boolean rExport = exportText();
+			if(rExport == true)
+			{
+				Toast.makeText(context, "Xuất file thành công", Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				Toast.makeText(context, "Xuất file thất bại", Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case Consts.CAMERA_ID:
 			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -215,6 +235,7 @@ public class NormalResult extends ResultClass {
 	}
 
 	private void progress() {
+		encoding = "ISO-8859-1";
 		if (langTranslate.equals(Consts.LANG_VIETNAM)) {
 			tranLanguage = Consts.TRANS_VIETNAM;
 		} else if (langTranslate.equals(Consts.LANG_GERMAN)) {
@@ -223,6 +244,7 @@ public class NormalResult extends ResultClass {
 			tranLanguage = Consts.TRANS_DUTCH;
 		} else if (langTranslate.equals(Consts.LANG_KOREAN)) {
 			tranLanguage = Consts.TRANS_KOREAN;
+			encoding = "x-windows-949";
 		} else if (langTranslate.equals(Consts.LANG_INDONESIA)) {
 			tranLanguage = Consts.TRANS_INDONESIA;
 		} else if (langTranslate.equals(Consts.LANG_ITALIA)) {
@@ -231,47 +253,28 @@ public class NormalResult extends ResultClass {
 			tranLanguage = Consts.TRANS_MALAYSIA;
 		} else if (langTranslate.equals(Consts.LANG_RUSSIA)) {
 			tranLanguage = Consts.TRANS_RUSSIA;
+			encoding = "KOI8-R";
 		} else if (langTranslate.equals(Consts.LANG_JAPAN)) {
 			tranLanguage = Consts.TRANS_JAPAN;
+			encoding = "SHIFT-JIS";
 		} else if (langTranslate.equals(Consts.LANG_FRANCE)) {
 			tranLanguage = Consts.TRANS_FRANCE;
 		} else if (langTranslate.equals(Consts.LANG_SPAIN)) {
 			tranLanguage = Consts.TRANS_SPAIN;
 		} else if (langTranslate.equals(Consts.LANG_THAILAND)) {
 			tranLanguage = Consts.TRANS_THAILAND;
+			encoding = "TIS-620";
 		} else if (langTranslate.equals(Consts.LANG_CHINA)) {
 			tranLanguage = Consts.TRANS_CHINA;
+			encoding = "BIG-5";
 		} else if (langTranslate.equals(Consts.LANG_ENGLISH)) {
 			tranLanguage = Consts.TRANS_ENGLISH;
 		}
-		resultTranslate = transText(textBase, sourceLanguage, tranLanguage);
+		resultTranslate = translate(sourceLanguage, tranLanguage, textBase);
 
 		isComplete = true;
 	}
-
-	private String transText(String str, String sl, String tl) {
-		String result = "";
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) != ' ') {
-				result += str.charAt(i);
-			} else {
-				result += "%20";
-			}
-		}
-
-		JSONObject json = JSONfunctions.getInstance().getJSONfromURL(
-				"http://translate.google.vn/translate_a/t?client=p&text="
-						+ result + "&sl=" + sl + "&tl=" + tl);
-		try {
-			JSONArray sentences = json.getJSONArray("sentences");
-			JSONObject res = sentences.getJSONObject(0);
-			result = res.getString("trans");
-
-		} catch (JSONException e) {
-			Log.e("log_tag", "Error parsing data " + e.toString());
-		}
-		return result;
-	}
+	
 
 	class RecognizeThread extends Thread {
 		public RecognizeThread() {
@@ -301,5 +304,94 @@ public class NormalResult extends ResultClass {
 			}
 		};
 	}
+	
+	private static ArrayList<String> listString;
+	private static String input = "";
+		
+	private String initParams(String scrText) {		
+		String tmp = "";
+		
+		input = scrText.toString() + '\n';
+		listString = new ArrayList<String>();
+		for (int i = 0; i < input.length(); i++) {
+			if (input.charAt(i) != '\n') {
+				tmp += input.charAt(i);
+			} else {				
+				listString.add(tmp);
+				tmp = "";						
+			}
+		}		
+		
+		String strForMSTrans = input.replace("\n", " | ");
+		return strForMSTrans;
+		
+	}
+		
 
+	public String translate(String scrLang, String destLang, String scrText){
+		String result = "";
+		
+		String temp = translateFirst(scrLang, scrText);
+		input = temp.replace(" |", "%0A");
+		input = input.replace(" ", "%20");
+		Log.d("Test input", input);
+		JSONObject json = JSONfunctions.getJSONfromURL("http://translate.google.vn/translate_a/t?client=j&text=" + input + "&sl=en&tl="+destLang, encoding);
+		try {
+			if(json != null)
+			{
+				JSONArray sentences = json.getJSONArray("sentences");
+				for (int i = 0; i < sentences.length(); i++) {
+					JSONObject res = sentences.getJSONObject(i);
+					Log.d("Test result", res.getString("trans"));
+					result += res.getString("trans").toString();
+				}		
+			}			
+			
+		} catch (JSONException e) {
+			Log.e("log_tag", "Error parsing data " + e.toString());
+		}
+				
+		return result;
+	}
+
+	
+	public String translateFirst(String scrLang, String scrText) {
+		String result = "";
+		String urlTrans = "http://translate.google.com/m?hl=vi";
+		String strForMSTrans = initParams(scrText);
+		
+		try {
+			urlTrans += "&sl=" + scrLang + "&tl=en&ie=UTF-8&q="
+					+ URLEncoder.encode(strForMSTrans, "UTF-8");
+			result = JSONfunctions.msTranslate(urlTrans);
+			Log.d("Test result ****", result);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Log.d("Test microsoft trans", result);
+		return result.toLowerCase();
+	}
+	
+	public Boolean exportText()
+	{		
+		File myFile = new File(Consts.ROOT_PATH + Consts.TESSDATA_NAME + "/text.txt");
+		try {
+			myFile.createNewFile();
+			FileOutputStream fOut = new FileOutputStream(myFile);
+			OutputStreamWriter myOutWriter = 
+									new OutputStreamWriter(fOut);
+			myOutWriter.append(textBase);
+			myOutWriter.close();
+			fOut.close();
+			return true;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;					
+		}
+		
+	}
+	
 }

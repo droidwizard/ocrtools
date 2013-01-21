@@ -11,6 +11,7 @@ public class Consts {
 	public static final String ROOT_NAME = "OCRTools";
 	public static final String IMAGE_NAME = "images";
 	public static final String TESSDATA_NAME = "tessdata";
+	public static final String FILE_NAME = "export";
 	public static final String SETTINGS_TITLE_EVENTS = "titleEvents";
 	public static final String DEFAULT_EVENT_1 = "Hội họp";
 	public static final String DEFAULT_EVENT_2 = "Tiệc cưới";
@@ -48,7 +49,7 @@ public class Consts {
 	public static final String LANG_FRANCE = "Pháp";
 	public static final String LANG_SPAIN = "Tây Ban Nha";
 	public static final String LANG_THAILAND = "Thái Lan";
-	public static final String LANG_CHINA = "Trung Quốc";
+	public static final String LANG_CHINA = "Trung Quốc(Phồn thể)";
 	public static final String LANG_VIETNAM = "Việt Nam";
 
 	public static final String TRANS_ENGLISH = "en";
