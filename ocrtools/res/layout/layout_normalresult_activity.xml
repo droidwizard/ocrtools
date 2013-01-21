@@ -21,21 +21,21 @@
             android:textColor="@android:color/white"/>        
        
         <RelativeLayout 
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content">
-	        <TextView 
-	            android:id="@+id/tv_text_result"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content" 
-	            android:background="@drawable/my_button_background_normal"
-	            android:textColor="@android:color/white"/>
-	        <EditText 
-	            android:id="@+id/edt_text_result"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	            android:minLines="7"
-	            android:hint=""/>
-	     </RelativeLayout>
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView 
+                    android:id="@+id/tv_text_result"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" 
+                    android:background="@drawable/my_button_background_normal"
+                    android:textColor="@android:color/white"/>
+                <EditText 
+                    android:id="@+id/edt_text_result"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="7"
+                    android:hint=""/>
+             </RelativeLayout>
         
         <EditText 
             android:id="@+id/edt_result_translate"
@@ -47,7 +47,7 @@
         
     </LinearLayout>
     
-	</ScrollView>
+        </ScrollView>
     <Spinner 
             android:id="@+id/sp_translate"
             android:layout_width="wrap_content"
