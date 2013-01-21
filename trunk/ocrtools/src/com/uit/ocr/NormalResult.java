@@ -103,6 +103,7 @@ public class NormalResult extends ResultClass {
 			sourceLanguage = Consts.TRANS_ENGLISH;
 		}
 		//sourceLanguage = "vi";
+		tranLanguage = Consts.TRANS_ENGLISH;
 		
 		onReceiveResult();
 		
@@ -344,6 +345,9 @@ public class NormalResult extends ResultClass {
 		String temp = translateFirst(scrLang, scrText);
 		input = temp.replace(" |", "%0A");
 		input = input.replace(" ", "%20");
+		input = input.replace("/", "%0A");
+		input = input.replace("?", "%0A");
+		input = input.replace("\\", "%0A");
 		Log.d("Test input", input);
 		JSONObject json = JSONfunctions.getJSONfromURL("http://translate.google.vn/translate_a/t?client=j&text=" + input + "&sl=en&tl="+destLang, encoding);
 		try {
