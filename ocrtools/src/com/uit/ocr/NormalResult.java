@@ -183,10 +183,6 @@ public class NormalResult extends ResultClass {
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, Consts.EXPORT_ID, Menu.NONE, R.string.menu_export)
 				.setIcon(android.R.drawable.ic_menu_view);
-		menu.add(Menu.NONE, Consts.CAMERA_ID, Menu.NONE, R.string.menu_camera)
-				.setIcon(android.R.drawable.ic_menu_camera);
-		menu.add(Menu.NONE, Consts.IMAGE_ID, Menu.NONE, R.string.menu_image)
-				.setIcon(android.R.drawable.ic_menu_gallery);
 		return true;
 	}
 
@@ -205,17 +201,6 @@ public class NormalResult extends ResultClass {
 			{
 				Toast.makeText(context, "Xuất file thất bại", Toast.LENGTH_SHORT).show();
 			}
-			break;
-		case Consts.CAMERA_ID:
-			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			startActivityForResult(camera, 103);
-			break;
-		case Consts.IMAGE_ID:
-			Intent i = new Intent();
-			i.setType("image/*");
-			i.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(
-					Intent.createChooser(i, "Application Chooser"), 102);
 			break;
 		default:
 			return super.onOptionsItemSelected(item);

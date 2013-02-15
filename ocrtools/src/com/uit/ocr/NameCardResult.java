@@ -6,6 +6,8 @@ import com.uit.ocr.utils.ResultClass;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Contacts;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -66,5 +68,18 @@ public class NameCardResult extends ResultClass {
 			}
 		}
 	};
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
+	
 
 }

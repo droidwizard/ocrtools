@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true" >
+    android:layout_height="fill_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,24 +43,26 @@
                     android:layout_below="@+id/relativeLayout2"
                     android:layout_marginTop="30dp" >
 
-                    <Spinner
-                        android:id="@+id/sp_languages"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:entries="@array/language_items"
-                        android:prompt="@string/language_prompt" />
-
                     <TextView
                         android:id="@+id/tv_languages"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_alignLeft="@+id/sp_languages"
+                        android:layout_alignParentTop="true"
                         android:text="@string/tv_languages"
                         android:textColor="#99d11c"
                         android:textSize="18dp" />
+
+                    <Spinner
+                        android:id="@+id/sp_languages"
+                        android:layout_width="200dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/tv_languages"
+                        android:layout_marginLeft="22dp"
+                        android:entries="@array/language_items"
+                        android:prompt="@string/language_prompt" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -100,7 +95,7 @@
 
                     <Button
                         android:id="@+id/btn_settings_saveevent"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/edt_settings_titleevent"
                         android:layout_toRightOf="@+id/edt_settings_titleevent"
@@ -108,6 +103,5 @@
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
