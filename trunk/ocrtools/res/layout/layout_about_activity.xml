@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical" >
-
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
@@ -22,65 +22,65 @@
 
                 <TextView
                     android:id="@+id/textView1"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
-                    android:layout_marginTop="135dp"
-                    style="@style/MyTextView"
-                    android:text="Đề tài : Nhận dạng chữ in và một số tiện ích mở rộng" />
+                    android:layout_marginTop="130dp"
+                    android:text="Đề tài : Ứng dụng công nghệ nhận dạng quang học và xây dựng tiện ích trên điện thoại android" />
 
                 <TextView
                     android:id="@+id/textView6"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView1"
                     android:layout_below="@+id/textView1"
                     android:layout_marginTop="30dp"
-                    style="@style/MyTextView"
                     android:text="Ứng dụng : OCRTools" />
 
                 <TextView
                     android:id="@+id/textView2"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView6"
                     android:layout_below="@+id/textView6"
                     android:layout_marginTop="30dp"
-                    style="@style/MyTextView"
                     android:text="GVHD : Ths Phan Nguyệt Minh" />
 
                 <TextView
                     android:id="@+id/textView3"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView2"
                     android:layout_below="@+id/textView2"
                     android:layout_marginTop="30dp"
-                    style="@style/MyTextView"
                     android:text="Thành viên thực hiện : " />
 
                 <TextView
                     android:id="@+id/textView4"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/textView3"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="30dp"
-                    style="@style/MyTextView"
                     android:text="Lê Đặng Thanh Triều 08520423" />
 
                 <TextView
                     android:id="@+id/textView5"
+                    style="@style/MyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView4"
                     android:layout_below="@+id/textView4"
                     android:layout_marginTop="30dp"
-                    style="@style/MyTextView"
                     android:text="Hoàng Đình Nam 08520241" />
             </RelativeLayout>
         </LinearLayout>
