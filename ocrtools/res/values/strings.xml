@@ -27,7 +27,7 @@
     
     <!-- Button -->
     <string name="btn_inputimageresult_addcontacts">Lưu Danh Bạ</string>
-    <string name="btn_invitationresult_save">Lưu Báo Thức</string>
+    <string name="btn_invitationresult_save">Lưu Lịch Hẹn</string>
     <string name="btn_translate">Dịch</string>
     
     
@@ -57,7 +57,7 @@
     
     <!-- Check Box -->
     <string name="cb_settings_2colorimage">Thiết lập chế độ quét hình trắng đen</string>
-    <string name="cb_settings_charfilter">Lọc ký tự việt cho phép</string>
+    <string name="cb_settings_charfilter">Lọc ký tự cho phép</string>
     
     <!-- Menu -->
     <string name="menu_settings">Cài đặt</string>  

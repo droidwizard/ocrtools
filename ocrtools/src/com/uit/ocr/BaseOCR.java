@@ -21,8 +21,10 @@ public class BaseOCR extends Activity {
 	
 	public static String lang = "vie";
 	
-	//private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
+	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
 
+	private static final String VIETCHAR2= "[a-z A-ZÁÀẢÃẠẤẦẨẪẬÂĂẮẰẲẴẶáàảảãạâăấầẩẫậắằẳẵặéèẻẽẹêếềểễệÉÈẺẼẸẾỀỂỄỆíìỉĩịÍÌỈĨỊÚÙỦŨỤỨỪỬỮỰúùủũụứừửữựóòỏõọôốồổỗộơớờởỡợÓÒỎÕỌỐỒỔỖỘƠỚỜỞỠỢÝỲỶỸỴýỳỷỹỵĐđ]*";
+	
 	public BaseOCR() {
 	}
 
@@ -46,18 +48,13 @@ public class BaseOCR extends Activity {
 			Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
 			if (MainActivity.isCharFilter == true) {
-				if (Consts.DATA_VIETNAM.equalsIgnoreCase("vie")) {
-					recognizedText = recognizedText
-					/*
-					 * .replaceAll(
-					 * "[^AĂÂBCDĐEÊGHIÍÌỈĨỊKLMNOÔƠPQRSTUƯVXYÝỲỶỸÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸẾỀỂỄỆÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤỨỪỬỮỰaăâbcdđeêghiíìỉĩịklmnoôơpqrstuưvxyýỳỷỹáàảãạắằẳẵặấầẩẫậéèẻẽẹếềểễệóòỏõọốồổỗộớờởỡợúùủũụứừửữự0123456789@:.,/\\\\n\\-_()\\^]+"
-					 * , " ");
-					 */
-					.replace("[\\d]11[\\d]", "[\\d]h[\\d]");
-				}
+				//if (Consts.DATA_VIETNAM.equalsIgnoreCase("vie")) {
+					recognizedText = recognizedText.replaceAll("[:,?></\\;`~'\".!#$%^&*)(}{][+=|]*", "");
+				//}
 			}
 
 			recognizedText = recognizedText.trim();
+			Log.v(TAG, "AFTER TEXT: " + recognizedText);
 
 		} catch (Exception e) {
 		}
