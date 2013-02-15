@@ -53,6 +53,7 @@
     <string name="tv_address">Địa điểm</string>  
     <string name="tv_languages">Ngôn ngữ</string>
     <string name="tv_cuochen">Thêm tiêu đề cuộc hẹn</string>
+    <string name="tv_baotruoc">Báo trước</string>
     
     <!-- Check Box -->
     <string name="cb_settings_2colorimage">Thiết lập chế độ quét hình trắng đen</string>

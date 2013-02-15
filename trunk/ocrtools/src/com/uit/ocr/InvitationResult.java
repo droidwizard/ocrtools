@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -29,10 +31,11 @@ public class InvitationResult extends ResultClass {
 	private String[] textAnalysis;
 	private EditText edtInvitationResult_location;
 	private EditText edtInvitationResult_time;
-	private Spinner spinInvitationResult_content;
+	private Spinner spinInvitationResult_content, spinInvitationResult_time;
 	private ImageView ivInvitationResult_main;
 	private Button btnInvitationResult_save;
 	private String eventLocation, eventTitle;
+	private int ringTime;
 	private Calendar calendar;
 	private ArrayList<String> defaultEvents = new ArrayList<String>();
 
@@ -43,6 +46,7 @@ public class InvitationResult extends ResultClass {
 		edtInvitationResult_location = (EditText) findViewById(R.id.edt_invitation_location);
 		edtInvitationResult_time = (EditText) findViewById(R.id.edt_invitaionresult_time);
 		spinInvitationResult_content = (Spinner) findViewById(R.id.spin_invitaionresult_content);
+		spinInvitationResult_time = (Spinner) findViewById(R.id.spinInvitationResult_time);
 		ivInvitationResult_main = (ImageView) findViewById(R.id.iv_invitationresult_main);
 		btnInvitationResult_save = (Button) findViewById(R.id.btn_invitationresult_add);
 
@@ -58,8 +62,13 @@ public class InvitationResult extends ResultClass {
 				InvitationResult.this,
 				android.R.layout.simple_spinner_dropdown_item, defaultEvents);
 		spinInvitationResult_content.setAdapter(adapter);
-
 		spinInvitationResult_content.setOnItemSelectedListener(spinListener);
+		
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
+				InvitationResult.this,
+				android.R.layout.simple_spinner_dropdown_item, Consts.DEFAULT_TIME);
+		spinInvitationResult_time.setAdapter(adapter2);
+		spinInvitationResult_time.setOnItemSelectedListener(spinListener2);
 
 	}
 
@@ -71,8 +80,6 @@ public class InvitationResult extends ResultClass {
 		defaultEvents.clear();
 
 		defaultEvents.add(Consts.DEFAULT_EVENT_1);
-		defaultEvents.add(Consts.DEFAULT_EVENT_2);
-		defaultEvents.add(Consts.DEFAULT_EVENT_3);
 		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -153,6 +160,18 @@ public class InvitationResult extends ResultClass {
 		public void onNothingSelected(AdapterView<?> arg0) {
 		}
 	};
+	
+	private OnItemSelectedListener spinListener2 = new OnItemSelectedListener() {
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int pos,
+				long arg3) {
+			String tmp = (String) arg0.getItemAtPosition(pos);
+			String[] tmps = tmp.split(" ");
+			ringTime=Integer.valueOf(tmps[0]);
+		}
+
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
+	};
 
 	@Override
 	public void onReceiveResult() {
@@ -209,7 +228,7 @@ public class InvitationResult extends ResultClass {
 		Intent intent = new Intent(Intent.ACTION_EDIT);
 		intent.setType("vnd.android.cursor.item/event");
 		intent.putExtra("beginTime",
-				startTime.getTimeInMillis() - 10 * 60 * 1000);
+				startTime.getTimeInMillis() - ringTime * 60 * 1000);
 		intent.putExtra("allDay", 1);
 		intent.putExtra("endTime", startTime.getTimeInMillis() + 60 * 60 * 1000);
 		intent.putExtra("title", eventTitle);
@@ -217,5 +236,19 @@ public class InvitationResult extends ResultClass {
 		// intent.putExtra("description", "Nội dung họp");
 		startActivity(intent);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 
 }

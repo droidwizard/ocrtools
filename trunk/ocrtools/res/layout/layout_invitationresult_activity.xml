@@ -28,8 +28,8 @@
                 android:id="@+id/view1"
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:background="#c6a42d" />
 
             <RelativeLayout
@@ -56,7 +56,7 @@
                     <Spinner
                         android:id="@+id/spin_invitaionresult_content"
                         android:layout_width="220dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
 
@@ -117,17 +117,37 @@
                 <RelativeLayout
                     android:id="@+id/relativeLayout3"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_below="@+id/relativeLayout4" >
+
+                    <Spinner
+                        android:id="@+id/spinInvitationResult_time"
+                        android:layout_width="220dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        style="@style/MyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/tv_baotruoc" />
 
                     <Button
                         android:id="@+id/btn_invitationresult_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_below="@+id/spinInvitationResult_time"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="14dp"
                         android:text="@string/btn_invitationresult_save" />
+
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

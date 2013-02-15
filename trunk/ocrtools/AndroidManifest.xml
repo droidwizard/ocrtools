@@ -32,12 +32,12 @@
 			          
         </activity>
         <activity android:name=".ImageHandler"></activity>
-        <activity android:name=".NameCardResult"></activity>
-        <activity android:name="Settings">
+        <activity android:name=".NameCardResult" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name="Settings" android:windowSoftInputMode="stateHidden">
             
         </activity>
-        <activity android:name="InvitationResult"></activity>
-        <activity android:name=".NormalResult">
+        <activity android:name="InvitationResult" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".NormalResult" android:windowSoftInputMode="stateHidden">
             
         </activity>
         <activity android:name="AboutActivity"></activity>

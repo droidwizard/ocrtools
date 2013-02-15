@@ -16,6 +16,7 @@ public class Consts {
 	public static final String DEFAULT_EVENT_1 = "Hội họp";
 	public static final String DEFAULT_EVENT_2 = "Tiệc cưới";
 	public static final String DEFAULT_EVENT_3 = "Sinh nhật";
+	public static final String[] DEFAULT_TIME = {"5 phút","10 phút","15 phút","30 phút"};
 	
 	public static final String TEXTBASERESULT="textBaseResult";
 	public static final String TEXTRESULT="textResult";
