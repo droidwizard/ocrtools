@@ -26,7 +26,7 @@ public class MainActivity extends Activity{
 	private ProgressDialog progressDialog;
 	private InitData mInitData;
 	public static boolean is2ColorImage;
-	public static boolean isCharFilter;
+	public static boolean isCharFilter=true;
 	private RadioButton rabtn_main_name_card;
 	private RadioButton rabtn_main_invite;
 	

@@ -86,14 +86,14 @@ public class Settings extends Activity{
 					MainActivity.is2ColorImage = true;
 					cbSettings2ColorImage
 							.setChecked(MainActivity.is2ColorImage);
-					Toast.makeText(context, "đã thiết lập quét hình trắng đen",
+					Toast.makeText(context, "Đã thiết lập quét hình trắng đen",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					MainActivity.is2ColorImage = false;
 					cbSettings2ColorImage
 							.setChecked(MainActivity.is2ColorImage);
 					Toast.makeText(context,
-							"đã tắt thiết lập quét hình trắng đen",
+							"Đã tắt thiết lập quét hình trắng đen",
 							Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -101,12 +101,12 @@ public class Settings extends Activity{
 				if (isChecked == true) {
 					MainActivity.isCharFilter = true;
 					cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
-					Toast.makeText(context, "đã thiết lập lọc ký tự việt",
+					Toast.makeText(context, "Đã thiết lập lọc ký tự",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					MainActivity.isCharFilter = false;
 					cbSettingsCharfilter.setChecked(MainActivity.isCharFilter);
-					Toast.makeText(context, "đã tắt thiết lập lọc ký tự việt",
+					Toast.makeText(context, "Đã tắt thiết lập lọc ký tự",
 							Toast.LENGTH_SHORT).show();
 				}
 			}
