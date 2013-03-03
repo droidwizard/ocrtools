@@ -18,13 +18,13 @@ public class BaseOCR extends Activity {
 	private static final String TAG = BaseOCR.class.getSimpleName();
 
 	private String recognizedText;
-	
+
 	public static String lang = "vie";
-	
+
 	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
 
-	private static final String VIETCHAR2= "[a-z A-ZÁÀẢÃẠẤẦẨẪẬÂĂẮẰẲẴẶáàảảãạâăấầẩẫậắằẳẵặéèẻẽẹêếềểễệÉÈẺẼẸẾỀỂỄỆíìỉĩịÍÌỈĨỊÚÙỦŨỤỨỪỬỮỰúùủũụứừửữựóòỏõọôốồổỗộơớờởỡợÓÒỎÕỌỐỒỔỖỘƠỚỜỞỠỢÝỲỶỸỴýỳỷỹỵĐđ]*";
-	
+	private static final String VIETCHAR2 = "[a-z A-ZÁÀẢÃẠẤẦẨẪẬÂĂẮẰẲẴẶáàảảãạâăấầẩẫậắằẳẵặéèẻẽẹêếềểễệÉÈẺẼẸẾỀỂỄỆíìỉĩịÍÌỈĨỊÚÙỦŨỤỨỪỬỮỰúùủũụứừửữựóòỏõọôốồổỗộơớờởỡợÓÒỎÕỌỐỒỔỖỘƠỚỜỞỠỢÝỲỶỸỴýỳỷỹỵĐđ]*";
+
 	public BaseOCR() {
 	}
 
@@ -41,16 +41,22 @@ public class BaseOCR extends Activity {
 			baseApi.init(Consts.DATA_PATH, Consts.DATA_VIETNAM);
 			baseApi.setImage(bitmap);
 
+			//baseApi.setRectangle(400, 400, 50, 50);
+
 			recognizedText = baseApi.getUTF8Text();
+			//Log.v(TAG, "MIDDLE TEXT: " + recognizedText);
+
+			// recognizedText = baseApi.getUTF8Text();
 
 			baseApi.end();
 
 			Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
 			if (MainActivity.isCharFilter == true) {
-				//if (Consts.DATA_VIETNAM.equalsIgnoreCase("vie")) {
-					recognizedText = recognizedText.replaceAll("[:,?></\\;`~'\".!#$%^&*)(}{][+=|]*", "");
-				//}
+				// if (Consts.DATA_VIETNAM.equalsIgnoreCase("vie")) {
+				recognizedText = recognizedText.replaceAll(
+						"[:,?></\\;`~'\"!#$%^&*)(}{][+=|]*", "");
+				// }
 			}
 
 			recognizedText = recognizedText.trim();
@@ -130,6 +136,7 @@ public class BaseOCR extends Activity {
 	}
 
 	public String[] onNameCardAnalisys(String input) {
+		String[] tmpName=input.split("\n");
 		String[] result = new String[10];
 		String lists[] = { Consts.EMAIL, Consts.MOBILE, Consts.NAME };
 		for (int i = 0; i < lists.length; i++) {
@@ -152,10 +159,20 @@ public class BaseOCR extends Activity {
 					result[i] = " ";
 				break;
 			case 2:
+				
+
 				if (matcher.find()) {
-					result[i] = matcher.group();
-				} else
-					result[i] = " ";
+					if (tmpName[2].matches("[A-Za-zĐđ]+")){
+						result[i] = tmpName[2];
+					}else if (tmpName[1].matches("[A-Za-zĐđ]+")){
+						result[i] = tmpName[1];
+					}
+					else{
+						result[i] = matcher.group();
+					}
+				}else{
+					result[i] =" ";
+				}
 				break;
 			}
 		}
