@@ -264,5 +264,5 @@ public class CustomImageView extends ImageView {
 		cropResult = Bitmap.createBitmap(mBitmap, (int)((mLeft - redundantXSpace)/scale), (int)((mTop - redundantYSpace)/scale), (int)((mRight - mLeft)/scale), (int)((mBot - mTop)/scale));
 		return cropResult;
 	}
-
+	
 }
