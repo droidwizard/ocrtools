@@ -67,6 +67,21 @@ public class Consts {
 	public static final String TRANS_THAILAND = "th";
 	public static final String TRANS_CHINA = "zh-TW";
 	public static final String TRANS_VIETNAM = "vi";
+	
+	public static final int LANG_KEY_ENGLISH = 0;
+	public static final int LANG_KEY_GERMAN = 1;
+	public static final int LANG_KEY_DUTCH = 2;
+	public static final int LANG_KEY_KOREAN = 3;
+	public static final int LANG_KEY_INDONESIA = 4;
+	public static final int LANG_KEY_ITALIA = 5;
+	public static final int LANG_KEY_MALAYSIA = 6;
+	public static final int LANG_KEY_RUSSIA = 7;
+	public static final int LANG_KEY_JAPAN = 8;
+	public static final int LANG_KEY_FRANCE = 9;
+	public static final int LANG_KEY_SPAIN = 10;
+	public static final int LANG_KEY_THAILAND = 11;
+	public static final int LANG_KEY_CHINA = 12;
+	public static final int LANG_KEY_VIETNAM = 13;
 
 	public static final int SETTINGS_ID = Menu.FIRST;
 	public static final int ABOUT_ID = Menu.FIRST + 1;

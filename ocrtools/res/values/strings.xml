@@ -66,23 +66,40 @@
     <string name="menu_camera">Quét camera</string>
     <string name="menu_image">Chọn hình</string>
     
-    <!-- Spinner -->
+    <!-- Preference -->
     <string-array name="language_items">
-        <item>Anh</item>
-        <item>Đức</item>
-        <item>Hà Lan</item>
-        <item>Hàn Quốc</item>
-        <item>Indonesia</item>
-        <item>Italia</item>
-        <item>Malaysia</item>
-        <item>Nga</item>
-        <item>Nhật Bản</item>
-        <item>Pháp</item>
-        <item>Tây Ban Nha</item>
-        <item>Thái Lan</item>
-        <item>Trung Quốc(Phồn thể)</item>
-        <item>Việt Nam</item>
+        <item>Tiếng Anh</item>
+        <item>Tiếng Đức</item>
+        <item>Tiếng Hà Lan</item>
+        <item>Tiếng Hàn</item>
+        <item>Tiếng Indonesia</item>
+        <item>Tiếng Italia</item>
+        <item>Tiếng Malaysia</item>
+        <item>Tiếng Nga</item>
+        <item>Tiếng Nhật</item>
+        <item>Tiếng Pháp</item>
+        <item>Tiếng Tây Ban Nha</item>
+        <item>Tiếng Thái</item>
+        <item>Tiếng Trung(Phồn thể)</item>
+        <item>Tiếng Việt</item>
     </string-array>
+    <string-array name="language_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+    </string-array>
+    
     <string name="language_prompt">Chọn ngôn ngữ</string>
     <string name="namecardresult_tv_name">Họ tên :</string>
     <string name="namecardresult_edt_name_hint">Nhận dạng tên</string>

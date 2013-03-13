@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
@@ -46,7 +45,7 @@ public class NormalResult extends ResultClass {
 	private Button changeMode;
 	private Button translate;
 	private Spinner spTranslate;
-	private String langTranslate;
+	private int langTranslate;
 	private String textBase;
 	private String resultTranslate;
 	private String sourceLanguage;
@@ -73,34 +72,52 @@ public class NormalResult extends ResultClass {
 		changeMode = (Button) findViewById(R.id.btn_edit_text_result);
 		translate = (Button) findViewById(R.id.btn_translate);
 		
-		if (BaseOCR.lang.equals(Consts.DATA_VIETNAM)) {
-			sourceLanguage = Consts.TRANS_VIETNAM;
-		} else if (BaseOCR.lang.equals(Consts.DATA_GERMAN)) {
-			sourceLanguage = Consts.TRANS_GERMAN;
-		} else if (BaseOCR.lang.equals(Consts.DATA_DUTCH)) {
-			sourceLanguage = Consts.TRANS_DUTCH;
-		} else if (BaseOCR.lang.equals(Consts.DATA_KOREAN)) {
-			sourceLanguage = Consts.TRANS_KOREAN;
-		} else if (BaseOCR.lang.equals(Consts.DATA_INDONESIA)) {
-			sourceLanguage = Consts.TRANS_INDONESIA;
-		} else if (BaseOCR.lang.equals(Consts.DATA_ITALIA)) {
-			sourceLanguage = Consts.TRANS_ITALIA;
-		} else if (BaseOCR.lang.equals(Consts.DATA_MALAYSIA)) {
-			sourceLanguage = Consts.TRANS_MALAYSIA;
-		} else if (BaseOCR.lang.equals(Consts.DATA_RUSSIA)) {
-			sourceLanguage = Consts.TRANS_RUSSIA;
-		} else if (BaseOCR.lang.equals(Consts.DATA_JAPAN)) {
-			sourceLanguage = Consts.TRANS_JAPAN;
-		} else if (BaseOCR.lang.equals(Consts.DATA_FRANCE)) {
-			sourceLanguage = Consts.TRANS_FRANCE;
-		} else if (BaseOCR.lang.equals(Consts.DATA_SPAIN)) {
-			sourceLanguage = Consts.TRANS_SPAIN;
-		} else if (BaseOCR.lang.equals(Consts.DATA_THAILAND)) {
-			sourceLanguage = Consts.TRANS_THAILAND;
-		} else if (BaseOCR.lang.equals(Consts.DATA_CHINA)) {
-			sourceLanguage = Consts.TRANS_CHINA;
-		} else if (BaseOCR.lang.equals(Consts.DATA_ENGLISH)) {
+		switch (MainActivity.mKeyLang) {
+		case Consts.LANG_KEY_ENGLISH:
 			sourceLanguage = Consts.TRANS_ENGLISH;
+			break;
+		case Consts.LANG_KEY_GERMAN:
+			sourceLanguage = Consts.TRANS_GERMAN;
+			break;
+		case Consts.LANG_KEY_DUTCH:
+			sourceLanguage = Consts.TRANS_DUTCH;
+			break;
+		case Consts.LANG_KEY_KOREAN:
+			sourceLanguage = Consts.TRANS_KOREAN;
+			break;
+		case Consts.LANG_KEY_INDONESIA:
+			sourceLanguage = Consts.TRANS_INDONESIA;
+			break;
+		case Consts.LANG_KEY_ITALIA:
+			sourceLanguage = Consts.TRANS_ITALIA;
+			break;
+		case Consts.LANG_KEY_MALAYSIA:
+			sourceLanguage = Consts.TRANS_MALAYSIA;
+			break;
+		case Consts.LANG_KEY_RUSSIA:
+			sourceLanguage = Consts.TRANS_RUSSIA;
+			break;
+		case Consts.LANG_KEY_JAPAN:
+			sourceLanguage = Consts.TRANS_JAPAN;
+			break;
+		case Consts.LANG_KEY_FRANCE:
+			sourceLanguage = Consts.TRANS_FRANCE;
+			break;
+		case Consts.LANG_KEY_SPAIN:
+			sourceLanguage = Consts.TRANS_SPAIN;
+			break;
+		case Consts.LANG_KEY_THAILAND:
+			sourceLanguage = Consts.TRANS_THAILAND;
+			break;
+		case Consts.LANG_KEY_CHINA:
+			sourceLanguage = Consts.TRANS_CHINA;
+			break;
+		case Consts.LANG_KEY_VIETNAM:
+			sourceLanguage = Consts.TRANS_VIETNAM;
+			break;
+
+		default:
+			break;
 		}
 		//sourceLanguage = "vi";
 		tranLanguage = Consts.TRANS_ENGLISH;
@@ -130,7 +147,8 @@ public class NormalResult extends ResultClass {
 	private OnItemSelectedListener spinnerListener = new OnItemSelectedListener() {
 		public void onItemSelected(AdapterView<?> parent, View arg1, int pos,
 				long arg3) {
-			langTranslate = parent.getItemAtPosition(pos).toString();
+			//langTranslate = parent.getItemAtPosition(pos).toString();
+			langTranslate = pos;
 		}
 		public void onNothingSelected(AdapterView<?> arg0) {
 		}
@@ -232,40 +250,58 @@ public class NormalResult extends ResultClass {
 
 	private void progress() {
 		encoding = "ISO-8859-1";
-		if (langTranslate.equals(Consts.LANG_VIETNAM)) {
-			tranLanguage = Consts.TRANS_VIETNAM;
-		} else if (langTranslate.equals(Consts.LANG_GERMAN)) {
+		switch (langTranslate) {
+		case Consts.LANG_KEY_ENGLISH:
+			tranLanguage = Consts.TRANS_ENGLISH;
+			break;
+		case Consts.LANG_KEY_GERMAN:
 			tranLanguage = Consts.TRANS_GERMAN;
-		} else if (langTranslate.equals(Consts.LANG_DUTCH)) {
+			break;
+		case Consts.LANG_KEY_DUTCH:
 			tranLanguage = Consts.TRANS_DUTCH;
-		} else if (langTranslate.equals(Consts.LANG_KOREAN)) {
+			break;
+		case Consts.LANG_KEY_KOREAN:
 			tranLanguage = Consts.TRANS_KOREAN;
 			encoding = "x-windows-949";
-		} else if (langTranslate.equals(Consts.LANG_INDONESIA)) {
+			break;
+		case Consts.LANG_KEY_INDONESIA:
 			tranLanguage = Consts.TRANS_INDONESIA;
-		} else if (langTranslate.equals(Consts.LANG_ITALIA)) {
+			break;
+		case Consts.LANG_KEY_ITALIA:
 			tranLanguage = Consts.TRANS_ITALIA;
-		} else if (langTranslate.equals(Consts.LANG_MALAYSIA)) {
+			break;
+		case Consts.LANG_KEY_MALAYSIA:
 			tranLanguage = Consts.TRANS_MALAYSIA;
-		} else if (langTranslate.equals(Consts.LANG_RUSSIA)) {
+			break;
+		case Consts.LANG_KEY_RUSSIA:
 			tranLanguage = Consts.TRANS_RUSSIA;
 			encoding = "KOI8-R";
-		} else if (langTranslate.equals(Consts.LANG_JAPAN)) {
+			break;
+		case Consts.LANG_KEY_JAPAN:
 			tranLanguage = Consts.TRANS_JAPAN;
 			encoding = "SHIFT-JIS";
-		} else if (langTranslate.equals(Consts.LANG_FRANCE)) {
+		case Consts.LANG_KEY_FRANCE:
 			tranLanguage = Consts.TRANS_FRANCE;
-		} else if (langTranslate.equals(Consts.LANG_SPAIN)) {
+			break;
+		case Consts.LANG_KEY_SPAIN:
 			tranLanguage = Consts.TRANS_SPAIN;
-		} else if (langTranslate.equals(Consts.LANG_THAILAND)) {
+			break;
+		case Consts.LANG_KEY_THAILAND:
 			tranLanguage = Consts.TRANS_THAILAND;
 			encoding = "TIS-620";
-		} else if (langTranslate.equals(Consts.LANG_CHINA)) {
+			break;
+		case Consts.LANG_KEY_CHINA:
 			tranLanguage = Consts.TRANS_CHINA;
 			encoding = "BIG-5";
-		} else if (langTranslate.equals(Consts.LANG_ENGLISH)) {
-			tranLanguage = Consts.TRANS_ENGLISH;
-		}
+			break;
+		case Consts.LANG_KEY_VIETNAM:
+			tranLanguage = Consts.TRANS_VIETNAM;
+			break;
+
+		default:
+			break;
+		}		
+		
 		resultTranslate = translate(sourceLanguage, tranLanguage, textBase);
 
 		isComplete = true;
@@ -328,11 +364,33 @@ public class NormalResult extends ResultClass {
 		String result = "";
 		
 		String temp = translateFirst(scrLang, scrText);
+		input = input.replace("%", "%25");
 		input = temp.replace(" |", "%0A");
 		input = input.replace(" ", "%20");
-		input = input.replace("/", "%0A");
-		input = input.replace("?", "%0A");
-		input = input.replace("\\", "%0A");
+		input = input.replace("/", "%2F");
+		input = input.replace("?", "%3F");
+		input = input.replace("\\", "%5C");
+		input = input.replace("|", "%7C");
+		input = input.replace("`", "%60");
+		input = input.replace("@", "%40");
+		input = input.replace("#", "%23");
+		input = input.replace("$", "%24");		
+		input = input.replace("^", "%5E");
+		input = input.replace("&", "%26");
+		input = input.replace("=", "%3D");
+		input = input.replace("+", "%2B");
+		input = input.replace("[", "%5B");
+		input = input.replace("]", "%5D");
+		input = input.replace("{", "%7B");
+		input = input.replace("}", "%7D");
+		input = input.replace(";", "%3B");
+		input = input.replace(":", "%3A");
+		input = input.replace("\"", "%22");
+		input = input.replace("<", "%3C");
+		input = input.replace(">", "%3E");
+		input = input.replace(",", "%2C");
+		input = input.replace("«", "%C2%AB");
+		input = input.replace("»", "%C2%BB");
 		Log.d("Test input", input);
 		JSONObject json = JSONfunctions.getJSONfromURL("http://translate.google.vn/translate_a/t?client=j&text=" + input + "&sl=en&tl="+destLang, encoding);
 		try {

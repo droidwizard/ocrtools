@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+     	android:title="Cài đặt chung">
+        <CheckBoxPreference
+        	android:title="Chế độ quét hình trắng đen"
+        	android:defaultValue="false"
+        	android:summary="Cho phép quét hình trắng đen hoặc không"
+        	android:key="cbColor" />
+        <CheckBoxPreference
+            android:title="Lọc ký tự"
+            android:defaultValue="true"
+            android:summary="Lọc các ký tự cho phép"
+            android:key="cbfilter" />                
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="Cài đặt ngôn ngữ">
+        <ListPreference
+            android:title="Ngôn ngữ"
+            android:summary="%s"
+            android:key="listLangs"
+            android:defaultValue="13"
+            android:entries="@array/language_items"
+            android:entryValues="@array/language_values" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="Cài đặt cá nhân">
+        <EditTextPreference
+                android:summary="Cài đặt tiêu đề cuộc hẹn"
+                android:defaultValue=""
+                android:title="Tiêu đề cuộc hẹn"
+                android:key="titleEvents" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -8,9 +8,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:orientation="vertical" >
-
-        <!-- android:background="@drawable/panel"> -->
+        android:orientation="vertical" 
+        android:background="@drawable/panel">
 
         <Button
             android:id="@+id/btn_main_camera"
