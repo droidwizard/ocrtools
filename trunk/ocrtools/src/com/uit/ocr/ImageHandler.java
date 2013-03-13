@@ -119,9 +119,9 @@ public class ImageHandler extends BaseOCR implements OnTouchListener {
 		//textResult=textResult.replace("\n", " ");
 		String[] tmp;
 		tmp=textResult.split("\n");
-		Log.i(TAG, tmp[0]);
-		Log.i(TAG, "Next 1 "+tmp[1]);
-		Log.i(TAG, "Next 2 "+tmp[2]);
+		//Log.i(TAG, tmp[0]);
+		//Log.i(TAG, "Next 1 "+tmp[1]);
+		//Log.i(TAG, "Next 2 "+tmp[2]);
 		
 		
 		//Log.i(TAG, textResult);

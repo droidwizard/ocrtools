@@ -19,7 +19,7 @@ public class BaseOCR extends Activity {
 
 	private String recognizedText;
 
-	public static String lang = "vie";
+	//public static String lang = "vie";
 
 	private static final String VIETCHAR = "[a-z A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*";
 
@@ -38,7 +38,7 @@ public class BaseOCR extends Activity {
 			bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 			TessBaseAPI baseApi = new TessBaseAPI();
 			baseApi.setDebug(true);
-			baseApi.init(Consts.DATA_PATH, Consts.DATA_VIETNAM);
+			baseApi.init(Consts.DATA_PATH, MainActivity.lang);
 			baseApi.setImage(bitmap);
 
 			//baseApi.setRectangle(400, 400, 50, 50);

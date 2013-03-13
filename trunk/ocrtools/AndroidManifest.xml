@@ -31,16 +31,34 @@
             </intent-filter>
 			          
         </activity>
-        <activity android:name=".ImageHandler"></activity>
-        <activity android:name=".NameCardResult" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name="Settings" android:windowSoftInputMode="stateHidden">
+        <activity 
+            android:name=".ImageHandler">
             
         </activity>
-        <activity android:name="InvitationResult" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".NormalResult" android:windowSoftInputMode="stateHidden">
+        <activity 
+            android:name=".NameCardResult" 
+            android:windowSoftInputMode="stateHidden">
             
         </activity>
-        <activity android:name="AboutActivity"></activity>
+        
+        <activity 
+            android:name=".SettingsActivity" 
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@android:color/black">
+            
+        </activity>
+        <activity 
+            android:name="InvitationResult" 
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity 
+            android:name=".NormalResult" 
+            android:windowSoftInputMode="stateHidden">
+            
+        </activity>
+        <activity 
+            android:name=".AboutActivity">
+            
+        </activity>
     </application>
 
 </manifest>
