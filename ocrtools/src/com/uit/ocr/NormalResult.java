@@ -280,6 +280,7 @@ public class NormalResult extends ResultClass {
 		case Consts.LANG_KEY_JAPAN:
 			tranLanguage = Consts.TRANS_JAPAN;
 			encoding = "SHIFT-JIS";
+			break;
 		case Consts.LANG_KEY_FRANCE:
 			tranLanguage = Consts.TRANS_FRANCE;
 			break;
