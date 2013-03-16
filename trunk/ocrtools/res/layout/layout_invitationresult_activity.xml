@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/result_background"
+    android:background="@drawable/background"
     android:orientation="horizontal" >
 
     <ScrollView
