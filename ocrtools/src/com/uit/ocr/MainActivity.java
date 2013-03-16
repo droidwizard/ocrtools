@@ -162,7 +162,7 @@ public class MainActivity extends Activity{
 				Intent i = new Intent();
 				i.setType("image/*");
 				i.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(Intent.createChooser(i, "Application Chooser"),102);
+				startActivityForResult(Intent.createChooser(i, "Chọn ứng dụng"),102);
 				break;
 			}
 			

@@ -44,7 +44,7 @@
         <activity 
             android:name=".SettingsActivity" 
             android:windowSoftInputMode="stateHidden"
-            android:theme="@android:color/black">
+            android:theme="@drawable/background">
             
         </activity>
         <activity 
