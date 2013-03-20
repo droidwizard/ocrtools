@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -41,7 +42,8 @@ public class MainActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_main_activity);		
+		setContentView(R.layout.layout_main_activity);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		rabtn_main_name_card=(RadioButton) findViewById(R.id.rabtn_danhthiep);
 		rabtn_main_invite=(RadioButton) findViewById(R.id.rabtn_thiepmoi);
 		rabtn_main_normal = (RadioButton) findViewById(R.id.rabtn_thuong);

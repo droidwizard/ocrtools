@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -64,7 +65,7 @@ public class NormalResult extends ResultClass {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_normalresult_activity);
-		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		textResult = (TextView) findViewById(R.id.tv_text_result);
 		textEdit = (EditText) findViewById(R.id.edt_text_result);
 		textTranslate = (EditText) findViewById(R.id.edt_result_translate);

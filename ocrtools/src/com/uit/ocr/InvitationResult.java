@@ -10,6 +10,7 @@ import com.uit.ocr.utils.ResultClass;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class InvitationResult extends ResultClass {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_invitationresult_activity);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		edtInvitationResult_location = (EditText) findViewById(R.id.edt_invitation_location);
 		edtInvitationResult_time = (EditText) findViewById(R.id.edt_invitaionresult_time);
 		spinInvitationResult_content = (Spinner) findViewById(R.id.spin_invitaionresult_content);
