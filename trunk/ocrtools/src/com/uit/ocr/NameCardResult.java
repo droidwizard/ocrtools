@@ -4,6 +4,7 @@ import com.uit.ocr.utils.Consts;
 import com.uit.ocr.utils.ResultClass;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.view.Menu;
@@ -30,6 +31,7 @@ public class NameCardResult extends ResultClass {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_namecardresult_activity);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		edtNameCardResultMobile = (EditText) findViewById(R.id.edt_namecardresult_phone);
 		edtNameCardResultEmail = (EditText) findViewById(R.id.edt_namecardresult_email);
 		edtNameCardResultName = (EditText) findViewById(R.id.edt_namecardresult_name);
